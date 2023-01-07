@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "sqlite3": "^5.1.4"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
