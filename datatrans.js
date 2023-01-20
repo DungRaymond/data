@@ -2,40 +2,58 @@
 import fs from 'fs';
 
 
-let reversed = JSON.parse(fs.readFileSync('./newdata45.json'));
-// for(let item of data45) {
-//   reversed.unshift(item)
-// }
+let reversed45 = JSON.parse(fs.readFileSync('./new45.json'));
+let reversed55 = JSON.parse(fs.readFileSync('./new55.json'));
 
-let arr = [
-  {
-    term: '00000',
-    stat: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-  }
-]
-// let testTemp= [];
+let read45 = "[" + fs.readFileSync('./data45') + "]"
+let arr45 = JSON.parse(read45)
+async function makedata45(){
+    // console.log('here1')
+    for await (let each of reversed45) {
+      // console.log('here2')
+      // let newTerm = each.term;
+      
+      // console.log(newStat)
+      let temp = arr45.pop()
+      arr45.push(temp)
 
-const preSort = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45"];
-(
-  async function(){
-    for await (let each of reversed) {
-      let newStat = arr[n].stat;
-      // testTemp.push(temp)
-      // fs.writeFileSync('./temp', JSON.stringify(testTemp))
-      let newTerm = each.term;
-
-      for await (let [i, item] of each.ketqua.entries()){
-        newStat[i] += 1;
+      for await (let item of each.ketqua){
+        temp.stat[item - 1] += 1;
+        // console.log('here3')
       }
-      
-      
-      arr.push({
-        term: newTerm,
-        stat: newStat
-      })
+
+      fs.appendFileSync('./data45', ",\n{\n\t\"stat\": " + JSON.stringify(temp.stat) + "\n}")
+      // console.log(temp.stat);
+      // console.log(final);
+      // arr.push({stat: final})
     }
   }
 
-)
+makedata45()
 
-fs.writeFileSync('./data', JSON.stringify(arr))
+let read55 = "[" + fs.readFileSync('./data55') + "]"
+let arr55 = JSON.parse(read55)
+async function makedata55(){
+    // console.log('here1')
+    for await (let each of reversed55) {
+      // console.log('here2')
+      // let newTerm = each.term;
+      
+      // console.log(newStat)
+      let temp = arr55.pop()
+      arr55.push(temp)
+
+      for await (let item of each.ketqua){
+        temp.stat[item - 1] += 1;
+        // console.log('here3')
+      }
+
+      fs.appendFileSync('./data55', ",\n{\n\t\"stat\": " + JSON.stringify(temp.stat) + "\n}")
+      // console.log(temp.stat);
+      // console.log(final);
+      // arr.push({stat: final})
+    }
+  }
+
+makedata55()
+

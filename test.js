@@ -14,6 +14,9 @@ import fs from 'fs';
 
 // fs.writeFileSync('./temp', c.toString())
 
-const arr = JSON.parse(fs.readFileSync('./newdata45.json'))
+// const arr = JSON.parse(fs.readFileSync('./newdata45.json'))
 
-console.log(arr[45])
+// console.log(arr[45])
+import data55 from './data55.js'
+
+fs.writeFileSync('newdata55.json',JSON.stringify(data55))
