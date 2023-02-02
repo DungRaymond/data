@@ -10,7 +10,7 @@ function waitUI() {
 // 6/45 
 
 async function lott645() {
-  for(let i = 1; i <= 969; i++) {
+  for(let i = 10; i >= 1; i--) {
     let chonkyquay = document.getElementsByTagName('select')[1];
     let doso = document.getElementsByClassName('choi_ngay')[13];
     chonkyquay.options[i].selected = true;
@@ -51,7 +51,7 @@ function waitUI() {
 
 
 async function lott655() {
-  for(let i = 1; i <= 805; i++) {
+  for(let i = 10; i >= 1; i--) {
     let chonkyquay = document.getElementsByTagName('select')[1];
     let doso = document.getElementsByClassName('choi_ngay')[11];
     chonkyquay.options[i].selected = true;
@@ -84,7 +84,6 @@ async function lott655() {
     };
     console.log(kyquay.innerHTML)
     arr55.push(result)
-
   }
   
 }
