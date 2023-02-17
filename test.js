@@ -1,22 +1,11 @@
-import fs from 'fs';
+let a = [{"key":1,"value":137},{"key":2,"value":117},{"key":3,"value":117},{"key":4,"value":136},{"key":5,"value":140},{"key":6,"value":145},{"key":7,"value":134},{"key":8,"value":122},{"key":9,"value":119},{"key":10,"value":136},{"key":11,"value":133},{"key":12,"value":123},{"key":13,"value":132},{"key":14,"value":115},{"key":15,"value":111},{"key":16,"value":127},{"key":17,"value":124},{"key":18,"value":134},{"key":19,"value":149},{"key":20,"value":124},{"key":21,"value":127},{"key":22,"value":126},{"key":23,"value":126},{"key":24,"value":144},{"key":25,"value":135},{"key":26,"value":126},{"key":27,"value":131},{"key":28,"value":128},{"key":29,"value":120},{"key":30,"value":143},{"key":31,"value":126},{"key":32,"value":124},{"key":33,"value":123},{"key":34,"value":126},{"key":35,"value":137},{"key":36,"value":122},{"key":37,"value":140},{"key":38,"value":111},{"key":39,"value":120},{"key":40,"value":133},{"key":41,"value":128},{"key":42,"value":114},{"key":43,"value":115},{"key":44,"value":144},{"key":45,"value":128}]
 
-// // let d = fs.readFileSync('./data');
-// // d = JSON.parse(d);
-// // console.log(d[0].term)
-
-// let a = [149,143,143,139,144,145,137,140,136,137,134,135,136,133,133,131,134,129,126,127,126,127,124,126,128,124,123,127,125,122,123,125,126,120,122,121,116,118,120,117,115,115,113,110,110];
-// let b = [151,149,147,147,146,146,145,143,142,140,139,139,138,136,138,135,136,134,132,131,132,131,130,131,129,130,128,128,128,128,127,127,127,125,125,124,123,123,123,122,122,119,118,116,116];
-// let c = [];
-
-// for(let i = 0; i < a.length; i++){
-//   c.push(b[i] - a[i]);
-// }
-
-// fs.writeFileSync('./temp', c.toString())
-
-// const arr = JSON.parse(fs.readFileSync('./newdata45.json'))
-
-// console.log(arr[45])
-import data55 from './data55.js'
-
-fs.writeFileSync('newdata55.json',JSON.stringify(data55))
+let b = a.sort((a,b) => {
+  return b.value - a.value
+})
+let c = b.map((each) => {
+  return each.value
+})
+let d = b.map((each) => {
+  return each.key
+})
