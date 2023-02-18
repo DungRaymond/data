@@ -19,15 +19,8 @@ ChartJS.register(
   Legend
 );
 
-// import fs from 'fs';
+import useSWR from 'swr';
 
-// export async function getServerSideProps() {
-//   // const res = await fetch(`https://.../data`)
-//   // const data = await res.json()
-//   let analyzeData = JSON.parse("[" + fs.readFileSync("../data45") +"]")
-//   // Pass data to the page via props
-//   return { props: { data } }
-// }
 
 export const options = {
   scales: {
@@ -61,14 +54,14 @@ export const data = {
     },
     {
       label: '',
-      // data: [2,6,4,8,2,1,8,3,6,3,5,4,2,3,5,4,2,5,6,4,6,4,6,5,1,6,5,1,3,6,4,2,1,5,3,3,7,5,3,5,7,4,5,6,6],
+      data: [2,6,4,8,2,1,8,3,6,3,5,4,2,3,5,4,2,5,6,4,6,4,6,5,1,6,5,1,3,6,4,2,1,5,3,3,7,5,3,5,7,4,5,6,6],
       backgroundColor: 'rgba(53, 162, 235, 0.7)',
     },
   ],
 };
 
 
-export function Find45() {
+export function Find45({analyticData}) {
   return(
   <>
     <Link href="/">Home</Link>
@@ -78,7 +71,19 @@ export function Find45() {
   )
 }
 
+// export async function getServerSideProps(context) {
+//   const res = await fetch(`localhost:3000/api/getData45`)
+//   const data = await res.json()
 
+//   if (!data) {
+//     return {
+//       notFound: true,
+//     }
+//   }
 
+//   return {
+//     props: { analyticData }, // will be passed to the page component as props
+//   }
+// }
 export default Find45
 
