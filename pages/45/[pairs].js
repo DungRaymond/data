@@ -101,7 +101,7 @@ export async function getServerSideProps(context) {
     })
     finalData.data2 = sortedData2;
 
-    console.log(finalData.data2);
+    // console.log(finalData.data2);
     
   } catch (error) {
     console.error(error);
