@@ -60,7 +60,7 @@ import axios from 'axios';
 // GET THE DATAS HERE
 
 export async function getServerSideProps(context) {
-  const pam = (context.params.pairs).split('n');
+  const pam = (context.params.pairs).split('-');
   let finalData = {
     obj: [],
     labels: [],
