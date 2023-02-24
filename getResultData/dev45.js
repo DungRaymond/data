@@ -10,7 +10,7 @@ function waitUI() {
 // 6/45 
 
 async function lott645() {
-  for(let i = 10; i >= 1; i--) {
+  for(let i = 5; i >= 1; i--) {
     let chonkyquay = document.getElementsByTagName('select')[1];
     let doso = document.getElementsByClassName('choi_ngay')[13];
     chonkyquay.options[i].selected = true;
