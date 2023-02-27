@@ -3,7 +3,7 @@ import fs from 'fs';
 const data45 = JSON.parse(fs.readFileSync('./json/reverb45.json'))
 
 let temp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-fs.writeFileSync('./json/data45.json', "\n{\n\t\"stat\": " + JSON.stringify(temp) + "\n}")
+fs.writeFileSync('./json/data45.json', "{\n\t\"stat\": " + JSON.stringify(temp) + "\n}")
 async function makeAnalytic45(){
   // console.log('here1')
   for await (let each of data45) {

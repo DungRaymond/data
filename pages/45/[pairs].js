@@ -60,8 +60,8 @@ export function Find45({aData}) {
         .bongtron {
           color: orange;
           background-color: grey;
-          border-radius: 50%;
-          padding: 0 8px;
+          border-radius: 49%;
+          padding: 4px 8px;
           margin: 0 0 0 5px;
         }
     `}</style>
