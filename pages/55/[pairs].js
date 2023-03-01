@@ -20,37 +20,170 @@ ChartJS.register(
 );
 
 import useSWR from 'swr';
-
-// const labels = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45]
-
-function dataCons(labels, data1, data2) {
-  const data = {
-    labels: labels,
-    datasets: [
-      {
-        label: '',
-        data: data1,
-        backgroundColor: 'rgba(255, 99, 132, 0.7)',
-      },
-      {
-        label: '',
-        data: data2,
-        backgroundColor: 'rgba(53, 162, 235, 0.7)',
-      }
-    ]
-  }
-
-  return data;
-}
+import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-export function Find55({aData}) {
+export function Page({aData}) {
+  const router = useRouter();
+  const queryParam = router.query.pairs.split('-');
+  // console.log(aData.data.datasets);
   return(
   <>
     <Link href="/">Home</Link>
     <Bar options={aData.options} data={aData.data} />
-    
+    {/* <h1>{aData.next.value.map((each) => {
+      return <span className='circle'>
+        {each}
+      </span>
+    })}</h1> */}
+    <div className='numberInput'>
+      <input className='textInput' type='text' id='first'/>
+      <br/>
+      <input className='textInput' type='text' id='second'/>
+      <br/>
+      <button type='button' className='pure-material-button-contained' onClick={() => {
+        const param1 = document.getElementById('first').value || 650;
+        const param2 = document.getElementById('second').value || 800;
+        router.push('/55/' + param1 + '-' + param2 + '-' + (param2 - 0 + 1));
+        }
+      }>
+      Click here
+      </button>
+    </div>
+
+      <br/>
+
+    <div className='arrowInput'>
+      <button type='button' className='pure-material-button-contained' onClick={() => {
+        router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 1) )
+      }}>
+        prev
+      </button>
+      <button type='button' className='pure-material-button-contained' onClick={() => {
+        router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
+      }}>
+        next
+      </button>
+
+    </div>
+
+
+    <style jsx>{`
+      input {
+        
+      }
+        .circle {
+          color: orange;
+          background-color: grey;
+          border-radius: 49%;
+          padding: 4px 8px;
+          margin: 0 0 0 5px;
+        }
+        .pure-material-button-contained {
+          position: relative;
+          display: inline-block;
+          box-sizing: border-box;
+          border: none;
+          border-radius: 4px;
+          padding: 0 16px;
+          min-width: 64px;
+          height: 36px;
+          vertical-align: middle;
+          text-align: center;
+          text-overflow: ellipsis;
+          text-transform: uppercase;
+          color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+          background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+          box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+          font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 36px;
+          overflow: hidden;
+          outline: none;
+          cursor: pointer;
+          transition: box-shadow 0.2s;
+        }
+        
+        .pure-material-button-contained::-moz-focus-inner {
+          border: none;
+        }
+        
+        /* Overlay */
+        .pure-material-button-contained::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+          opacity: 0;
+          transition: opacity 0.2s;
+        }
+        
+        /* Ripple */
+        .pure-material-button-contained::after {
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          border-radius: 50%;
+          padding: 50%;
+          width: 32px; /* Safari */
+          height: 32px; /* Safari */
+          background-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(1);
+          transition: opacity 1s, transform 0.5s;
+        }
+        
+        /* Hover, Focus */
+        .pure-material-button-contained:hover,
+        .pure-material-button-contained:focus {
+          box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+        }
+        
+        .pure-material-button-contained:hover::before {
+          opacity: 0.08;
+        }
+        
+        .pure-material-button-contained:focus::before {
+          opacity: 0.24;
+        }
+        
+        .pure-material-button-contained:hover:focus::before {
+          opacity: 0.3;
+        }
+        
+        /* Active */
+        .pure-material-button-contained:active {
+          box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        }
+        
+        .pure-material-button-contained:active::after {
+          opacity: 0.32;
+          transform: translate(-50%, -50%) scale(0);
+          transition: transform 0s;
+        }
+        
+        /* Disabled */
+        .pure-material-button-contained:disabled {
+          color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.38);
+          background-color: rgba(var(--pure-material-onsurface-rgb, 0, 0, 0), 0.12);
+          box-shadow: none;
+          cursor: initial;
+        }
+        
+        .pure-material-button-contained:disabled::before {
+          opacity: 0;
+        }
+        
+        .pure-material-button-contained:disabled::after {
+          opacity: 0;
+        }
+    `}</style>
   </>
   )
 }
@@ -65,25 +198,29 @@ export async function getServerSideProps(context) {
     obj: [],
     labels: [],
     data1: [],
-    data2: []
+    data2: [],
+    data3: [],
+    next: []
   }
+
   try {
-    const response = await axios.get(`http://localhost:3000/api/getData55`);
-    let statData = JSON.parse("[" + response.data + "]")
+    const response = await axios.get(`http://localhost:3000/api/getData55`); // get analyzed from result
+    const reverb = await axios.get('http://localhost:3000/api/getResult55'); // get results term by term
+    let statData = JSON.parse("[" + response.data + "]");
+    let resultData = JSON.parse(reverb.data)
+
     // THE DATA WE NEED
     for(let i = 0; i < 55; i++){
       finalData.obj.push({
         key : i + 1,
         value1 : statData[pam[0]].stat[i],
-        value2 : statData[pam[1]].stat[i]
+        value2 : statData[pam[1]].stat[i],
+        value3 : statData[pam[2]].stat[i]
       })
     }
 
-    // finalData.data1 = (statData[pam[0]].stat)
-    // finalData.data2 = (statData[pam[1]].stat)
-
     let sorted = finalData.obj.sort((a,b) => {
-      return b.value2 - a.value2
+      return b.value3 - a.value3
     })
     
     let sortedLabels = sorted.map((each) => {
@@ -101,7 +238,14 @@ export async function getServerSideProps(context) {
     })
     finalData.data2 = sortedData2;
 
-    // console.log(finalData.data2);
+    let sortedData3 = sorted.map((each, index) => {
+      return each.value3 - finalData.obj[index].value2
+    })
+    finalData.data3 = sortedData3;
+
+    // ANCHOR
+    finalData.next = resultData[pam[1]].ketqua||'not yet'
+    // console.log(resultData[pam[1]]);
     
   } catch (error) {
     console.error(error);
@@ -109,10 +253,6 @@ export async function getServerSideProps(context) {
   
   //  CHART CONFIG
 
-
-  // const aar = [{"key":1,"value":137},{"key":2,"value":117},{"key":3,"value":117},{"key":4,"value":136},{"key":5,"value":140},{"key":6,"value":145},{"key":7,"value":134},{"key":8,"value":122},{"key":9,"value":119},{"key":10,"value":136},{"key":11,"value":133},{"key":12,"value":123},{"key":13,"value":132},{"key":14,"value":115},{"key":15,"value":111},{"key":16,"value":127},{"key":17,"value":124},{"key":18,"value":134},{"key":19,"value":149},{"key":20,"value":124},{"key":21,"value":127},{"key":22,"value":126},{"key":23,"value":126},{"key":24,"value":144},{"key":25,"value":135},{"key":26,"value":126},{"key":27,"value":131},{"key":28,"value":128},{"key":29,"value":120},{"key":30,"value":143},{"key":31,"value":126},{"key":32,"value":124},{"key":33,"value":123},{"key":34,"value":126},{"key":35,"value":137},{"key":36,"value":122},{"key":37,"value":140},{"key":38,"value":111},{"key":39,"value":120},{"key":40,"value":133},{"key":41,"value":128},{"key":42,"value":114},{"key":43,"value":115},{"key":44,"value":144},{"key":45,"value":128}]
-  // const labels = [19,6,24,44,30,5,37,1,35,4,10,25,7,18,11,40,13,27,28,41,45,16,21,22,23,26,31,34,17,20,32,12,33,8,36,29,39,9,2,3,14,43,42,15,38];
-  // const valueArr = [149,145,144,144,143,140,140,137,137,136,136,135,134,134,133,133,132,131,128,128,128,127,127,126,126,126,126,126,124,124,124,123,123,122,122,120,120,119,117,117,115,115,114,111,111];
 
   let aData = {
     options: {
@@ -128,7 +268,7 @@ export async function getServerSideProps(context) {
       plugins: {
         title: {
           display: true,
-          text: 'Mega 6-55 - Stacked',
+          text: 'Statistical table',
         },
       },
     },
@@ -136,18 +276,25 @@ export async function getServerSideProps(context) {
       labels: finalData.labels,
       datasets: [
         {
-          label: '',
-          // data: [149,145,144,144,143,140,140,137,137,136,136,135,134,134,133,133,132,131,128,128,128,127,127,126,126,126,126,126,124,124,124,123,123,122,122,120,120,119,117,117,115,115,114,111,111],
+          label: 'first pivot',
           data: finalData.data1,
-          backgroundColor: 'rgba(255, 99, 132, 0.7)',
+          backgroundColor: 'rgba(248, 7, 188, 0.7)',
         },
         {
-          label: '',
-          // data: [2,6,4,8,2,1,8,3,6,3,5,4,2,3,5,4,2,5,6,4,6,4,6,5,1,6,5,1,3,6,4,2,1,5,3,3,7,5,3,5,7,4,5,6,6],
+          label: 'second pivot',
           data: finalData.data2,
-          backgroundColor: 'rgba(53, 162, 235, 0.7)',
+          backgroundColor: 'rgba(47, 94, 249, 0.7)',
+        },
+        {
+          label: 'last diff',
+          data: finalData.data3,
+          backgroundColor: 'rgba(253, 153, 3, 0.7)',
         },
       ],
+    },
+    next: {
+      value: finalData.next
+      // ANCHOR
     }
   
   }
@@ -159,5 +306,4 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default Find55
-
+export default Page
