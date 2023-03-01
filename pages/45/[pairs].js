@@ -22,32 +22,12 @@ ChartJS.register(
 import useSWR from 'swr';
 import { useRouter } from 'next/router'
 
-
-function dataCons(labels, data1, data2) {
-  const data = {
-    labels: labels,
-    datasets: [
-      {
-        label: '',
-        data: data1,
-        backgroundColor: 'rgba(255, 99, 132, 0.7)',
-      },
-      {
-        label: '',
-        data: data2,
-        backgroundColor: 'rgba(53, 162, 235, 0.7)',
-      }
-    ]
-  }
-
-  return data;
-}
-
 // PAGE COMPONENT
 
 export function Page({aData}) {
   const router = useRouter();
-
+  const queryParam = router.query.pairs.split('-');
+  console.log(aData.data.datasets);
   return(
   <>
     <Link href="/">Home</Link>
@@ -58,20 +38,41 @@ export function Page({aData}) {
       </span>
     })}</h1> */}
     <div className='numberInput'>
-      <input type='text' id='first'/>
-      <input type='text' id='second'/>
+      <input className='textInput' type='text' id='first'/>
+      <br/>
+      <input className='textInput' type='text' id='second'/>
+      <br/>
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        const param1 = document.getElementById('first').value
-        const param2 = document.getElementById('second').value
-        router.push('/45/' + param1 + '-' + param2)
+        const param1 = document.getElementById('first').value || 750;
+        const param2 = document.getElementById('second').value || 1000;
+        router.push('/45/' + param1 + '-' + param2 + '-' + (param2 - 0 + 1));
         }
       }>
       Click here
       </button>
     </div>
 
+      <br/>
+
+    <div className='arrowInput'>
+      <button type='button' className='pure-material-button-contained' onClick={() => {
+        router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 1) )
+      }}>
+        prev
+      </button>
+      <button type='button' className='pure-material-button-contained' onClick={() => {
+        router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
+      }}>
+        next
+      </button>
+
+    </div>
+
 
     <style jsx>{`
+      input {
+        
+      }
         .circle {
           color: orange;
           background-color: grey;
@@ -198,11 +199,13 @@ export async function getServerSideProps(context) {
     labels: [],
     data1: [],
     data2: [],
+    data3: [],
     next: []
   }
+
   try {
-    const response = await axios.get(`http://localhost:3000/api/getData45`);
-    const reverb = await axios.get('http://localhost:3000/api/getResult45');
+    const response = await axios.get(`http://localhost:3000/api/getData45`); // get analyzed from result
+    const reverb = await axios.get('http://localhost:3000/api/getResult45'); // get results term by term
     let statData = JSON.parse("[" + response.data + "]");
     let resultData = JSON.parse(reverb.data)
 
@@ -211,12 +214,13 @@ export async function getServerSideProps(context) {
       finalData.obj.push({
         key : i + 1,
         value1 : statData[pam[0]].stat[i],
-        value2 : statData[pam[1]].stat[i]
+        value2 : statData[pam[1]].stat[i],
+        value3 : statData[pam[2]].stat[i]
       })
     }
 
     let sorted = finalData.obj.sort((a,b) => {
-      return b.value2 - a.value2
+      return b.value3 - a.value3
     })
     
     let sortedLabels = sorted.map((each) => {
@@ -233,6 +237,11 @@ export async function getServerSideProps(context) {
       return each.value2 - finalData.obj[index].value1
     })
     finalData.data2 = sortedData2;
+
+    let sortedData3 = sorted.map((each, index) => {
+      return each.value3 - finalData.obj[index].value2
+    })
+    finalData.data3 = sortedData3;
 
     // ANCHOR
     finalData.next = resultData[pam[1]].ketqua||'not yet'
@@ -267,14 +276,19 @@ export async function getServerSideProps(context) {
       labels: finalData.labels,
       datasets: [
         {
-          label: '',
+          label: 'first pivot',
           data: finalData.data1,
-          backgroundColor: 'rgba(255, 99, 132, 0.7)',
+          backgroundColor: 'rgba(248, 7, 188, 0.7)',
         },
         {
-          label: '',
+          label: 'second pivot',
           data: finalData.data2,
-          backgroundColor: 'rgba(53, 162, 235, 0.7)',
+          backgroundColor: 'rgba(47, 94, 249, 0.7)',
+        },
+        {
+          label: 'last diff',
+          data: finalData.data3,
+          backgroundColor: 'rgba(253, 153, 3, 0.7)',
         },
       ],
     },
