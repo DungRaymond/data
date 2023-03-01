@@ -27,7 +27,7 @@ import { useRouter } from 'next/router'
 export function Page({aData}) {
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
-  console.log(aData.data.datasets);
+  // console.log(aData.data.datasets);
   return(
   <>
     <Link href="/">Home</Link>
@@ -43,8 +43,8 @@ export function Page({aData}) {
       <input className='textInput' type='text' id='second'/>
       <br/>
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        const param1 = document.getElementById('first').value || 750;
-        const param2 = document.getElementById('second').value || 1000;
+        const param1 = document.getElementById('first').value || 800;
+        const param2 = document.getElementById('second').value || 985;
         router.push('/45/' + param1 + '-' + param2 + '-' + (param2 - 0 + 1));
         }
       }>
