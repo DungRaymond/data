@@ -1,9 +1,9 @@
 import fs from 'fs';
 
-const data55 = JSON.parse(fs.readFileSync('./reverb55.json'))
+const data55 = JSON.parse(fs.readFileSync('./json/reverb55.json'))
 
 let temp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-console.log(temp.length);
+fs.writeFileSync('./json/data55.json', "{\n\t\"stat\": " + JSON.stringify(temp) + "\n}")
 async function makeAnalytic55(){
   // console.log('here1')
   for await (let each of data55) {
@@ -17,7 +17,7 @@ async function makeAnalytic55(){
       // console.log('here3')
     }
 
-    fs.appendFileSync('./data55', ",\n{\n\t\"stat\": " + JSON.stringify(temp) + "\n}")
+    fs.appendFileSync('./json/data55.json', ",\n{\n\t\"stat\": " + JSON.stringify(temp) + "\n}")
     // console.log(temp.stat);
     // console.log(final);
     // arr.push({stat: final})
