@@ -3,9 +3,69 @@ import Link from "next/link"
 export function HomePage() {
   return(
   <>
-    <h1><Link href="/45/979-1004">1</Link></h1>
-    <h1><Link href="/55/700-800">2</Link></h1>
-  
+    <div className="btn-bar">
+      <button><Link href="/45/979-1006-1007">Pick 1</Link></button>
+      <button><Link href="/55/700-820-830">Pick 2</Link></button>
+    </div>
+    
+    <style jsx>{
+      `
+      .btn-bar {
+        padding: 0 400px;
+      }
+      /* Material style */
+      button {
+        border: none;
+        cursor: pointer;
+        color: white;
+        padding: 15px 40px;
+        border-radius: 2px;
+        font-size: 22px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, .4);
+        background: #2196F3;
+      }
+      
+      /* Ripple magic */
+      button{
+        position: relative;
+        overflow: hidden;
+      }
+      
+      button:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, .5);
+        opacity: 0;
+        border-radius: 100%;
+        transform: scale(1, 1) translate(-50%);
+        transform-origin: 50% 50%;
+      }
+      
+      @keyframes ripple {
+        0% {
+          transform: scale(0, 0);
+          opacity: 1;
+        }
+        20% {
+          transform: scale(25, 25);
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: scale(40, 40);
+        }
+      }
+      
+      button:focus:not(:active)::after {
+        animation: ripple 1s ease-out;
+      }
+      
+      `
+    }</style>
   </>
   )
 }
