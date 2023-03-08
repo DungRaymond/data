@@ -30,7 +30,11 @@ export function Page({aData}) {
   // console.log(aData.data.datasets);
   return(
   <>
-    <Link href="/">Home</Link>
+    <button type='button' className='pure-material-button-contained' onClick={() => {
+        router.push('/')
+      }}>
+        Home
+    </button>
     <Bar options={aData.options} data={aData.data} />
     {/* <h1>{aData.next.value.map((each) => {
       return <span className='circle'>
@@ -45,7 +49,7 @@ export function Page({aData}) {
       <button type='button' className='pure-material-button-contained' onClick={() => {
         const param1 = document.getElementById('first').value || 800;
         const param2 = document.getElementById('second').value || 985;
-        router.push('/45/' + param1 + '-' + param2 + '-' + (param2 - 0 + 1));
+        router.push('/45/' + param1 + '-' + param2 + '-' + (param2 - 0 + 10));
         }
       }>
       Click here

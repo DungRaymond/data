@@ -17,7 +17,7 @@ async function lott645() {
     doso.click();
     const waitres = await waitUI();
     let ngayquay = document.getElementsByTagName('td')[0];
-    let kyquay = document.getElementsByTagName('a')[97];
+    let kyquay = document.getElementsByTagName('a')[98];
     let bongtron = document.getElementsByTagName('span');
     let result = {
       date : ngayquay.innerHTML,
@@ -37,5 +37,3 @@ async function lott645() {
   }
   
 }
-
-// 6/55

@@ -1,11 +1,21 @@
-import Link from "next/link"
+import { useRouter } from 'next/router'
 
 export function HomePage() {
+  const router = useRouter();
+
   return(
   <>
     <div className="btn-bar">
-      <button><Link href="/45/979-1006-1007">Pick 1</Link></button>
-      <button><Link href="/55/700-820-830">Pick 2</Link></button>
+      <button type='button' className='pure-material-button-contained' onClick={() => {
+        router.push("/45/979-1006-1007")
+      }}>
+        Pick 1
+      </button>
+      <button type='button' className='pure-material-button-contained' onClick={() => {
+        router.push("/55/700-820-830")
+      }}>
+        Pick 2
+      </button>
     </div>
     
     <style jsx>{
