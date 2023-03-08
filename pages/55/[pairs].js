@@ -24,6 +24,7 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
+ChartJS.defaults.font.size = 36;
 export function Page({aData}) {
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
@@ -266,14 +267,18 @@ export async function getServerSideProps(context) {
         },
         y: {
           stacked: true,
+          display: false
         },
       },
       responsive: true,
       plugins: {
         title: {
-          display: true,
+          display: false,
           text: 'Statistical table',
         },
+        legend: {
+          display: false
+        }
       },
     },
     data: {
