@@ -24,7 +24,7 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 36;
+ChartJS.defaults.font.size = 50;
 export function Page({aData}) {
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
@@ -37,11 +37,11 @@ export function Page({aData}) {
         Home
     </button>
     <Bar options={aData.options} data={aData.data} />
-    {/* <h1>{aData.next.value.map((each) => {
+    <h1>{aData.next.value.map((each) => {
       return <span className='circle'>
         {each}
       </span>
-    })}</h1> */}
+    })}</h1>
     <div className='numberInput'>
       <input className='textInput' type='text' id='first'/>
       <br/>
@@ -249,7 +249,7 @@ export async function getServerSideProps(context) {
     finalData.data3 = sortedData3;
 
     // ANCHOR
-    finalData.next = resultData[pam[1]].ketqua||'not yet'
+    finalData.next = resultData[pam[2]].ketqua||'not yet'
     // console.log(resultData[pam[1]]);
     
   } catch (error) {
