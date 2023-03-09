@@ -24,7 +24,8 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 36;
+ChartJS.defaults.font.size = 30;
+ChartJS.defaults.font.weight = '700';
 export function Page({aData}) {
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
@@ -229,9 +230,13 @@ export async function getServerSideProps(context) {
     })
     
     let sortedLabels = sorted.map((each) => {
-      return each.key
+      if(each.key < 10) {
+        return '0' + each.key
+      } else {
+        return each.key + ''
+      }
     })
-    finalData.labels = sortedLabels;
+    // finalData.labels = sortedLabels;
 
     let sortedData1 = sorted.map((each) => {
       return each.value1
@@ -249,8 +254,15 @@ export async function getServerSideProps(context) {
     finalData.data3 = sortedData3;
 
     // ANCHOR
-    finalData.next = resultData[pam[2]].ketqua||'not yet'
-    // console.log(resultData[pam[1]]);
+    finalData.next = resultData[pam[2]].ketqua||null
+
+    finalData.labels = sortedLabels.map((each) => {
+      if(!finalData.next.includes(each)) {
+        return each
+      } else {
+        return '[' + each + ']'
+      }
+    })
     
   } catch (error) {
     console.error(error);

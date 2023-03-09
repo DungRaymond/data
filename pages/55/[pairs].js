@@ -8,7 +8,8 @@ import {
   Legend,
 } from 'chart.js';
 import Link from 'next/link';
-import { Bar } from 'react-chartjs-2';
+import { Bar, getElementsAtEvent } from 'react-chartjs-2';
+import { useRef } from 'react';
 
 ChartJS.register(
   CategoryScale,
@@ -24,19 +25,21 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 50;
+ChartJS.defaults.font.size = 25;
+ChartJS.defaults.font.weight = '700';
+
 export function Page({aData}) {
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
-  // console.log(aData.data.datasets);
+  
   return(
   <>
-    <button type='button' className='pure-material-button-contained' onClick={() => {
+    {/* <button type='button' className='pure-material-button-contained' onClick={() => {
         router.push('/')
       }}>
         Home
-    </button>
-    <Bar options={aData.options} data={aData.data} />
+    </button> */}
+    <Bar options={aData.options} data={aData.data}/>
     <h1>{aData.next.value.map((each) => {
       return <span className='circle'>
         {each}
@@ -229,9 +232,14 @@ export async function getServerSideProps(context) {
     })
     
     let sortedLabels = sorted.map((each) => {
-      return each.key
+      if(each.key < 10) {
+        return '0' + each.key
+      } else {
+        return each.key + ''
+      }
     })
-    finalData.labels = sortedLabels;
+    // finalData.labels = sortedLabels;
+    // console.log(sortedLabels);
 
     let sortedData1 = sorted.map((each) => {
       return each.value1
@@ -249,8 +257,15 @@ export async function getServerSideProps(context) {
     finalData.data3 = sortedData3;
 
     // ANCHOR
-    finalData.next = resultData[pam[2]].ketqua||'not yet'
-    // console.log(resultData[pam[1]]);
+    finalData.next = resultData[pam[2]].ketqua||null
+    
+    finalData.labels = sortedLabels.map((each) => {
+      if(!finalData.next.includes(each)) {
+        return each
+      } else {
+        return '[' + each + ']'
+      }
+    })
     
   } catch (error) {
     console.error(error);
