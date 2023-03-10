@@ -24,8 +24,8 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 30;
-ChartJS.defaults.font.weight = '700';
+ChartJS.defaults.font.size = 15;
+ChartJS.defaults.font.weight = '900';
 export function Page({aData}) {
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
@@ -39,7 +39,7 @@ export function Page({aData}) {
     </button>
     <Bar options={aData.options} data={aData.data} />
     <h1>{aData.next.value.map((each) => {
-      return <span className='circle'>
+      return <span className='circle' key={each + 'hoho'}>
         {each}
       </span>
     })}</h1>
@@ -49,8 +49,8 @@ export function Page({aData}) {
       <input className='textInput' type='text' id='second'/>
       <br/>
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        const param1 = document.getElementById('first').value || 800;
-        const param2 = document.getElementById('second').value || 985;
+        const param1 = document.getElementById('first').value || 969;
+        const param2 = document.getElementById('second').value || 999;
         router.push('/45/' + param1 + '-' + param2 + '-' + (param2 - 0 + 10));
         }
       }>
