@@ -4,6 +4,6 @@
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
   "/45/[pairs]": "pages/45/[pairs].js",
-  "/api/getData45": "pages/api/getData45.js",
-  "/api/getResult45": "pages/api/getResult45.js"
+  "/api/getResult45": "pages/api/getResult45.js",
+  "/api/getData45": "pages/api/getData45.js"
 }
