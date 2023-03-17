@@ -67,7 +67,9 @@ export function Page({aData}) {
         prev
       </button>
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
+        if(queryParam[2] < aData.dataLength - 1) {
+          router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
+        }
       }}>
         next
       </button>
@@ -214,7 +216,8 @@ export async function getServerSideProps(context) {
     data1: [],
     data2: [],
     data3: [],
-    next: []
+    next: [],
+    len: 0,
   }
 
   try {
@@ -271,6 +274,7 @@ export async function getServerSideProps(context) {
         return '[' + each + ']'
       }
     })
+    finalData.len = resultData.length
     
   } catch (error) {
     console.error(error);
@@ -324,7 +328,8 @@ export async function getServerSideProps(context) {
     next: {
       value: finalData.next
       // ANCHOR
-    }
+    },
+    dataLength: finalData.len
   
   }
   

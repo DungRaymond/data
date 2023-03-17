@@ -47,13 +47,13 @@ export function Page({aData}) {
     })}</h1>
     <div className='numberInput'>
       <input className='textInput' type='text' id='first'/>
-      <br/>
       <input className='textInput' type='text' id='second'/>
-      <br/>
+      <input className='textInput' type='text' id='third' />
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        const param1 = document.getElementById('first').value || 650;
-        const param2 = document.getElementById('second').value || 800;
-        router.push('/55/' + param1 + '-' + param2 + '-' + (param2 - 0 + 10));
+        const param1 = document.getElementById('first').value || 700;
+        const param2 = document.getElementById('second').value || 820;
+        const param3 = document.getElementById('third').value || param2 - 0 + 10;
+        router.push('/55/' + param1 + '-' + param2 + '-' + param3);
         }
       }>
       Click here
@@ -69,7 +69,9 @@ export function Page({aData}) {
         prev
       </button>
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
+        if(queryParam[2] < aData.dataLength - 1) {
+          router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
+        }
       }}>
         next
       </button>
@@ -79,7 +81,11 @@ export function Page({aData}) {
 
     <style jsx>{`
       input {
-        
+        outline: none;
+        font-height: 0.6em;
+        font-size: 21px;
+        width: 70px;
+        margin: auto 2px;
       }
         .circle {
           color: orange;
@@ -208,7 +214,8 @@ export async function getServerSideProps(context) {
     data1: [],
     data2: [],
     data3: [],
-    next: []
+    next: [],
+    len: 0
   }
 
   try {
@@ -266,6 +273,7 @@ export async function getServerSideProps(context) {
         return '[' + each + ']'
       }
     })
+    finalData.len = resultData.length
     
   } catch (error) {
     console.error(error);
@@ -319,7 +327,8 @@ export async function getServerSideProps(context) {
     next: {
       value: finalData.next
       // ANCHOR
-    }
+    },
+    dataLength: finalData.len
   
   }
   
