@@ -5,8 +5,5 @@
   "/": "pages/index.js",
   "/45/[pairs]": "pages/45/[pairs].js",
   "/api/getData45": "pages/api/getData45.js",
-  "/api/getResult45": "pages/api/getResult45.js",
-  "/55/[pairs]": "pages/55/[pairs].js",
-  "/api/getData55": "pages/api/getData55.js",
-  "/api/getResult55": "pages/api/getResult55.js"
+  "/api/getResult45": "pages/api/getResult45.js"
 }
