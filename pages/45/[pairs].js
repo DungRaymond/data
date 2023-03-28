@@ -10,6 +10,8 @@ import {
 import Link from 'next/link';
 import { Bar } from 'react-chartjs-2';
 
+import { Grid } from '@mui/material';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -32,66 +34,97 @@ export function Page({aData}) {
   // console.log(aData.data.datasets);
   return(
   <>
-    <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push('/')
-      }}>
-        Home
-    </button>
+    <Grid container spacing={1}>
+      <Grid item xs={1}>
+        <button type='button' className='pure-material-button-contained' onClick={() => {
+            router.push('/')
+          }}>
+            Home
+        </button>
+      </Grid>
+
+      <Grid item xs={2}>
+        <div id='latest_result'>{aData.next.value.map((each) => {
+          return <span className='circle' key={each + 'hoho'}>
+            {each}
+          </span>
+        })}</div>
+      </Grid>
+
+      <Grid item xs={2}>
+        <div className='arrowInput'>
+          <button type='button' className='pure-material-button-contained' onClick={() => {
+            router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 1) )
+          }}>
+            prev
+          </button>
+          <button type='button' className='pure-material-button-contained' onClick={() => {
+            if(queryParam[2] < aData.dataLength - 1) {
+              router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
+            }
+          }}>
+            next
+          </button>
+
+        </div>
+      </Grid>
+
+      <Grid item xs={3}>
+        <div className='numberInput'>
+          <input className='textInput' type='text' id='first' />
+          <input className='textInput' type='text' id='second' />
+          <input className='textInput' type='text' id='third' />
+          <button type='button' className='pure-material-button-contained' onClick={() => {
+            const param1 = document.getElementById('first').value || 969;
+            const param2 = document.getElementById('second').value || 999;
+            const param3 = document.getElementById('third').value || param2 - 0 + 10;
+            router.push('/45/' + param1 + '-' + param2 + '-' + param3);
+            }
+          }>
+          Click here
+          </button>
+        </div>
+      </Grid>
+    </Grid>
+
+    {/* The bar */}
     <Bar options={aData.options} data={aData.data} />
-    <h1>{aData.next.value.map((each) => {
-      return <span className='circle' key={each + 'hoho'}>
-        {each}
-      </span>
-    })}</h1>
-    <div className='numberInput'>
-      <input className='textInput' type='text' id='first' />
-      <input className='textInput' type='text' id='second' />
-      <input className='textInput' type='text' id='third' />
-      <button type='button' className='pure-material-button-contained' onClick={() => {
-        const param1 = document.getElementById('first').value || 969;
-        const param2 = document.getElementById('second').value || 999;
-        const param3 = document.getElementById('third').value || param2 - 0 + 10;
-        router.push('/45/' + param1 + '-' + param2 + '-' + param3);
-        }
-      }>
-      Click here
-      </button>
-    </div>
 
-      <br/>
-
-    <div className='arrowInput'>
-      <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 1) )
-      }}>
-        prev
-      </button>
-      <button type='button' className='pure-material-button-contained' onClick={() => {
-        if(queryParam[2] < aData.dataLength - 1) {
-          router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
-        }
-      }}>
-        next
-      </button>
-
-    </div>
 
 
     <style jsx>{`
       input {
+        position: relative;
+        display: inline-block;
         outline: none;
         font-height: 0.6em;
         font-size: 21px;
         width: 70px;
         margin: auto 2px;
+        vertical-align: middle;
       }
-      .circle {
+      #latest_result > span {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 28px;
+        font-weight: 600;
         color: orange;
         background-color: grey;
-        border-radius: 49%;
-        padding: 4px 8px;
-        margin: 0 0 0 5px;
+        border-radius: 10px;
+        padding: 4px 8px 2px 8px;
+        margin-left: 2px;
       }
+
+      #latest_result > span:first-child {
+        margin-left: 0;
+        border-left: none;
+      }
+      #latest_result > span:last-child {
+        border-left: none;
+      }
+
       .pure-material-button-contained {
         position: relative;
         display: inline-block;
@@ -109,7 +142,7 @@ export function Page({aData}) {
         background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
         box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
         font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 500;
         line-height: 36px;
         overflow: hidden;

@@ -12,7 +12,7 @@ export function HomePage() {
         Pick 1
       </button>
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push("/55/700-820-830")
+        router.push("/55/700-825-840")
       }}>
         Pick 2
       </button>
