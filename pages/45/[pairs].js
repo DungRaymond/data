@@ -7,7 +7,6 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import Link from 'next/link';
 import { Bar } from 'react-chartjs-2';
 
 import { Grid } from '@mui/material';
@@ -26,7 +25,7 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 15;
+ChartJS.defaults.font.size = 18;
 ChartJS.defaults.font.weight = '900';
 export function Page({aData}) {
   const router = useRouter();

@@ -7,9 +7,9 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import Link from 'next/link';
+import { Grid } from '@mui/material'
 import { Bar, getElementsAtEvent } from 'react-chartjs-2';
-import { useRef } from 'react';
+
 
 ChartJS.register(
   CategoryScale,
@@ -25,7 +25,7 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 25;
+ChartJS.defaults.font.size = 18;
 ChartJS.defaults.font.weight = '700';
 
 export function Page({aData}) {
@@ -34,66 +34,97 @@ export function Page({aData}) {
   
   return(
   <>
-    {/* <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push('/')
-      }}>
-        Home
-    </button> */}
+    <Grid container spacing={1}>
+      <Grid item xs={1}>
+        <button type='button' className='pure-material-button-contained' onClick={() => {
+            router.push('/')
+          }}>
+            Home
+        </button>
+      </Grid>
+
+      <Grid item xs={3}>
+        <div id="latest_result">{aData.next.value.map((each) => {
+          return <span className='circle' key={each + 'hehe'}>
+            {each}
+          </span>
+        })}</div>
+      </Grid>
+
+      <Grid item xs={3}>
+        <div className='numberInput'>
+          <input className='textInput' type='text' id='first'/>
+          <input className='textInput' type='text' id='second'/>
+          <input className='textInput' type='text' id='third' />
+          <button type='button' className='pure-material-button-contained' onClick={() => {
+            const param1 = document.getElementById('first').value || 700;
+            const param2 = document.getElementById('second').value || 820;
+            const param3 = document.getElementById('third').value || param2 - 0 + 10;
+            router.push('/55/' + param1 + '-' + param2 + '-' + param3);
+            }
+          }>
+          Click here
+          </button>
+        </div>
+      </Grid>
+
+      <Grid item xs={2}>
+        <div className='arrowInput'>
+          <button type='button' className='pure-material-button-contained' onClick={() => {
+            router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 1) )
+          }}>
+            prev
+          </button>
+          <button type='button' className='pure-material-button-contained' onClick={() => {
+            if(queryParam[2] < aData.dataLength - 1) {
+              router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
+            }
+          }}>
+            next
+          </button>
+
+        </div>
+      </Grid>
+    </Grid>
+
+    {/* The bar */}
     <Bar options={aData.options} data={aData.data}/>
-    <h1>{aData.next.value.map((each) => {
-      return <span className='circle'>
-        {each}
-      </span>
-    })}</h1>
-    <div className='numberInput'>
-      <input className='textInput' type='text' id='first'/>
-      <input className='textInput' type='text' id='second'/>
-      <input className='textInput' type='text' id='third' />
-      <button type='button' className='pure-material-button-contained' onClick={() => {
-        const param1 = document.getElementById('first').value || 700;
-        const param2 = document.getElementById('second').value || 820;
-        const param3 = document.getElementById('third').value || param2 - 0 + 10;
-        router.push('/55/' + param1 + '-' + param2 + '-' + param3);
-        }
-      }>
-      Click here
-      </button>
-    </div>
 
-      <br/>
-
-    <div className='arrowInput'>
-      <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 1) )
-      }}>
-        prev
-      </button>
-      <button type='button' className='pure-material-button-contained' onClick={() => {
-        if(queryParam[2] < aData.dataLength - 1) {
-          router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
-        }
-      }}>
-        next
-      </button>
-
-    </div>
 
 
     <style jsx>{`
       input {
+        position: relative;
+        display: inline-block;
         outline: none;
         font-height: 0.6em;
         font-size: 21px;
         width: 70px;
         margin: auto 2px;
+        vertical-align: middle;
       }
-        .circle {
-          color: orange;
-          background-color: grey;
-          border-radius: 49%;
-          padding: 4px 8px;
-          margin: 0 0 0 5px;
-        }
+      #latest_result > span {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 28px;
+        font-weight: 600;
+        color: orange;
+        background-color: grey;
+        border-radius: 10px;
+        padding: 4px 8px 2px 8px;
+        margin-left: 2px;
+      }
+
+      #latest_result > span:first-child {
+        margin-left: 0;
+        border-left: none;
+      }
+      #latest_result > span:last-child {
+        border-left: none;
+      }
+
         .pure-material-button-contained {
           position: relative;
           display: inline-block;
