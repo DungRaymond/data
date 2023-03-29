@@ -51,23 +51,6 @@ export function Page({aData}) {
         })}</div>
       </Grid>
 
-      <Grid item xs={3}>
-        <div className='numberInput'>
-          <input className='textInput' type='text' id='first'/>
-          <input className='textInput' type='text' id='second'/>
-          <input className='textInput' type='text' id='third' />
-          <button type='button' className='pure-material-button-contained' onClick={() => {
-            const param1 = document.getElementById('first').value || 700;
-            const param2 = document.getElementById('second').value || 820;
-            const param3 = document.getElementById('third').value || param2 - 0 + 10;
-            router.push('/55/' + param1 + '-' + param2 + '-' + param3);
-            }
-          }>
-          Click here
-          </button>
-        </div>
-      </Grid>
-
       <Grid item xs={2}>
         <div className='arrowInput'>
           <button type='button' className='pure-material-button-contained' onClick={() => {
@@ -85,6 +68,25 @@ export function Page({aData}) {
 
         </div>
       </Grid>
+
+      <Grid item xs={3}>
+        <div className='numberInput'>
+          <input className='textInput' type='text' id='first'/>
+          <input className='textInput' type='text' id='second'/>
+          <input className='textInput' type='text' id='third' />
+          <button type='button' className='pure-material-button-contained' onClick={() => {
+            const param1 = document.getElementById('first').value || 700;
+            const param2 = document.getElementById('second').value || 820;
+            const param3 = document.getElementById('third').value || param2 - 0 + 10;
+            router.push('/55/' + param1 + '-' + param2 + '-' + param3);
+            }
+          }>
+          Click here
+          </button>
+        </div>
+      </Grid>
+
+      
     </Grid>
 
     {/* The bar */}
