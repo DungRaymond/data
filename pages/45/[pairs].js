@@ -25,7 +25,7 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 18;
+ChartJS.defaults.font.size = 14;
 ChartJS.defaults.font.weight = '900';
 export function Page({aData}) {
   const router = useRouter();
@@ -42,12 +42,16 @@ export function Page({aData}) {
         </button>
       </Grid>
 
-      <Grid item xs={2}>
+      <Grid item xs={4}>
         <div id='latest_result'>{aData.next.value.map((each) => {
           return <span className='circle' key={each + 'hoho'}>
             {each}
           </span>
-        })}</div>
+        })}
+          <span>
+            {queryParam[2] - 0 + 1}
+          </span>
+        </div>
       </Grid>
 
       <Grid item xs={2}>
@@ -68,15 +72,15 @@ export function Page({aData}) {
         </div>
       </Grid>
 
-      <Grid item xs={3}>
+      <Grid item xs={5}>
         <div className='numberInput'>
           <input className='textInput' type='text' id='first' />
           <input className='textInput' type='text' id='second' />
           <input className='textInput' type='text' id='third' />
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            const param1 = document.getElementById('first').value || 969;
-            const param2 = document.getElementById('second').value || 999;
-            const param3 = document.getElementById('third').value || param2 - 0 + 10;
+            const param1 = document.getElementById('first').value || 930;
+            const param2 = document.getElementById('second').value || 976;
+            const param3 = document.getElementById('third').value || param2 - 0 + 40;
             router.push('/45/' + param1 + '-' + param2 + '-' + param3);
             }
           }>
@@ -113,7 +117,7 @@ export function Page({aData}) {
         background-color: grey;
         border-radius: 10px;
         padding: 4px 8px 2px 8px;
-        margin-left: 2px;
+        margin-left: 10px;
       }
 
       #latest_result > span:first-child {
@@ -122,6 +126,8 @@ export function Page({aData}) {
       }
       #latest_result > span:last-child {
         border-left: none;
+        background-color: green;
+        color: white;
       }
 
       .pure-material-button-contained {
