@@ -25,7 +25,7 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 18;
+ChartJS.defaults.font.size = 11;
 ChartJS.defaults.font.weight = '700';
 
 export function Page({aData}) {
@@ -43,12 +43,16 @@ export function Page({aData}) {
         </button>
       </Grid>
 
-      <Grid item xs={3}>
+      <Grid item xs={4}>
         <div id="latest_result">{aData.next.value.map((each) => {
           return <span className='circle' key={each + 'hehe'}>
             {each}
           </span>
-        })}</div>
+        })}
+            <span>
+              {queryParam[2] - 0 + 1}
+            </span>
+          </div>
       </Grid>
 
       <Grid item xs={2}>
@@ -69,7 +73,7 @@ export function Page({aData}) {
         </div>
       </Grid>
 
-      <Grid item xs={3}>
+      <Grid item xs={5}>
         <div className='numberInput'>
           <input className='textInput' type='text' id='first'/>
           <input className='textInput' type='text' id='second'/>
@@ -253,9 +257,13 @@ export async function getServerSideProps(context) {
 
   try {
     const response = await axios.get(`http://localhost:3000/api/getData55`); // get analyzed from result
-    const reverb = await axios.get('http://localhost:3000/api/getResult55'); // get results term by term
     let statData = JSON.parse("[" + response.data + "]");
-    let resultData = JSON.parse(reverb.data)
+
+    const freq = await axios.get('http://localhost:3000/api/getFreq55') // get last 100 result
+    let freqData = JSON.parse("[" + freq.data + "]");
+
+    const reverb = await axios.get('http://localhost:3000/api/getResult55'); // get results term by term
+    let resultData = JSON.parse(reverb.data);
 
     // THE DATA WE NEED
     for(let i = 0; i < 55; i++){
@@ -278,8 +286,6 @@ export async function getServerSideProps(context) {
         return each.key + ''
       }
     })
-    // finalData.labels = sortedLabels;
-    // console.log(sortedLabels);
 
     let sortedData1 = sorted.map((each) => {
       return each.value1
@@ -357,6 +363,9 @@ export async function getServerSideProps(context) {
         },
       ],
     },
+    // last100: {
+    //   labels: freqData.labels
+    // },
     next: {
       value: finalData.next
       // ANCHOR
