@@ -93,6 +93,9 @@ export function Page({aData}) {
     {/* The bar */}
     <Bar options={aData.options} data={aData.data} />
 
+    <br/>
+
+    <Bar options={aData.options} data={aData.last100}/>
 
 
     <style jsx>{`
@@ -256,12 +259,17 @@ export async function getServerSideProps(context) {
     data3: [],
     next: [],
     len: 0,
+    last100Data: []
   }
 
   try {
     const response = await axios.get(`http://localhost:3000/api/getData45`); // get analyzed from result
-    const reverb = await axios.get('http://localhost:3000/api/getResult45'); // get results term by term
     let statData = JSON.parse("[" + response.data + "]");
+
+    const freq = await axios.get('http://localhost:3000/api/getFreq55') // get last 100 result
+    let freqData = JSON.parse("[" + freq.data + "]");
+
+    const reverb = await axios.get('http://localhost:3000/api/getResult45'); // get results term by term
     let resultData = JSON.parse(reverb.data)
 
     // THE DATA WE NEED
@@ -270,7 +278,8 @@ export async function getServerSideProps(context) {
         key : i + 1,
         value1 : statData[pam[0]].stat[i],
         value2 : statData[pam[1]].stat[i],
-        value3 : statData[pam[2]].stat[i]
+        value3 : statData[pam[2]].stat[i],
+        last100: freqData[freqData.length - 1].stat[i]
       })
     }
 
@@ -313,6 +322,11 @@ export async function getServerSideProps(context) {
       }
     })
     finalData.len = resultData.length
+
+    let sortedLast100Data = sorted.map((each) => {
+      return each.last100
+    })
+    finalData.last100Data = sortedLast100Data;
     
   } catch (error) {
     console.error(error);
@@ -362,6 +376,16 @@ export async function getServerSideProps(context) {
           backgroundColor: 'rgba(253, 153, 3, 0.7)',
         },
       ],
+    },
+    last100: {
+      labels: finalData.labels,
+      datasets: [
+        {
+          label: 'frequency',
+          data: finalData.last100Data,
+          backgroundColor: 'rgba(208,9,241,0.7)'
+        }
+      ]
     },
     next: {
       value: finalData.next
