@@ -266,7 +266,7 @@ export async function getServerSideProps(context) {
     const response = await axios.get(`http://localhost:3000/api/getData45`); // get analyzed from result
     let statData = JSON.parse("[" + response.data + "]");
 
-    const freq = await axios.get('http://localhost:3000/api/getFreq55') // get last 100 result
+    const freq = await axios.get('http://localhost:3000/api/getFreq45') // get last 100 result
     let freqData = JSON.parse("[" + freq.data + "]");
 
     const reverb = await axios.get('http://localhost:3000/api/getResult45'); // get results term by term
