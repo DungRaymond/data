@@ -44,4 +44,13 @@ async function lott655() {
     arr55.push(result)
   }
   
+  return arr55;
 }
+
+
+async function printArr() {
+  let res = await lott655();
+  console.log(JSON.stringify(arr55));
+}
+
+printArr();
