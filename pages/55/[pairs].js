@@ -25,7 +25,7 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 11;
+ChartJS.defaults.font.size = 18;
 ChartJS.defaults.font.weight = '700';
 
 export function Page({aData}) {
@@ -370,7 +370,8 @@ export async function getServerSideProps(context) {
         {
           label: 'last diff',
           data: finalData.data3,
-          backgroundColor: 'rgba(253, 153, 3, 0.7)',
+          // backgroundColor: 'rgba(253, 153, 3, 0.7)',
+          backgroundColor: 'rgba(47, 94, 249, 0.7)',
         },
       ],
     },

@@ -5,7 +5,7 @@ const data55 = JSON.parse(fs.readFileSync('./json/reverb55.json'))
 let temp = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 fs.writeFileSync('./json/freq55.json', "{\n\t\"stat\": " + JSON.stringify(temp) + "\n}")
 
-let arr100 = data55.slice(data55.length - 40, data55.length)
+let arr100 = data55.slice(data55.length - 44, data55.length)
 arr100 = arr100.map(each => {
   return each.ketqua
 })
