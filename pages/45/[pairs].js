@@ -80,7 +80,7 @@ export function Page({aData}) {
           <button type='button' className='pure-material-button-contained' onClick={() => {
             const param1 = document.getElementById('first').value || 930;
             const param2 = document.getElementById('second').value || 976;
-            const param3 = document.getElementById('third').value || param2 - 0 + 40;
+            const param3 = document.getElementById('third').value || param2 - 0 + 70;
             router.push('/45/' + param1 + '-' + param2 + '-' + param3);
             }
           }>
