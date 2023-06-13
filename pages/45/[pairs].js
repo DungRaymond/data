@@ -98,6 +98,8 @@ export function Page({aData}) {
     </Grid>
 
     {/* The bar */}
+    <br/>
+
     <Bar options={aData.options} data={aData.last100}/>
 
     <br/>
