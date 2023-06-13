@@ -39,5 +39,5 @@ import fs from 'fs';
 // })
 // fs.appendFileSync('./abc',",\n" + JSON.stringify(crr2))
 
-const lenCheck = JSON.parse("[" + fs.readFileSync('./json/data55.json') + "]")
+const lenCheck = JSON.parse("[" + fs.readFileSync('./json/data45.json') + "]")
 console.log(lenCheck.length);
