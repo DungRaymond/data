@@ -98,11 +98,11 @@ export function Page({aData}) {
     </Grid>
 
     {/* The bar */}
-    <Bar options={aData.options} data={aData.data} />
+    <Bar options={aData.options} data={aData.last100}/>
 
     <br/>
 
-    <Bar options={aData.options} data={aData.last100}/>
+    <Bar options={aData.options} data={aData.data} />
 
 
     <style jsx>{`
