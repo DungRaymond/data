@@ -68,6 +68,13 @@ export function Page({aData}) {
           }}>
             next
           </button>
+          <button type='button' className='pure-material-button-contained' onClick={() => {
+            if(queryParam[2] < aData.dataLength - 1) {
+              router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (aData.dataLength - 1))
+            }
+          }}>
+            last
+          </button>
 
         </div>
       </Grid>
