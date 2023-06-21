@@ -41,3 +41,5 @@ import fs from 'fs';
 
 const lenCheck = JSON.parse("[" + fs.readFileSync('./json/data45.json') + "]")
 console.log(lenCheck.length);
+
+// console.log(typeof(JSON.stringify(fs.readFileSync('./json/data45.json'))));
