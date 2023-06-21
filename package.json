@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prep": "node a45.js && node b45.js && node a55.js && node b55.js"
+    "prep": "node a45.js && node b45.js && node a55.js && node b55.js && node c45.js && node c55.js"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
