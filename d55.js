@@ -5,8 +5,15 @@ let sample = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', 
 async function extract() {
   for await(each of sample) {
     let pivot = i;
-    let data = fs.readFileSync("./json/collection55/type" + pivot + ".json");
-    
+    let data = JSON.parse(fs.readFileSync("./json/collection55/type" + pivot + ".json"));
+
+    for await (let ite of data) {
+      for await (let item of ite.ketqua){
+        let index = item - 1;
+        temp[index] += 1;
+      }
+      fs.appendFileSync('./json/data55.json', ",\n{\n\t\"stat\": " + JSON.stringify(temp) + "\n}")
+    }
   }
 
 }
