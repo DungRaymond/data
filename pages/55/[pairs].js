@@ -107,6 +107,10 @@ export function Page({aData}) {
 
     <br/>
 
+          
+
+    <br/>
+
     <Bar options={aData.options} data={aData.data}/>
 
 
