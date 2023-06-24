@@ -201,7 +201,7 @@ async function extract() {
         }
       }
     }
-    fs.appendFileSync('./json/modeList45.json', JSON.stringify(obj) + ",\n")
+    fs.appendFileSync('./json/modeList45.json', "\t" + JSON.stringify(obj) + ",\n")
     
   }
   fs.appendFileSync('./json/modeList45.json', "\n]");
