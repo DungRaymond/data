@@ -11,6 +11,11 @@ import { Bar } from 'react-chartjs-2';
 
 import { Grid } from '@mui/material';
 
+`use client`
+
+import {useState} from 'react';
+
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -28,6 +33,13 @@ import { useRouter } from 'next/router'
 ChartJS.defaults.font.size = 14;
 ChartJS.defaults.font.weight = '900';
 export function Page({aData}) {
+  const [pick1, setPick1] = useState(0)
+  const [pick2, setPick2] = useState(0)
+  const [pick3, setPick3] = useState(0)
+  const [pick4, setPick4] = useState(0)
+  const [pick5, setPick5] = useState(0)
+  const [pick6, setPick6] = useState(0)
+
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
   // console.log(aData.data.datasets);
@@ -105,6 +117,77 @@ export function Page({aData}) {
     <br/>
 
     <Bar options={aData.options} data={aData.data} />
+
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <input className='textInput' type='text' id='pick1' 
+        onKeyDown={(event) => {
+          if(event.code === 'Enter') {
+            const pivot = document.getElementById('pick1').value;
+            axios.get('http://localhost:3000/api/getMode45')
+            .then(res => {
+              const arr = JSON.parse(res.data)
+              console.log(JSON.stringify(arr[pivot - 1]));
+            })
+          }
+        }}/>
+
+      </Grid>
+    </Grid>
+
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <input className='textInput' type='text' id='pick2' onKeyDown={(event) => {
+          if(event.code === 'Enter') {
+            alert(document.getElementById('pick2').value - 0)
+          }
+        }}/>
+      </Grid>
+
+    </Grid>
+    
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <input className='textInput' type='text' id='pick3' onKeyDown={(event) => {
+          if(event.code === 'Enter') {
+            alert(document.getElementById('pick3').value - 0)
+          }
+        }}/>
+      </Grid>
+
+    </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <input className='textInput' type='text' id='pick4' onKeyDown={(event) => {
+          if(event.code === 'Enter') {
+            alert(document.getElementById('pick4').value - 0)
+          }
+        }}/>
+      </Grid>
+
+    </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <input className='textInput' type='text' id='pick5' onKeyDown={(event) => {
+          if(event.code === 'Enter') {
+            alert(document.getElementById('pick5').value - 0)
+          }
+        }}/>
+      </Grid>
+
+    </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <input className='textInput' type='text' id='pick6' onKeyDown={(event) => {
+          if(event.code === 'Enter') {
+            alert(document.getElementById('pick6').value - 0)
+          }
+        }}/>
+      </Grid>
+
+    </Grid>
+
+
 
 
     <style jsx>{`
@@ -266,6 +349,7 @@ export async function getServerSideProps(context) {
     data1: [],
     data2: [],
     data3: [],
+    total: [],
     next: [],
     len: 0,
     last100Data: []
@@ -320,6 +404,11 @@ export async function getServerSideProps(context) {
     })
     finalData.data3 = sortedData3;
 
+    let sortedTotal = sorted.map((each, index) => {
+      return each.value3
+    })
+    finalData.total = sortedTotal;
+
     // ANCHOR
     finalData.next = resultData[pam[2]].ketqua||null
 
@@ -368,23 +457,30 @@ export async function getServerSideProps(context) {
     },
     data: {
       labels: finalData.labels,
+      // datasets: [
+      //   {
+      //     label: 'first pivot',
+      //     data: finalData.data1,
+      //     backgroundColor: 'rgba(248, 7, 188, 0.7)',
+      //   },
+      //   {
+      //     label: 'second pivot',
+      //     data: finalData.data2,
+      //     backgroundColor: 'rgba(47, 94, 249, 0.7)',
+      //   },
+      //   {
+      //     label: 'last diff',
+      //     data: finalData.data3,
+      //     backgroundColor: 'rgba(253, 153, 3, 0.7)',
+      //   },
+      // ],
       datasets: [
         {
-          label: 'first pivot',
-          data: finalData.data1,
-          backgroundColor: 'rgba(248, 7, 188, 0.7)',
-        },
-        {
-          label: 'second pivot',
-          data: finalData.data2,
-          backgroundColor: 'rgba(47, 94, 249, 0.7)',
-        },
-        {
-          label: 'last diff',
-          data: finalData.data3,
-          backgroundColor: 'rgba(253, 153, 3, 0.7)',
-        },
-      ],
+          label: 'count',
+          data: finalData.total,
+          backgroundColor: 'rgba(253, 153, 3, 0.7)'
+        }
+      ]
     },
     last100: {
       labels: finalData.labels,
