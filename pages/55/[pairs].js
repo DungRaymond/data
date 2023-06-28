@@ -80,7 +80,7 @@ export function Page({aData}) {
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength - 1) {
-              router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (aData.dataLength - 1))
+              router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (aData.dataLength))
             }
           }}>
             last
@@ -376,6 +376,7 @@ export async function getServerSideProps(context) {
       return b.value3 - a.value3
     })
     
+    // sorted result ball number
     let sortedLabels = sorted.map((each) => {
       if(each.key < 10) {
         return '0' + each.key
@@ -383,6 +384,8 @@ export async function getServerSideProps(context) {
         return each.key + ''
       }
     })
+
+    // DEPRECATED
 
     let sortedData1 = sorted.map((each) => {
       return each.value1
@@ -399,13 +402,15 @@ export async function getServerSideProps(context) {
     })
     finalData.data3 = sortedData3;
 
+    // DEPRECATED-END
+
     let sortedTotal = sorted.map((each, index) => {
       return each.value3
     })
     finalData.total = sortedTotal;
 
     // ANCHOR
-    finalData.next = resultData[pam[2]].ketqua||null
+    finalData.next = resultData[pam[2] - 1].ketqua
     
     finalData.labels = sortedLabels.map((each) => {
       if(!finalData.next.includes(each)) {
