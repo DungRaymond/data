@@ -82,7 +82,7 @@ export function Page({aData}) {
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength - 1) {
-              router.push('/45/0-' + (aData.dataLength - 18) + '-' + (aData.dataLength))
+              router.push('/45/0-' + (aData.dataLength - 18) + '-' + (aData.dataLength + 1))
             }
           }}>
             last
@@ -100,7 +100,7 @@ export function Page({aData}) {
             const param1 = document.getElementById('first').value || 930;
             const param2 = document.getElementById('second').value || 976;
             const param3 = document.getElementById('third').value || param2 - 0 + 70;
-            router.push('/45/' + param1 + '-' + param2 + '-' + param3);
+            router.push('/45/0' + '-' + (param3 - 18) + '-' + param3);
             }
           }>
           Click here
