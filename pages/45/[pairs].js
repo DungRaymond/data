@@ -82,7 +82,7 @@ export function Page({aData}) {
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength - 1) {
-              router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (aData.dataLength))
+              router.push('/45/0-' + (aData.dataLength - 18) + '-' + (aData.dataLength))
             }
           }}>
             last
@@ -112,25 +112,44 @@ export function Page({aData}) {
     {/* The bar */}
     <br/>
 
-    <Bar options={aData.options} data={aData.last100}/>
+    {/* <Bar options={aData.options} data={aData.last100}/> */}
 
     <br/>
 
     <Bar options={aData.options} data={aData.data} />
 
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={4}>
         <input className='textInput' type='text' id='pick1' 
         onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick1').value;
             axios.get('http://localhost:3000/api/getMode45')
             .then(res => {
-              const arr = JSON.parse(res.data)
-              console.log(JSON.stringify(arr[pivot - 1]));
+              let arr = JSON.parse(res.data)
+              arr = arr[pivot - 1].modeList;
+              let sliced = arr.slice(0, pivot - 1);
+              sliced.push(arr.slice(pivot, arr.length - 1))
+              console.log(JSON.stringify(sliced));
             })
           }
         }}/>
+
+        <button type='button' className='pure-material-button-contained' onClick={() => {
+            const pivotPick = document.getElementById("pick1").value;
+
+            
+            }
+          }>
+          Find mode
+        </button>
+
+      </Grid>
+
+      <Grid item xs={6}>
+        <text>
+          {pick1}
+        </text>
 
       </Grid>
     </Grid>
@@ -395,7 +414,7 @@ export async function getServerSideProps(context) {
     finalData.data1 = sortedData1;
 
     let sortedData2 = sorted.map((each, index) => {
-      return each.value2 - finalData.obj[index].value1
+      return each.value3 - finalData.obj[index].value1
     })
     finalData.data2 = sortedData2;
 
@@ -451,36 +470,31 @@ export async function getServerSideProps(context) {
           text: 'Statistical table',
         },
         legend: {
-          display: false
+          display: true
         }
       },
     },
     data: {
       labels: finalData.labels,
-      // datasets: [
-      //   {
-      //     label: 'first pivot',
-      //     data: finalData.data1,
-      //     backgroundColor: 'rgba(248, 7, 188, 0.7)',
-      //   },
-      //   {
-      //     label: 'second pivot',
-      //     data: finalData.data2,
-      //     backgroundColor: 'rgba(47, 94, 249, 0.7)',
-      //   },
-      //   {
-      //     label: 'last diff',
-      //     data: finalData.data3,
-      //     backgroundColor: 'rgba(253, 153, 3, 0.7)',
-      //   },
-      // ],
       datasets: [
         {
-          label: 'count',
-          data: finalData.total,
-          backgroundColor: 'rgba(253, 153, 3, 0.7)'
-        }
-      ]
+          label: 'second pivot',
+          data: finalData.data2,
+          backgroundColor: 'rgba(47, 94, 249, 0.9)',
+        },
+        {
+          label: 'last diff',
+          data: finalData.data3,
+          backgroundColor: 'rgba(208,9,241,1)',
+        },
+      ],
+      // datasets: [
+      //   {
+      //     label: 'count',
+      //     data: finalData.total,
+      //     backgroundColor: 'rgba(253, 153, 3, 0.7)'
+      //   }
+      // ]
     },
     last100: {
       labels: finalData.labels,
