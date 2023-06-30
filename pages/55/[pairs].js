@@ -112,7 +112,7 @@ export function Page({aData}) {
     {/* The bar */}
     <br/>
     
-    <Bar options={aData.options} data={aData.last100}/>
+    {/* <Bar options={aData.options} data={aData.last100}/> */}
 
     <br/>
 
@@ -398,7 +398,8 @@ export async function getServerSideProps(context) {
     finalData.data2 = sortedData2;
 
     let sortedData3 = sorted.map((each, index) => {
-      return each.value3 - finalData.obj[index].value2
+      // return each.value3 - finalData.obj[index].value2
+      return each.value3
     })
     finalData.data3 = sortedData3;
 
@@ -451,37 +452,37 @@ export async function getServerSideProps(context) {
           text: 'Statistical table',
         },
         legend: {
-          display: false
+          display: true
         }
       },
     },
     data: {
       labels: finalData.labels,
-      // datasets: [
-      //   {
-      //     label: 'first pivot',
-      //     data: finalData.data1,
-      //     backgroundColor: 'rgba(248, 7, 188, 0.7)',
-      //   },
-      //   {
-      //     label: 'second pivot',
-      //     data: finalData.data2,
-      //     backgroundColor: 'rgba(47, 94, 249, 0.7)',
-      //   },
-      //   {
-      //     label: 'last diff',
-      //     data: finalData.data3,
-      //     // backgroundColor: 'rgba(253, 153, 3, 0.7)',
-      //     backgroundColor: 'rgba(47, 94, 249, 0.7)',
-      //   },
-      // ],
       datasets: [
         {
-          label: 'count',
-          data: finalData.total,
-          backgroundColor: 'rgba(47, 94, 249, 0.7)'
-        }
-      ]
+          label: 'first pivot',
+          data: finalData.data1,
+          backgroundColor: 'rgba(248, 7, 188, 0.7)',
+        },
+        {
+          label: 'second pivot',
+          data: finalData.data2,
+          backgroundColor: 'rgba(47, 94, 249, 0.7)',
+        },
+        {
+          label: 'last diff',
+          data: finalData.data3,
+          // backgroundColor: 'rgba(253, 153, 3, 0.7)',
+          backgroundColor: 'rgba(47, 94, 249, 0.7)',
+        },
+      ],
+      // datasets: [
+      //   {
+      //     label: 'count',
+      //     data: finalData.total,
+      //     backgroundColor: 'rgba(47, 94, 249, 0.7)'
+      //   }
+      // ]
     },
     last100: {
       labels: finalData.labels,
