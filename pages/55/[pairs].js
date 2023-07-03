@@ -80,7 +80,7 @@ export function Page({aData}) {
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength - 1) {
-              router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (aData.dataLength))
+              router.push('/55/0' + '-' + (aData.dataLength - 21) + '-' + (aData.dataLength))
             }
           }}>
             last
@@ -95,10 +95,10 @@ export function Page({aData}) {
           <input className='textInput' type='text' id='second'/>
           <input className='textInput' type='text' id='third' />
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            const param1 = document.getElementById('first').value || 700;
-            const param2 = document.getElementById('second').value || 820;
-            const param3 = document.getElementById('third').value || param2 - 0 + 10;
-            router.push('/55/' + param1 + '-' + param2 + '-' + param3);
+            const param1 = document.getElementById('first').value || 0;
+            const param2 = document.getElementById('second').value;
+            const param3 = document.getElementById('third').value || 899;
+            router.push('/55/0' + '-' + (param2||param3 - 21) + '-' + param3);
             }
           }>
           Click here
@@ -130,8 +130,11 @@ export function Page({aData}) {
             const pivot = document.getElementById('pick1').value;
             axios.get('http://localhost:3000/api/getMode55')
             .then(res => {
-              const arr = JSON.parse(res.data)
-              console.log(JSON.stringify(arr[pivot - 1]));
+              let arr = JSON.parse(res.data)
+              arr = arr[pivot - 1].modeList;
+              let sliced = arr.slice(0, pivot - 1);
+              sliced.push(arr.slice(pivot, arr.length))
+              console.log(sliced);
             })
           }
         }}/>
@@ -393,13 +396,12 @@ export async function getServerSideProps(context) {
     finalData.data1 = sortedData1;
 
     let sortedData2 = sorted.map((each, index) => {
-      return each.value2 - finalData.obj[index].value1
+      return each.value3 - finalData.obj[index].value1
     })
     finalData.data2 = sortedData2;
 
     let sortedData3 = sorted.map((each, index) => {
-      // return each.value3 - finalData.obj[index].value2
-      return each.value3
+      return each.value3 - finalData.obj[index].value2
     })
     finalData.data3 = sortedData3;
 
@@ -460,11 +462,6 @@ export async function getServerSideProps(context) {
       labels: finalData.labels,
       datasets: [
         {
-          label: 'first pivot',
-          data: finalData.data1,
-          backgroundColor: 'rgba(248, 7, 188, 0.7)',
-        },
-        {
           label: 'second pivot',
           data: finalData.data2,
           backgroundColor: 'rgba(47, 94, 249, 0.7)',
@@ -472,8 +469,7 @@ export async function getServerSideProps(context) {
         {
           label: 'last diff',
           data: finalData.data3,
-          // backgroundColor: 'rgba(253, 153, 3, 0.7)',
-          backgroundColor: 'rgba(47, 94, 249, 0.7)',
+          backgroundColor: 'rgba(253, 153, 3, 0.7)',
         },
       ],
       // datasets: [
