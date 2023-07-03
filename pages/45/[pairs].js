@@ -74,15 +74,15 @@ export function Page({aData}) {
             prev
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            if(queryParam[2] < aData.dataLength - 1) {
+            if(queryParam[2] < aData.dataLength) {
               router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
             }
           }}>
             next
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            if(queryParam[2] < aData.dataLength - 1) {
-              router.push('/45/0-' + (aData.dataLength - 18) + '-' + (aData.dataLength + 1))
+            if(queryParam[2] < aData.dataLength) {
+              router.push('/45/0-' + (aData.dataLength - 18) + '-' + (aData.dataLength))
             }
           }}>
             last
@@ -97,10 +97,10 @@ export function Page({aData}) {
           <input className='textInput' type='text' id='second' />
           <input className='textInput' type='text' id='third' />
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            const param1 = document.getElementById('first').value || 930;
-            const param2 = document.getElementById('second').value || 976;
-            const param3 = document.getElementById('third').value || param2 - 0 + 70;
-            router.push('/45/0' + '-' + (param3 - 18) + '-' + param3);
+            const param1 = document.getElementById('first').value || 0;
+            const param2 = document.getElementById('second').value || 1043;
+            const param3 = document.getElementById('third').value || 1061;
+            router.push('/45/0' + '-' + (param2||param3 - 18) + '-' + param3);
             }
           }>
           Click here
@@ -129,20 +129,22 @@ export function Page({aData}) {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
               let sliced = arr.slice(0, pivot - 1);
-              sliced.push(arr.slice(pivot, arr.length - 1))
-              console.log(JSON.stringify(sliced));
+              sliced = sliced.concat(arr.slice(pivot, arr.length))
+              // setPick1(sliced)
+              // console.log(JSON.stringify(sliced));
+              console.log(sliced);
             })
           }
         }}/>
 
-        <button type='button' className='pure-material-button-contained' onClick={() => {
+        {/* <button type='button' className='pure-material-button-contained' onClick={() => {
             const pivotPick = document.getElementById("pick1").value;
 
             
             }
           }>
           Find mode
-        </button>
+        </button> */}
 
       </Grid>
 
@@ -158,7 +160,15 @@ export function Page({aData}) {
       <Grid item xs={6}>
         <input className='textInput' type='text' id='pick2' onKeyDown={(event) => {
           if(event.code === 'Enter') {
-            alert(document.getElementById('pick2').value - 0)
+            const pivot = document.getElementById('pick1').value;
+            axios.get('http://localhost:3000/api/getMode45')
+            .then(res => {
+              let arr = JSON.parse(res.data)
+              arr = arr[pivot - 1].modeList;
+              let sliced = arr.slice(0, pivot - 1);
+              sliced.push(arr.slice(pivot, arr.length))
+              console.log(sliced);
+            })
           }
         }}/>
       </Grid>
