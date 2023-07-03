@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "raw": "node a45.js && node a55.js",
-    "prep": "node b45.js && node c45.js && node b55.js && node c55.js",
+    "prep": "node c45.js && node c55.js",
     "mode": "node d45.js && node d55.js"
   },
   "dependencies": {
