@@ -109,17 +109,14 @@ export function Page({aData}) {
       </Grid>
     </Grid>
 
-    {/* The bar */}
-    <br/>
-
-    {/* <Bar options={aData.options} data={aData.last100}/> */}
-
-    <br/>
+          <br/>
 
     <Bar options={aData.options} data={aData.data} />
 
+    <br/>
+
     <Grid container spacing={2}>
-      <Grid item xs={4}>
+      <Grid item xs={2}>
         <input className='textInput' type='text' id='pick1' 
         onKeyDown={(event) => {
           if(event.code === 'Enter') {
@@ -130,21 +127,10 @@ export function Page({aData}) {
               arr = arr[pivot - 1].modeList;
               let sliced = arr.slice(0, pivot - 1);
               sliced = sliced.concat(arr.slice(pivot, arr.length))
-              // setPick1(sliced)
-              // console.log(JSON.stringify(sliced));
               console.log(sliced);
             })
           }
         }}/>
-
-        {/* <button type='button' className='pure-material-button-contained' onClick={() => {
-            const pivotPick = document.getElementById("pick1").value;
-
-            
-            }
-          }>
-          Find mode
-        </button> */}
 
       </Grid>
 
@@ -155,12 +141,12 @@ export function Page({aData}) {
 
       </Grid>
     </Grid>
-
+    
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={2}>
         <input className='textInput' type='text' id='pick2' onKeyDown={(event) => {
           if(event.code === 'Enter') {
-            const pivot = document.getElementById('pick1').value;
+            const pivot = document.getElementById('pick2').value;
             axios.get('http://localhost:3000/api/getMode45')
             .then(res => {
               let arr = JSON.parse(res.data)
@@ -174,42 +160,74 @@ export function Page({aData}) {
       </Grid>
 
     </Grid>
-    
+
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={2}>
         <input className='textInput' type='text' id='pick3' onKeyDown={(event) => {
           if(event.code === 'Enter') {
-            alert(document.getElementById('pick3').value - 0)
+            const pivot = document.getElementById('pick3').value;
+            axios.get('http://localhost:3000/api/getMode45')
+            .then(res => {
+              let arr = JSON.parse(res.data)
+              arr = arr[pivot - 1].modeList;
+              let sliced = arr.slice(0, pivot - 1);
+              sliced.push(arr.slice(pivot, arr.length))
+              console.log(sliced);
+            })
           }
         }}/>
       </Grid>
 
     </Grid>
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={2}>
         <input className='textInput' type='text' id='pick4' onKeyDown={(event) => {
           if(event.code === 'Enter') {
-            alert(document.getElementById('pick4').value - 0)
+            const pivot = document.getElementById('pick4').value;
+            axios.get('http://localhost:3000/api/getMode45')
+            .then(res => {
+              let arr = JSON.parse(res.data)
+              arr = arr[pivot - 1].modeList;
+              let sliced = arr.slice(0, pivot - 1);
+              sliced.push(arr.slice(pivot, arr.length))
+              console.log(sliced);
+            })
           }
         }}/>
       </Grid>
 
     </Grid>
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={2}>
         <input className='textInput' type='text' id='pick5' onKeyDown={(event) => {
           if(event.code === 'Enter') {
-            alert(document.getElementById('pick5').value - 0)
+            const pivot = document.getElementById('pick5').value;
+            axios.get('http://localhost:3000/api/getMode45')
+            .then(res => {
+              let arr = JSON.parse(res.data)
+              arr = arr[pivot - 1].modeList;
+              let sliced = arr.slice(0, pivot - 1);
+              sliced.push(arr.slice(pivot, arr.length))
+              console.log(sliced);
+            })
           }
         }}/>
       </Grid>
 
     </Grid>
     <Grid container spacing={2}>
-      <Grid item xs={6}>
+      <Grid item xs={2}>
         <input className='textInput' type='text' id='pick6' onKeyDown={(event) => {
           if(event.code === 'Enter') {
-            alert(document.getElementById('pick6').value - 0)
+            const pivot = document.getElementById('pick6').value;
+            axios.get('http://localhost:3000/api/getMode45')
+            .then(res => {
+              let arr = JSON.parse(res.data)
+              arr = arr[pivot - 1].modeList;
+              let sliced = arr.slice(0, pivot - 1);
+              sliced.push(arr.slice(pivot, arr.length))
+              console.log(sliced);
+            })
           }
         }}/>
       </Grid>

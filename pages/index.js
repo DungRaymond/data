@@ -7,12 +7,12 @@ export function HomePage() {
   <>
     <div className="btn-bar">
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push("/45/979-1006-1007")
+        router.push("/45/0-1045-1063")
       }}>
         Pick 1
       </button>
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push("/55/700-825-840")
+        router.push("/55/0-878-899")
       }}>
         Pick 2
       </button>
