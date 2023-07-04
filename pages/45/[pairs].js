@@ -33,12 +33,12 @@ import { useRouter } from 'next/router'
 ChartJS.defaults.font.size = 14;
 ChartJS.defaults.font.weight = '900';
 export function Page({aData}) {
-  const [pick1, setPick1] = useState(0)
-  const [pick2, setPick2] = useState(0)
-  const [pick3, setPick3] = useState(0)
-  const [pick4, setPick4] = useState(0)
-  const [pick5, setPick5] = useState(0)
-  const [pick6, setPick6] = useState(0)
+  const [pick1, setPick1] = useState([])
+  const [pick2, setPick2] = useState([])
+  const [pick3, setPick3] = useState([])
+  const [pick4, setPick4] = useState([])
+  const [pick5, setPick5] = useState([])
+  const [pick6, setPick6] = useState([])
 
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
@@ -127,20 +127,28 @@ export function Page({aData}) {
               arr = arr[pivot - 1].modeList;
               let sliced = arr.slice(0, pivot - 1);
               sliced = sliced.concat(arr.slice(pivot, arr.length))
-              console.log(sliced);
+             
+              let sorted = sliced.sort((a,b) => {
+                return b.count - a.count
+              })
+
+              setPick1(sorted.slice(0, 9))
             })
           }
         }}/>
-
       </Grid>
-
-      <Grid item xs={6}>
-        <text>
-          {pick1}
-        </text>
-
-      </Grid>
+      {pick1.map((each,i) => {
+        return(
+          <Grid item xs={1}>
+            <h3 key={i}>
+              {each.number} ({each.count})
+            </h3>
+          </Grid>
+        )
+      })}
     </Grid>
+
+    <hr/>
     
     <Grid container spacing={2}>
       <Grid item xs={2}>
@@ -152,14 +160,29 @@ export function Page({aData}) {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
               let sliced = arr.slice(0, pivot - 1);
-              sliced.push(arr.slice(pivot, arr.length))
-              console.log(sliced);
+              sliced = sliced.concat(arr.slice(pivot, arr.length))
+              
+              let sorted = sliced.sort((a,b) => {
+                return b.count - a.count
+              })
+
+              setPick2(sorted.slice(0, 9))
             })
           }
         }}/>
       </Grid>
-
+      {pick2.map((each,i) => {
+        return(
+          <Grid item xs={1}>
+            <h3 key={i}>
+              {each.number} ({each.count})
+            </h3>
+          </Grid>
+        )
+      })}
     </Grid>
+
+    <hr/>
 
     <Grid container spacing={2}>
       <Grid item xs={2}>
@@ -171,14 +194,30 @@ export function Page({aData}) {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
               let sliced = arr.slice(0, pivot - 1);
-              sliced.push(arr.slice(pivot, arr.length))
-              console.log(sliced);
+              sliced = sliced.concat(arr.slice(pivot, arr.length))
+              
+              let sorted = sliced.sort((a,b) => {
+                return b.count - a.count
+              })
+
+              setPick3(sorted.slice(0, 9))
             })
           }
         }}/>
       </Grid>
-
+      {pick3.map((each,i) => {
+        return(
+          <Grid item xs={1}>
+            <h3 key={i}>
+              {each.number} ({each.count})
+            </h3>
+          </Grid>
+        )
+      })}
     </Grid>
+
+    <hr/>
+
     <Grid container spacing={2}>
       <Grid item xs={2}>
         <input className='textInput' type='text' id='pick4' onKeyDown={(event) => {
@@ -189,14 +228,30 @@ export function Page({aData}) {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
               let sliced = arr.slice(0, pivot - 1);
-              sliced.push(arr.slice(pivot, arr.length))
-              console.log(sliced);
+              sliced = sliced.concat(arr.slice(pivot, arr.length))
+              
+              let sorted = sliced.sort((a,b) => {
+                return b.count - a.count
+              })
+
+              setPick4(sorted.slice(0, 9))
             })
           }
         }}/>
       </Grid>
-
+      {pick4.map((each,i) => {
+        return(
+          <Grid item xs={1}>
+            <h3 key={i}>
+              {each.number} ({each.count})
+            </h3>
+          </Grid>
+        )
+      })}
     </Grid>
+
+    <hr/>
+
     <Grid container spacing={2}>
       <Grid item xs={2}>
         <input className='textInput' type='text' id='pick5' onKeyDown={(event) => {
@@ -207,14 +262,30 @@ export function Page({aData}) {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
               let sliced = arr.slice(0, pivot - 1);
-              sliced.push(arr.slice(pivot, arr.length))
-              console.log(sliced);
+              sliced = sliced.concat(arr.slice(pivot, arr.length))
+              
+              let sorted = sliced.sort((a,b) => {
+                return b.count - a.count
+              })
+
+              setPick5(sorted.slice(0, 9))
             })
           }
         }}/>
       </Grid>
-
+      {pick5.map((each,i) => {
+        return(
+          <Grid item xs={1}>
+            <h3 key={i}>
+              {each.number} ({each.count})
+            </h3>
+          </Grid>
+        )
+      })}
     </Grid>
+
+    <hr/>
+
     <Grid container spacing={2}>
       <Grid item xs={2}>
         <input className='textInput' type='text' id='pick6' onKeyDown={(event) => {
@@ -225,14 +296,29 @@ export function Page({aData}) {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
               let sliced = arr.slice(0, pivot - 1);
-              sliced.push(arr.slice(pivot, arr.length))
+              sliced = sliced.concat(arr.slice(pivot, arr.length))
               console.log(sliced);
+              let sorted = sliced.sort((a,b) => {
+                return b.count - a.count
+              })
+
+              setPick6(sorted.slice(0, 9))
             })
           }
         }}/>
       </Grid>
-
+      {pick6.map((each,i) => {
+        return(
+          <Grid item xs={1}>
+            <h3 key={i}>
+              {each.number} ({each.count})
+            </h3>
+          </Grid>
+        )
+      })}
     </Grid>
+
+    <hr/>
 
 
 
@@ -243,8 +329,9 @@ export function Page({aData}) {
         display: inline-block;
         outline: none;
         font-height: 0.6em;
-        font-size: 21px;
-        width: 70px;
+        font-size: 24px;
+        width: 4em;
+        height: 1.4em;
         margin: auto 2px;
         vertical-align: middle;
       }
