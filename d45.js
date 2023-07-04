@@ -201,7 +201,11 @@ async function extract() {
         }
       }
     }
-    fs.appendFileSync('./json/modeList45.json', "\t" + JSON.stringify(obj) + ",\n")
+    if(each == 45){
+      fs.appendFileSync('./json/modeList45.json', "\t" + JSON.stringify(obj) + "\n")
+    } else {
+      fs.appendFileSync('./json/modeList45.json', "\t" + JSON.stringify(obj) + ",\n")
+    }
     
   }
   fs.appendFileSync('./json/modeList45.json', "\n]");

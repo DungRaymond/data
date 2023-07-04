@@ -233,7 +233,7 @@ async function extract() {
       ]
     }
     for await (let ite of data) {
-      for await (let item of ite.ketqua){
+      for await (let item of ite.jackpot){
         for await (let element of obj.modeList) {
           if(element.number == item) {
             element.count += 1;
@@ -241,7 +241,11 @@ async function extract() {
         }
       }
     }
-    fs.appendFileSync('./json/modeList55.json', "\t" + JSON.stringify(obj) + ",\n")
+    if(each == 55){
+      fs.appendFileSync('./json/modeList55.json', "\t" + JSON.stringify(obj) + "\n")
+    } else {
+      fs.appendFileSync('./json/modeList55.json', "\t" + JSON.stringify(obj) + ",\n")
+    }
     
   }
   fs.appendFileSync('./json/modeList55.json', "\n]");
