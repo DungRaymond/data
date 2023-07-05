@@ -54,19 +54,19 @@ export function Page({aData}) {
         </button>
       </Grid>
 
-      <Grid item xs={4}>
+      <Grid item xs={3}>
         <div id='latest_result'>{aData.next.value.map((each) => {
           return <span className='circle' key={each + 'hoho'}>
             {each}
           </span>
         })}
-          <span>
+          {/* <span>
             {queryParam[2] - 0 + 1}
-          </span>
+          </span> */}
         </div>
       </Grid>
 
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <div className='arrowInput'>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 1) )
@@ -353,11 +353,11 @@ export function Page({aData}) {
         margin-left: 0;
         border-left: none;
       }
-      #latest_result > span:last-child {
-        border-left: none;
-        background-color: green;
-        color: white;
-      }
+      // #latest_result > span:last-child {
+      //   border-left: none;
+      //   background-color: green;
+      //   color: white;
+      // }
 
       .pure-material-button-contained {
         position: relative;
