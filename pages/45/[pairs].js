@@ -367,7 +367,15 @@ export function Page({aData}) {
                   <span className='bongdate'>{each.date}</span>
                 </h2>
                 <h2>
-                  {each.jackpot.map((bong) => {
+                  {each.ketqua.map((bong) => {
+                    const param1 = document.getElementById('has1').value;
+                    const param2 = document.getElementById('has2').value;
+                    const param3 = document.getElementById('has3').value;
+                    if(bong == param1 || bong == param2 || bong == param3){
+                      return <span className='bongcloud-white'>
+                        {bong}
+                      </span>
+                    }
                     return <span className='bongcloud'>
                       {bong}
                     </span>
@@ -408,6 +416,17 @@ export function Page({aData}) {
       padding: 0 3px;
     }
     .bongcloud:last-child {
+      margin-right: 0;
+    }
+    .bongcloud-white {
+      border: 1px black solid;
+      background-color: blue;
+      border-radius: 5px;
+      margin-right: 4px;
+      padding: 0 3px;
+      color: white;
+    }
+    .bongcloud-white:last-child {
       margin-right: 0;
     }
       input {
