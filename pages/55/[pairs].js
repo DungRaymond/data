@@ -37,6 +37,7 @@ export function Page({aData}) {
   const [pick4, setPick4] = useState([])
   const [pick5, setPick5] = useState([])
   const [pick6, setPick6] = useState([])
+  const [pair, setPair] = useState([])
 
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
@@ -52,34 +53,31 @@ export function Page({aData}) {
         </button>
       </Grid>
 
-      <Grid item xs={4}>
+      <Grid item xs={3}>
         <div id="latest_result">{aData.next.value.map((each) => {
           return <span className='circle' key={each + 'hehe'}>
             {each}
           </span>
         })}
-            <span>
-              {queryParam[2] - 0 + 1}
-            </span>
           </div>
       </Grid>
 
       <Grid item xs={2}>
         <div className='arrowInput'>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 1) )
+            router.push('/55/' + queryParam[0] + '-' + (aData.dataLength - 21) + '-' + (queryParam[2] - 1) )
           }}>
             prev
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            if(queryParam[2] < aData.dataLength - 1) {
-              router.push('/55/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
+            if(queryParam[2] < aData.dataLength) {
+              router.push('/55/' + queryParam[0] + '-' + (aData.dataLength - 21) + '-' + (queryParam[2] - 0 + 1))
             }
           }}>
             next
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            if(queryParam[2] < aData.dataLength - 1) {
+            if(queryParam[2] < aData.dataLength) {
               router.push('/55/0' + '-' + (aData.dataLength - 21) + '-' + (aData.dataLength))
             }
           }}>
@@ -100,8 +98,8 @@ export function Page({aData}) {
             const param3 = document.getElementById('third').value || 899;
             router.push('/55/0' + '-' + (param2||param3 - 21) + '-' + param3);
             }
-          }>
-          Click here
+            }>
+            Click here
           </button>
         </div>
       </Grid>
@@ -322,6 +320,58 @@ export function Page({aData}) {
           </Grid>
         )
       })}
+    </Grid>
+
+      <hr/>
+
+    <Grid container>
+      <Grid item xs={3}>
+        <input className='textInput' type='text' id="has1"/>
+        <input className='textInput' type='text' id="has2"/>
+        <input className='textInput' type='text' id="has3"/>
+      </Grid>
+
+      <Grid item xs={1}>
+        <button type='button' className='pure-material-button-contained' onClick={() => {
+            const param1 = document.getElementById('has1').value;
+            const param2 = document.getElementById('has2').value;
+            const param3 = document.getElementById('has3').value;
+            axios.get('http://localhost:3000/api/getResult55')
+            .then(res => {
+              let arr = (JSON.parse(res.data)).map((each) => {
+                return each.ketqua
+              });
+              let includeArr = arr;
+              if(param1) {
+                includeArr = includeArr.filter((item) => {
+                  return item.includes(param1)
+                })
+              }
+              if(param2) {
+                includeArr = includeArr.filter((item) => {
+                  return item.includes(param2)
+                })
+              }
+              if(param3) {
+                includeArr = includeArr.filter((item) => {
+                  return item.includes(param3)
+                })
+              }
+              setPair(includeArr)
+            })
+            }
+            }>
+            Click here
+          </button>
+      </Grid>
+
+      <Grid item xs={8}>
+        {pair.map((each) => {
+          return (
+            <span>{each} || </span>
+          )
+        })}
+      </Grid>
     </Grid>
     
 
