@@ -331,6 +331,8 @@ export function Page({aData}) {
             const param1 = document.getElementById('has1').value;
             const param2 = document.getElementById('has2').value;
             const param3 = document.getElementById('has3').value;
+            const param4 = document.getElementById('has4').value;
+            
             axios.get('http://localhost:3000/api/getResult55')
             .then(res => {
               let arr = (JSON.parse(res.data));
@@ -348,6 +350,11 @@ export function Page({aData}) {
               if(param3) {
                 includeArr = includeArr.filter((item) => {
                   return item.jackpot.includes(param3)
+                })
+              }
+              if(param4) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param4)
                 })
               }
               setPair(includeArr)
@@ -359,6 +366,8 @@ export function Page({aData}) {
             const param1 = document.getElementById('has1').value;
             const param2 = document.getElementById('has2').value;
             const param3 = document.getElementById('has3').value;
+            const param4 = document.getElementById('has4').value;
+            
             axios.get('http://localhost:3000/api/getResult55')
             .then(res => {
               let arr = (JSON.parse(res.data));
@@ -376,6 +385,11 @@ export function Page({aData}) {
               if(param3) {
                 includeArr = includeArr.filter((item) => {
                   return item.jackpot.includes(param3)
+                })
+              }
+              if(param4) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param4)
                 })
               }
               setPair(includeArr)
@@ -387,6 +401,8 @@ export function Page({aData}) {
             const param1 = document.getElementById('has1').value;
             const param2 = document.getElementById('has2').value;
             const param3 = document.getElementById('has3').value;
+            const param4 = document.getElementById('has4').value;
+            
             axios.get('http://localhost:3000/api/getResult55')
             .then(res => {
               let arr = (JSON.parse(res.data));
@@ -404,16 +420,24 @@ export function Page({aData}) {
               if(param3) {
                 includeArr = includeArr.filter((item) => {
                   return item.jackpot.includes(param3)
+                })
+              }
+              if(param4) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param4)
                 })
               }
               setPair(includeArr)
             })
           }
         }}/>
-        <button type='button' className='pure-material-button-contained' onClick={() => {
+        <input className='textInput' type='text' id="has4" onKeyDown={event => {
+          if(event.code === 'Enter') {
             const param1 = document.getElementById('has1').value;
             const param2 = document.getElementById('has2').value;
             const param3 = document.getElementById('has3').value;
+            const param4 = document.getElementById('has4').value;
+            
             axios.get('http://localhost:3000/api/getResult55')
             .then(res => {
               let arr = (JSON.parse(res.data));
@@ -433,12 +457,15 @@ export function Page({aData}) {
                   return item.jackpot.includes(param3)
                 })
               }
+              if(param4) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param4)
+                })
+              }
               setPair(includeArr)
             })
-            }
-            }>
-            Click here
-          </button>
+          }
+        }}/>
       </Grid>
 
       <Grid item container xs={10}>
@@ -455,7 +482,8 @@ export function Page({aData}) {
                     const param1 = document.getElementById('has1').value;
                     const param2 = document.getElementById('has2').value;
                     const param3 = document.getElementById('has3').value;
-                    if(bong == param1 || bong == param2 || bong == param3){
+                    const param4 = document.getElementById('has4').value;
+                    if(bong == param1 || bong == param2 || bong == param3 || bong == param4){
                       return <span className='bongcloud-white'>
                         {bong}
                       </span>

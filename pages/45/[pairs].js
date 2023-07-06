@@ -328,6 +328,8 @@ export function Page({aData}) {
             const param1 = document.getElementById('has1').value;
             const param2 = document.getElementById('has2').value;
             const param3 = document.getElementById('has3').value;
+            const param4 = document.getElementById('has4').value;
+            
             axios.get('http://localhost:3000/api/getResult45')
             .then(res => {
               let arr = (JSON.parse(res.data));
@@ -347,6 +349,12 @@ export function Page({aData}) {
                   return item.ketqua.includes(param3)
                 })
               }
+              if(param4) {
+                includeArr = includeArr.filter((item) => {
+                  return item.ketqua.includes(param4)
+                })
+              }
+              
               setPair(includeArr)
             })
           }
@@ -356,6 +364,8 @@ export function Page({aData}) {
             const param1 = document.getElementById('has1').value;
             const param2 = document.getElementById('has2').value;
             const param3 = document.getElementById('has3').value;
+            const param4 = document.getElementById('has4').value;
+            
             axios.get('http://localhost:3000/api/getResult45')
             .then(res => {
               let arr = (JSON.parse(res.data));
@@ -375,6 +385,12 @@ export function Page({aData}) {
                   return item.ketqua.includes(param3)
                 })
               }
+              if(param4) {
+                includeArr = includeArr.filter((item) => {
+                  return item.ketqua.includes(param4)
+                })
+              }
+              
               setPair(includeArr)
             })
           }
@@ -384,6 +400,8 @@ export function Page({aData}) {
             const param1 = document.getElementById('has1').value;
             const param2 = document.getElementById('has2').value;
             const param3 = document.getElementById('has3').value;
+            const param4 = document.getElementById('has4').value;
+            
             axios.get('http://localhost:3000/api/getResult45')
             .then(res => {
               let arr = (JSON.parse(res.data));
@@ -403,6 +421,83 @@ export function Page({aData}) {
                   return item.ketqua.includes(param3)
                 })
               }
+              if(param4) {
+                includeArr = includeArr.filter((item) => {
+                  return item.ketqua.includes(param4)
+                })
+              }
+              setPair(includeArr)
+            })
+          }
+        }}/>
+        <input className='textInput' type='text' id="has4" onKeyDown={event => {
+          if(event.code === 'Enter') {
+            const param1 = document.getElementById('has1').value;
+            const param2 = document.getElementById('has2').value;
+            const param3 = document.getElementById('has3').value;
+            const param4 = document.getElementById('has4').value;
+            
+            axios.get('http://localhost:3000/api/getResult45')
+            .then(res => {
+              let arr = (JSON.parse(res.data));
+              let includeArr = arr;
+              if(param1) {
+                includeArr = includeArr.filter((item) => {
+                  return item.ketqua.includes(param1)
+                })
+              }
+              if(param2) {
+                includeArr = includeArr.filter((item) => {
+                  return item.ketqua.includes(param2)
+                })
+              }
+              if(param3) {
+                includeArr = includeArr.filter((item) => {
+                  return item.ketqua.includes(param3)
+                })
+              }
+              if(param4) {
+                includeArr = includeArr.filter((item) => {
+                  return item.ketqua.includes(param4)
+                })
+              }
+              
+              setPair(includeArr)
+            })
+          }
+        }}/>
+        <input className='textInput' type='text' id="has5" onKeyDown={event => {
+          if(event.code === 'Enter') {
+            const param1 = document.getElementById('has1').value;
+            const param2 = document.getElementById('has2').value;
+            const param3 = document.getElementById('has3').value;
+            const param4 = document.getElementById('has4').value;
+            
+            axios.get('http://localhost:3000/api/getResult45')
+            .then(res => {
+              let arr = (JSON.parse(res.data));
+              let includeArr = arr;
+              if(param1) {
+                includeArr = includeArr.filter((item) => {
+                  return item.ketqua.includes(param1)
+                })
+              }
+              if(param2) {
+                includeArr = includeArr.filter((item) => {
+                  return item.ketqua.includes(param2)
+                })
+              }
+              if(param3) {
+                includeArr = includeArr.filter((item) => {
+                  return item.ketqua.includes(param3)
+                })
+              }
+              if(param4) {
+                includeArr = includeArr.filter((item) => {
+                  return item.ketqua.includes(param4)
+                })
+              }
+              
               setPair(includeArr)
             })
           }
@@ -452,7 +547,9 @@ export function Page({aData}) {
                     const param1 = document.getElementById('has1').value;
                     const param2 = document.getElementById('has2').value;
                     const param3 = document.getElementById('has3').value;
-                    if(bong == param1 || bong == param2 || bong == param3){
+                    const param4 = document.getElementById('has4').value;
+                    
+                    if(bong == param1 || bong == param2 || bong == param3 || bong == param4){
                       return <span className='bongcloud-white'>
                         {bong}
                       </span>
