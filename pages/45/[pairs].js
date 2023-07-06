@@ -39,6 +39,7 @@ export function Page({aData}) {
   const [pick4, setPick4] = useState([])
   const [pick5, setPick5] = useState([])
   const [pick6, setPick6] = useState([])
+  const [pair, setPair] = useState([])
 
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
