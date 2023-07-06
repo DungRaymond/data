@@ -420,7 +420,7 @@ export function Page({aData}) {
     }
     .bongcloud-white {
       border: 1px black solid;
-      background-color: blue;
+      background-color: grey;
       border-radius: 5px;
       margin-right: 4px;
       padding: 0 3px;
