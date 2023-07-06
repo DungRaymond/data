@@ -339,17 +339,17 @@ export function Page({aData}) {
               let includeArr = arr;
               if(param1) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param1)
+                  return item.jackpot.includes(param1)
                 })
               }
               if(param2) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param2)
+                  return item.jackpot.includes(param2)
                 })
               }
               if(param3) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param3)
+                  return item.jackpot.includes(param3)
                 })
               }
               setPair(includeArr)
