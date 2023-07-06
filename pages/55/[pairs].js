@@ -326,9 +326,90 @@ export function Page({aData}) {
 
     <Grid container>
       <Grid item xs={2}>
-        <input className='textInput' type='text' id="has1"/>
-        <input className='textInput' type='text' id="has2"/>
-        <input className='textInput' type='text' id="has3"/>
+        <input className='textInput' type='text' id="has1" onKeyDown={event => {
+          if(event.code === 'Enter') {
+            const param1 = document.getElementById('has1').value;
+            const param2 = document.getElementById('has2').value;
+            const param3 = document.getElementById('has3').value;
+            axios.get('http://localhost:3000/api/getResult55')
+            .then(res => {
+              let arr = (JSON.parse(res.data));
+              let includeArr = arr;
+              if(param1) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param1)
+                })
+              }
+              if(param2) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param2)
+                })
+              }
+              if(param3) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param3)
+                })
+              }
+              setPair(includeArr)
+            })
+          }
+        }}/>
+        <input className='textInput' type='text' id="has2" onKeyDown={event => {
+          if(event.code === 'Enter') {
+            const param1 = document.getElementById('has1').value;
+            const param2 = document.getElementById('has2').value;
+            const param3 = document.getElementById('has3').value;
+            axios.get('http://localhost:3000/api/getResult55')
+            .then(res => {
+              let arr = (JSON.parse(res.data));
+              let includeArr = arr;
+              if(param1) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param1)
+                })
+              }
+              if(param2) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param2)
+                })
+              }
+              if(param3) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param3)
+                })
+              }
+              setPair(includeArr)
+            })
+          }
+        }}/>
+        <input className='textInput' type='text' id="has3" onKeyDown={event => {
+          if(event.code === 'Enter') {
+            const param1 = document.getElementById('has1').value;
+            const param2 = document.getElementById('has2').value;
+            const param3 = document.getElementById('has3').value;
+            axios.get('http://localhost:3000/api/getResult55')
+            .then(res => {
+              let arr = (JSON.parse(res.data));
+              let includeArr = arr;
+              if(param1) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param1)
+                })
+              }
+              if(param2) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param2)
+                })
+              }
+              if(param3) {
+                includeArr = includeArr.filter((item) => {
+                  return item.jackpot.includes(param3)
+                })
+              }
+              setPair(includeArr)
+            })
+          }
+        }}/>
         <button type='button' className='pure-material-button-contained' onClick={() => {
             const param1 = document.getElementById('has1').value;
             const param2 = document.getElementById('has2').value;
