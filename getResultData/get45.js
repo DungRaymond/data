@@ -12,9 +12,10 @@ function waitUI() {
 async function lott645() {
   for(let i = 2; i > 1; i--) {
     let chonkyquay = document.getElementsByTagName('select')[1];
-    let doso = document.getElementsByClassName('choi_ngay')[13];
+    // let doso = document.getElementsByClassName('choi_ngay')[13];
     chonkyquay.options[i].selected = true;
-    doso.click();
+    // doso.click();
+    DoSearch(true);
     const waitres = await waitUI();
     let ngayquay = document.getElementsByTagName('td')[0];
     let kyquay = document.getElementsByTagName('a')[98];

@@ -47,3 +47,30 @@ https://vietlott.vn/vi/trung-thuong/ket-qua-trung-thuong/winning-number-655
 655
 
 51 - 42 || 14
+
+
+
+function NextPage(PageIndex) {
+                    CurrentPageIndex = PageIndex;
+                    setTimeout('RealDoSearch()', 10);
+                }
+
+                
+function DoSearch(ItemCheckMulti) {
+                    CheckMulti = ItemCheckMulti;
+                    setTimeout('RealDoSearch()', 10);
+                }
+
+
+function RealDoSearch() {
+                    RenderInfo = CreateRenderInfo();
+                    GameId = document.getElementById('drpSelectGame').value;
+                    GameDrawId = document.getElementById('drpSelectGameDraw').value;
+                    AjaxOut = Vietlott.PlugIn.WebParts.Game645CompareWebPart.ServerSideDrawResult(RenderInfo, 'e9eabf12', GameDrawId, ArrNumbers, CheckMulti, CurrentPageIndex).value;
+                    if (AjaxOut.Error) {
+                        alert(AjaxOut.InfoMessage);
+                        return;
+                    }
+                    document.getElementById('divResultContent').innerHTML = AjaxOut.HtmlContent;
+                    window.open('#top', '_self');
+                }
