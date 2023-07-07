@@ -322,7 +322,7 @@ export function Page({aData}) {
     <hr/>
 
     <Grid container>
-      <Grid item xs={2}>
+      <Grid item xs={1}>
         <input className='textInput' type='text' id="has1" onKeyDown={event => {
           if(event.code === 'Enter') {
             const param1 = document.getElementById('has1').value;
@@ -533,10 +533,10 @@ export function Page({aData}) {
           </button>
       </Grid>
 
-      <Grid item container xs={10}>
+      <Grid item container xs={11}>
         {pair.map((each) => {
           return (
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <span>
                 <h2>
                   <span className="bongterm">{each.term}</span>
