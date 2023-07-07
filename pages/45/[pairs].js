@@ -502,41 +502,12 @@ export function Page({aData}) {
             })
           }
         }}/>
-        <button type='button' className='pure-material-button-contained' onClick={() => {
-            const param1 = document.getElementById('has1').value;
-            const param2 = document.getElementById('has2').value;
-            const param3 = document.getElementById('has3').value;
-            axios.get('http://localhost:3000/api/getResult45')
-            .then(res => {
-              let arr = (JSON.parse(res.data));
-              let includeArr = arr;
-              if(param1) {
-                includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param1)
-                })
-              }
-              if(param2) {
-                includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param2)
-                })
-              }
-              if(param3) {
-                includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param3)
-                })
-              }
-              setPair(includeArr)
-            })
-            }
-            }>
-            Click here
-          </button>
       </Grid>
 
       <Grid item container xs={11}>
         {pair.map((each) => {
           return (
-            <Grid item xs={2}>
+            <Grid item xs={3}>
               <span>
                 <h2>
                   <span className="bongterm">{each.term}</span>
