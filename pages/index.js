@@ -9,12 +9,12 @@ export function HomePage() {
       <button type='button' className='pure-material-button-contained' onClick={() => {
         router.push("/45/0-1045-1063")
       }}>
-        Pick 1
+        Mega
       </button>
       <button type='button' className='pure-material-button-contained' onClick={() => {
         router.push("/55/0-878-899")
       }}>
-        Pick 2
+        Power
       </button>
     </div>
     
