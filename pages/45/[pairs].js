@@ -336,22 +336,22 @@ export function Page({aData}) {
               let includeArr = arr;
               if(param1) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param1)
+                  return item.jackpot.includes(param1)
                 })
               }
               if(param2) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param2)
+                  return item.jackpot.includes(param2)
                 })
               }
               if(param3) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param3)
+                  return item.jackpot.includes(param3)
                 })
               }
               if(param4) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param4)
+                  return item.jackpot.includes(param4)
                 })
               }
               
@@ -372,22 +372,22 @@ export function Page({aData}) {
               let includeArr = arr;
               if(param1) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param1)
+                  return item.jackpot.includes(param1)
                 })
               }
               if(param2) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param2)
+                  return item.jackpot.includes(param2)
                 })
               }
               if(param3) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param3)
+                  return item.jackpot.includes(param3)
                 })
               }
               if(param4) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param4)
+                  return item.jackpot.includes(param4)
                 })
               }
               
@@ -408,22 +408,22 @@ export function Page({aData}) {
               let includeArr = arr;
               if(param1) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param1)
+                  return item.jackpot.includes(param1)
                 })
               }
               if(param2) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param2)
+                  return item.jackpot.includes(param2)
                 })
               }
               if(param3) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param3)
+                  return item.jackpot.includes(param3)
                 })
               }
               if(param4) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param4)
+                  return item.jackpot.includes(param4)
                 })
               }
               setPair(includeArr)
@@ -443,22 +443,22 @@ export function Page({aData}) {
               let includeArr = arr;
               if(param1) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param1)
+                  return item.jackpot.includes(param1)
                 })
               }
               if(param2) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param2)
+                  return item.jackpot.includes(param2)
                 })
               }
               if(param3) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param3)
+                  return item.jackpot.includes(param3)
                 })
               }
               if(param4) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param4)
+                  return item.jackpot.includes(param4)
                 })
               }
               
@@ -479,22 +479,22 @@ export function Page({aData}) {
               let includeArr = arr;
               if(param1) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param1)
+                  return item.jackpot.includes(param1)
                 })
               }
               if(param2) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param2)
+                  return item.jackpot.includes(param2)
                 })
               }
               if(param3) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param3)
+                  return item.jackpot.includes(param3)
                 })
               }
               if(param4) {
                 includeArr = includeArr.filter((item) => {
-                  return item.ketqua.includes(param4)
+                  return item.jackpot.includes(param4)
                 })
               }
               
@@ -514,7 +514,7 @@ export function Page({aData}) {
                   <span className='bongdate'>{each.date}</span>
                 </h2>
                 <h2>
-                  {each.ketqua.map((bong) => {
+                  {each.jackpot.map((bong) => {
                     const param1 = document.getElementById('has1').value;
                     const param2 = document.getElementById('has2').value;
                     const param3 = document.getElementById('has3').value;
@@ -798,7 +798,7 @@ export async function getServerSideProps(context) {
     finalData.total = sortedTotal;
 
     // ANCHOR
-    finalData.next = resultData[pam[2] - 1].ketqua||null
+    finalData.next = resultData[pam[2] - 1].jackpot||null
 
     finalData.labels = sortedLabels.map((each) => {
       if(!finalData.next.includes(each)) {

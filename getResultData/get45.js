@@ -23,7 +23,7 @@ async function lott645() {
     let result = {
       date : ngayquay.innerHTML,
       term: kyquay.innerHTML,
-      ketqua: [
+      jackpot: [
         bongtron[114].innerHTML,
         bongtron[115].innerHTML,
         bongtron[116].innerHTML,

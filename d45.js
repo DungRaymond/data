@@ -193,7 +193,7 @@ async function extract() {
       ]
     }
     for await (let ite of data) {
-      for await (let item of ite.ketqua){
+      for await (let item of ite.jackpot){
         for await (let element of obj.modeList) {
           if(element.number == item) {
             element.count += 1;
