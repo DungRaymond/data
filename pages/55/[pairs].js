@@ -42,6 +42,7 @@ export function Page({aData}) {
   const [checked, setChecked] = useState([])
 
   const router = useRouter();
+  const mainURL = router.basePath;
   const queryParam = router.query.pairs.split('-');
   
   return(
@@ -126,7 +127,7 @@ export function Page({aData}) {
         onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick1').value;
-            axios.get('http://localhost:3000/api/getMode55')
+            axios.get(mainURL + '/api/getMode55')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -792,13 +793,13 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    const response = await axios.get(`http://localhost:3000/api/getData55`); // get analyzed from result
+    const response = await axios.get( mainURL + `/api/getData55`); // get analyzed from result
     let statData = JSON.parse("[" + response.data + "]");
 
-    const freq = await axios.get('http://localhost:3000/api/getFreq55') // get last 100 result
+    const freq = await axios.get( mainURL + '/api/getFreq55') // get last 100 result
     let freqData = JSON.parse("[" + freq.data + "]");
 
-    const reverb = await axios.get('http://localhost:3000/api/getResult55'); // get results term by term
+    const reverb = await axios.get( mainURL + '/api/getResult55'); // get results term by term
     let resultData = JSON.parse(reverb.data);
 
     // THE DATA WE NEED
