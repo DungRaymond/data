@@ -10,7 +10,7 @@ async function makeAnalytic45(){
     // console.log('here2')
     // console.log(each.ketqua);
     
-    for await (let item of each.ketqua){
+    for await (let item of each.jackpot){
       // console.log(item -1);
       let index = item -1;
       temp[index] += 1;
