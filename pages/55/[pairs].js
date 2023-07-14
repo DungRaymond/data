@@ -31,7 +31,7 @@ import isInclude from '../../modules/combination.js'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 18;
+ChartJS.defaults.font.size = 16;
 ChartJS.defaults.font.weight = '700';
 
 export function Page({aData}) {
