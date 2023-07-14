@@ -806,7 +806,7 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    const response = await axios.get( basepath + `p/api/getData45`); // get analyzed from result
+    const response = await axios.get( basepath + `/api/getData45`); // get analyzed from result
     let statData = JSON.parse("[" + response.data + "]");
 
     const freq = await axios.get( basepath + '/api/getFreq45') // get last 100 result
