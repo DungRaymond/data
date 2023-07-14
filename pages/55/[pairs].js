@@ -474,10 +474,10 @@ export function Page({aData}) {
         }}/>
       </Grid>
 
-      <Grid item container xs={10}>
+      <Grid item container>
         {pair.map((each) => {
           return (
-            <Grid item xs={3}>
+            <Grid item lg={3} xs={6} sm={6}>
               <span>
                 <h2>
                   <span className="bongterm">{each.term}</span>
@@ -562,7 +562,7 @@ export function Page({aData}) {
               </Grid>
                 {each.filtered.map(eachJackpot => {
                   return (
-                    <Grid item xs={3}>
+                    <Grid item lg={3} xs={6} sm={6}>
                       <span>
                         <h2>
                           <span className="bongterm">{eachJackpot.term}</span>
