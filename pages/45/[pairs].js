@@ -8,7 +8,6 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-
 import { Grid } from '@mui/material';
 
 `use client`
@@ -124,7 +123,7 @@ export function Page({aData}) {
         onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick1').value;
-            axios.get('http://localhost:3000/api/getMode45')
+            axios.get(process.env.basepath + '/api/getMode45')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -158,7 +157,7 @@ export function Page({aData}) {
         <input className='textInput' type='text' id='pick2' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick2').value;
-            axios.get('http://localhost:3000/api/getMode45')
+            axios.get(process.env.basepath + '/api/getMode45')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -192,7 +191,7 @@ export function Page({aData}) {
         <input className='textInput' type='text' id='pick3' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick3').value;
-            axios.get('http://localhost:3000/api/getMode45')
+            axios.get(process.env.basepath + '/api/getMode45')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -226,7 +225,7 @@ export function Page({aData}) {
         <input className='textInput' type='text' id='pick4' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick4').value;
-            axios.get('http://localhost:3000/api/getMode45')
+            axios.get(process.env.basepath + '/api/getMode45')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -260,7 +259,7 @@ export function Page({aData}) {
         <input className='textInput' type='text' id='pick5' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick5').value;
-            axios.get('http://localhost:3000/api/getMode45')
+            axios.get(process.env.basepath + '/api/getMode45')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -294,7 +293,7 @@ export function Page({aData}) {
         <input className='textInput' type='text' id='pick6' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick6').value;
-            axios.get('http://localhost:3000/api/getMode45')
+            axios.get(process.env.basepath + '/api/getMode45')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -332,7 +331,7 @@ export function Page({aData}) {
             const param3 = document.getElementById('has3').value;
             const param4 = document.getElementById('has4').value;
             
-            axios.get('http://localhost:3000/api/getResult45')
+            axios.get(process.env.basepath + '/api/getResult45')
             .then(res => {
               let arr = (JSON.parse(res.data));
               let includeArr = arr;
@@ -368,7 +367,7 @@ export function Page({aData}) {
             const param3 = document.getElementById('has3').value;
             const param4 = document.getElementById('has4').value;
             
-            axios.get('http://localhost:3000/api/getResult45')
+            axios.get(process.env.basepath + '/api/getResult45')
             .then(res => {
               let arr = (JSON.parse(res.data));
               let includeArr = arr;
@@ -404,7 +403,7 @@ export function Page({aData}) {
             const param3 = document.getElementById('has3').value;
             const param4 = document.getElementById('has4').value;
             
-            axios.get('http://localhost:3000/api/getResult45')
+            axios.get(process.env.basepath + '/api/getResult45')
             .then(res => {
               let arr = (JSON.parse(res.data));
               let includeArr = arr;
@@ -439,7 +438,7 @@ export function Page({aData}) {
             const param3 = document.getElementById('has3').value;
             const param4 = document.getElementById('has4').value;
             
-            axios.get('http://localhost:3000/api/getResult45')
+            axios.get(process.env.basepath + '/api/getResult45')
             .then(res => {
               let arr = (JSON.parse(res.data));
               let includeArr = arr;
@@ -541,7 +540,7 @@ export function Page({aData}) {
               const param6 = document.getElementById('check6').value;
               const jackpot = [param1, param2, param3, param4, param5, param6]
               
-              axios.get('http://localhost:3000/api/getResult45')
+              axios.get( process.env.basepath + '/api/getResult45')
               .then(res => {
                 let arr = (JSON.parse(res.data));
                 const test = isInclude(arr, jackpot);
@@ -805,13 +804,13 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    const response = await axios.get(`http://localhost:3000/api/getData45`); // get analyzed from result
+    const response = await axios.get( process.env.basepath + `p/api/getData45`); // get analyzed from result
     let statData = JSON.parse("[" + response.data + "]");
 
-    const freq = await axios.get('http://localhost:3000/api/getFreq45') // get last 100 result
+    const freq = await axios.get( process.env.basepath + '/api/getFreq45') // get last 100 result
     let freqData = JSON.parse("[" + freq.data + "]");
 
-    const reverb = await axios.get('http://localhost:3000/api/getResult45'); // get results term by term
+    const reverb = await axios.get( process.env.basepath + '/api/getResult45'); // get results term by term
     let resultData = JSON.parse(reverb.data)
 
     // THE DATA WE NEED
