@@ -14,6 +14,7 @@ import { Grid } from '@mui/material';
 `use client`
 
 import {useState} from 'react';
+import isInclude from '../../modules/combination.js'
 
 
 ChartJS.register(
@@ -40,6 +41,7 @@ export function Page({aData}) {
   const [pick5, setPick5] = useState([])
   const [pick6, setPick6] = useState([])
   const [pair, setPair] = useState([])
+  const [checked, setChecked] = useState([])
 
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
@@ -315,14 +317,14 @@ export function Page({aData}) {
               {each.number} ({each.count})
             </h3>
           </Grid>
-        )
-      })}
+          )
+        })}
     </Grid>
 
     <hr/>
 
     <Grid container>
-      <Grid item xs={1}>
+      <Grid item xs={2}>
         <input className='textInput' type='text' id="has1" onKeyDown={event => {
           if(event.code === 'Enter') {
             const param1 = document.getElementById('has1').value;
@@ -466,42 +468,6 @@ export function Page({aData}) {
             })
           }
         }}/>
-        <input className='textInput' type='text' id="has5" onKeyDown={event => {
-          if(event.code === 'Enter') {
-            const param1 = document.getElementById('has1').value;
-            const param2 = document.getElementById('has2').value;
-            const param3 = document.getElementById('has3').value;
-            const param4 = document.getElementById('has4').value;
-            
-            axios.get('http://localhost:3000/api/getResult45')
-            .then(res => {
-              let arr = (JSON.parse(res.data));
-              let includeArr = arr;
-              if(param1) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param1)
-                })
-              }
-              if(param2) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param2)
-                })
-              }
-              if(param3) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param3)
-                })
-              }
-              if(param4) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param4)
-                })
-              }
-              
-              setPair(includeArr)
-            })
-          }
-        }}/>
       </Grid>
 
       <Grid item container xs={11}>
@@ -536,8 +502,103 @@ export function Page({aData}) {
           )
         })}
       </Grid>
+
     </Grid>
 
+    {/** PART 3 */}
+
+    <hr/>
+
+    <Grid container>
+      <Grid item container xs={7}>
+        <Grid item xs={2} spacing={2}>
+          <input className='textInput' type='text' id="check1"/>
+        </Grid>
+        <Grid item xs={2} spacing={2}>
+          <input className='textInput' type='text' id="check2"/>
+        </Grid>
+        <Grid item xs={2} spacing={2}>
+          <input className='textInput' type='text' id="check3"/>
+        </Grid>
+        <Grid item xs={2} spacing={2}>
+          <input className='textInput' type='text' id="check4"/>
+        </Grid>
+        <Grid item xs={2} spacing={2}>
+          <input className='textInput' type='text' id="check5"/>
+        </Grid>
+        <Grid item xs={2} spacing={2}>
+          <input className='textInput' type='text' id="check6"/>
+        </Grid>
+      </Grid>
+
+        <Grid item xs={1} spacing={2}>
+          <button type="button" className='pure-material-button-contained' onClick={() => {
+              const param1 = document.getElementById('check1').value;
+              const param2 = document.getElementById('check2').value;
+              const param3 = document.getElementById('check3').value;
+              const param4 = document.getElementById('check4').value;
+              const param5 = document.getElementById('check5').value;
+              const param6 = document.getElementById('check6').value;
+              const jackpot = [param1, param2, param3, param4, param5, param6]
+              
+              axios.get('http://localhost:3000/api/getResult45')
+              .then(res => {
+                let arr = (JSON.parse(res.data));
+                const test = isInclude(arr, jackpot);
+                setChecked(test)
+              })
+          }}>
+            Click
+          </button>
+        </Grid>
+
+        <Grid container item xs={12}>
+          {checked.map(each => {
+            return (
+              <>
+                <Grid item xs={12}>
+                  {each.comb.map(item => {
+                    return <span className='bongcloud'>
+                      {item}
+                    </span>
+                  })}
+                </Grid>
+                  {each.filtered.map(eachJackpot => {
+                    return (
+                      <Grid item xs={3}>
+                        <span>
+                          <h2>
+                            <span className="bongterm">{eachJackpot.term}</span>
+                            <span className='bongdate'>{eachJackpot.date}</span>
+                          </h2>
+                          <h2>
+                            {eachJackpot.jackpot.map((bong) => {
+                              const param1 = each.comb[0];
+                              const param2 = each.comb[1];
+                              const param3 = each.comb[2];
+                              if(bong == param1 || bong == param2 || bong == param3){
+                                return <span className='bongcloud-white'>
+                                  {bong}
+                                </span>
+                              }
+                              return <span className='bongcloud'>
+                                {bong}
+                              </span>
+                            })}
+                          </h2>
+          
+                        </span>
+                      </Grid>
+                    )
+                  })}
+                <Grid item xs={12}>
+                  <hr/>
+                </Grid>
+              </>
+            )
+          })}
+        </Grid>
+      </Grid>
 
 
 
