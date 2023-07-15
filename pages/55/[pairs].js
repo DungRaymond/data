@@ -23,8 +23,6 @@ ChartJS.register(
 import {useState} from 'react';
 import useSWR from 'swr';
 import { useRouter } from 'next/router'
-const basepath = "https://data-flame.vercel.app"
-// const basepath = "http://localhost:3000"
 
 
 import isInclude from '../../modules/combination.js'
@@ -130,7 +128,7 @@ export function Page({aData}) {
         onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick1').value;
-            axios.get(basepath + '/api/getMode55')
+            axios.get(aData.basepath + '/api/getMode55')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -164,7 +162,7 @@ export function Page({aData}) {
         <input className='textInput' type='text' id='pick2' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick2').value;
-            axios.get(basepath + '/api/getMode55')
+            axios.get(aData.basepath + '/api/getMode55')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -197,7 +195,7 @@ export function Page({aData}) {
         <input className='textInput' type='text' id='pick3' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick3').value;
-            axios.get(basepath + '/api/getMode55')
+            axios.get(aData.basepath + '/api/getMode55')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -230,7 +228,7 @@ export function Page({aData}) {
         <input className='textInput' type='text' id='pick4' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick4').value;
-            axios.get(basepath + '/api/getMode55')
+            axios.get(aData.basepath + '/api/getMode55')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -265,7 +263,7 @@ export function Page({aData}) {
         <input className='textInput' type='text' id='pick5' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick5').value;
-            axios.get(basepath + '/api/getMode55')
+            axios.get(aData.basepath + '/api/getMode55')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -300,7 +298,7 @@ export function Page({aData}) {
         <input className='textInput' type='text' id='pick6' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick6').value;
-            axios.get(basepath + '/api/getMode55')
+            axios.get(aData.basepath + '/api/getMode55')
             .then(res => {
               let arr = JSON.parse(res.data)
               arr = arr[pivot - 1].modeList;
@@ -339,7 +337,7 @@ export function Page({aData}) {
             const param3 = document.getElementById('has3').value;
             const param4 = document.getElementById('has4').value;
             
-            axios.get(basepath + '/api/getResult55')
+            axios.get(aData.basepath + '/api/getResult55')
             .then(res => {
               let arr = (JSON.parse(res.data));
               let includeArr = arr;
@@ -374,7 +372,7 @@ export function Page({aData}) {
             const param3 = document.getElementById('has3').value;
             const param4 = document.getElementById('has4').value;
             
-            axios.get(basepath + '/api/getResult55')
+            axios.get(aData.basepath + '/api/getResult55')
             .then(res => {
               let arr = (JSON.parse(res.data));
               let includeArr = arr;
@@ -408,8 +406,7 @@ export function Page({aData}) {
             const param2 = document.getElementById('has2').value;
             const param3 = document.getElementById('has3').value;
             const param4 = document.getElementById('has4').value;
-            
-            axios.get(basepath + '/api/getResult55')
+            axios.get(aData.basepath + '/api/getResult55')
             .then(res => {
               let arr = (JSON.parse(res.data));
               let includeArr = arr;
@@ -444,7 +441,7 @@ export function Page({aData}) {
             const param3 = document.getElementById('has3').value;
             const param4 = document.getElementById('has4').value;
             
-            axios.get(basepath + '/api/getResult55')
+            axios.get(aData.basepath + '/api/getResult55')
             .then(res => {
               let arr = (JSON.parse(res.data));
               let includeArr = arr;
@@ -538,7 +535,7 @@ export function Page({aData}) {
             const param6 = document.getElementById('check6').value;
             const jackpot = [param1, param2, param3, param4, param5, param6]
             
-            axios.get(basepath + '/api/getResult55')
+            axios.get(aData.basepath + '/api/getResult55')
             .then(res => {
               let arr = (JSON.parse(res.data));
               const test = isInclude(arr, jackpot);
@@ -796,13 +793,13 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    const response = await axios.get(basepath + `/api/getData55`); // get analyzed from result
+    const response = await axios.get(process.env.basepath + `/api/getData55`); // get analyzed from result
     let statData = JSON.parse("[" + response.data + "]");
 
-    const freq = await axios.get(basepath + '/api/getFreq55') // get last 100 result
+    const freq = await axios.get(process.env.basepath + '/api/getFreq55') // get last 100 result
     let freqData = JSON.parse("[" + freq.data + "]");
 
-    const reverb = await axios.get(basepath + '/api/getResult55'); // get results term by term
+    const reverb = await axios.get(process.env.basepath + '/api/getResult55'); // get results term by term
     let resultData = JSON.parse(reverb.data);
 
     // THE DATA WE NEED
@@ -935,11 +932,10 @@ export async function getServerSideProps(context) {
       value: finalData.next
       // ANCHOR
     },
-    dataLength: finalData.len
+    dataLength: finalData.len,
+    basepath: process.env.basepath
   
   }
-  
-
   return {
     props: { aData }, // will be passed to the page component as props
     // props: { data: 'hello'}
