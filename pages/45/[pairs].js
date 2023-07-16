@@ -510,27 +510,27 @@ export function Page({aData}) {
 
     <Grid container>
       <Grid item container xs={7}>
-        <Grid item xs={2} spacing={2}>
+        <Grid item xs={2}>
           <input className='textInput' type='text' id="check1"/>
         </Grid>
-        <Grid item xs={2} spacing={2}>
+        <Grid item xs={2}>
           <input className='textInput' type='text' id="check2"/>
         </Grid>
-        <Grid item xs={2} spacing={2}>
+        <Grid item xs={2} >
           <input className='textInput' type='text' id="check3"/>
         </Grid>
-        <Grid item xs={2} spacing={2}>
+        <Grid item xs={2}>
           <input className='textInput' type='text' id="check4"/>
         </Grid>
-        <Grid item xs={2} spacing={2}>
+        <Grid item xs={2}>
           <input className='textInput' type='text' id="check5"/>
         </Grid>
-        <Grid item xs={2} spacing={2}>
+        <Grid item xs={2}>
           <input className='textInput' type='text' id="check6"/>
         </Grid>
       </Grid>
 
-        <Grid item xs={1} spacing={2}>
+        <Grid item xs={1}>
           <button type="button" className='pure-material-button-contained' onClick={() => {
               const param1 = document.getElementById('check1').value;
               const param2 = document.getElementById('check2').value;
