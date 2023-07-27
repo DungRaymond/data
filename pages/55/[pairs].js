@@ -82,7 +82,7 @@ export function Page({aData}) {
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
-              router.push('/55/0' + '-' + (aData.dataLength - 21) + '-' + (aData.dataLength))
+              router.push('/55/0' + '-' + (aData.dataLength - 24) + '-' + (aData.dataLength))
             }
           }}>
             last
@@ -122,8 +122,8 @@ export function Page({aData}) {
     <br/>
 
 
-    <Grid container spacing={2}>
-      <Grid item xs={2}>
+    <Grid container spacing={1}>
+      <Grid item xs={1}>
         <input className='textInput' type='text' id='pick1' 
         onKeyDown={(event) => {
           if(event.code === 'Enter') {
@@ -139,7 +139,7 @@ export function Page({aData}) {
                 return b.count - a.count
               })
 
-              setPick1(sorted.slice(0, 9))
+              setPick1(sorted.slice(0, 11))
             })
           }
         }}/>
@@ -157,8 +157,8 @@ export function Page({aData}) {
 
     <hr />
 
-    <Grid container spacing={2}>
-      <Grid item xs={2}>
+    <Grid container spacing={1}>
+      <Grid item xs={1}>
         <input className='textInput' type='text' id='pick2' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick2').value;
@@ -173,7 +173,7 @@ export function Page({aData}) {
                 return b.count - a.count
               })
 
-              setPick2(sorted.slice(0, 9))
+              setPick2(sorted.slice(0, 11))
             })
           }
         }}/>
@@ -190,8 +190,8 @@ export function Page({aData}) {
     </Grid>
     <hr />
     
-    <Grid container spacing={2}>
-      <Grid item xs={2}>
+    <Grid container spacing={1}>
+      <Grid item xs={1}>
         <input className='textInput' type='text' id='pick3' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick3').value;
@@ -205,7 +205,7 @@ export function Page({aData}) {
               let sorted = sliced.sort((a,b) => {
                 return b.count - a.count
               })
-              setPick3(sorted.slice(0, 9))
+              setPick3(sorted.slice(0, 11))
             })
           }
         }}/>
@@ -223,8 +223,8 @@ export function Page({aData}) {
     </Grid>
     <hr />
 
-    <Grid container spacing={2}>
-      <Grid item xs={2}>
+    <Grid container spacing={1}>
+      <Grid item xs={1}>
         <input className='textInput' type='text' id='pick4' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick4').value;
@@ -240,7 +240,7 @@ export function Page({aData}) {
                 return b.count - a.count
               })
 
-              setPick4(sorted.slice(0, 9))
+              setPick4(sorted.slice(0, 11))
             })
           }
         }}/>
@@ -258,8 +258,8 @@ export function Page({aData}) {
     </Grid>
     <hr />
 
-    <Grid container spacing={2}>
-      <Grid item xs={2}>
+    <Grid container spacing={1}>
+      <Grid item xs={1}>
         <input className='textInput' type='text' id='pick5' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick5').value;
@@ -274,7 +274,7 @@ export function Page({aData}) {
                 return b.count - a.count
               })
 
-              setPick5(sorted.slice(0, 9))
+              setPick5(sorted.slice(0, 11))
             })
           }
         }}/>
@@ -293,8 +293,8 @@ export function Page({aData}) {
 
     <hr />
 
-    <Grid container spacing={2}>
-      <Grid item xs={2}>
+    <Grid container spacing={1}>
+      <Grid item xs={1}>
         <input className='textInput' type='text' id='pick6' onKeyDown={(event) => {
           if(event.code === 'Enter') {
             const pivot = document.getElementById('pick6').value;
@@ -309,7 +309,7 @@ export function Page({aData}) {
                 return b.count - a.count
               })
 
-              setPick6(sorted.slice(0, 9))
+              setPick6(sorted.slice(0, 11))
             })
           }
         }}/>
@@ -851,7 +851,7 @@ export async function getServerSideProps(context) {
     finalData.total = sortedTotal;
 
     // ANCHOR
-    finalData.next = resultData[pam[2] - 1].ketqua
+    finalData.next = resultData[pam[2] - 1].jackpot
     
     finalData.labels = sortedLabels.map((each) => {
       if(!finalData.next.includes(each)) {
