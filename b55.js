@@ -7,7 +7,7 @@ fs.writeFileSync('./json/freq55.json', "{\n\t\"stat\": " + JSON.stringify(temp) 
 
 let arr100 = data55.slice(data55.length - 18, data55.length)
 arr100 = arr100.map(each => {
-  return each.ketqua
+  return each.jackpot
 })
 
 // console.log(arr100);
