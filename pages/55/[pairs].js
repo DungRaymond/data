@@ -69,13 +69,13 @@ export function Page({aData}) {
       <Grid item xs={2}>
         <div className='arrowInput'>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            router.push('/55/' + queryParam[0] + '-' + (aData.dataLength - 21) + '-' + (queryParam[2] - 1) )
+            router.push('/55/' + queryParam[0] + '-' + (queryParam[1] - 1) + '-' + (queryParam[2] - 1) )
           }}>
             prev
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
-              router.push('/55/' + queryParam[0] + '-' + (aData.dataLength - 21) + '-' + (queryParam[2] - 0 + 1))
+              router.push('/55/' + queryParam[0] + '-' + (queryParam[1] - 0 + 1) + '-' + (queryParam[2] - 0 + 1))
             }
           }}>
             next

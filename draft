@@ -74,3 +74,11 @@ function RealDoSearch() {
                     document.getElementById('divResultContent').innerHTML = AjaxOut.HtmlContent;
                     window.open('#top', '_self');
                 }
+
+
+655 ringed jackpot
+
+22 24 35 43 45 54
+06 27 29 32 39 52
+14 15 16 22 23 29
+12 14 19 29 44 47
