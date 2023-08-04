@@ -508,24 +508,27 @@ export function Page({aData}) {
 
     <hr/>
 
-    <Grid container>
-      <Grid item container xs={7}>
-        <Grid item xs={2}>
+    <Grid container justifyContent={'center'}>
+      <Grid item container md={6} sm={12} spacing={1} direction={'row'} justifyContent={'center'}>
+        <Grid item md={2} sm={3}>
           <input className='textInput' type='text' id="check1"/>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item md={2} sm={3}>
           <input className='textInput' type='text' id="check2"/>
         </Grid>
-        <Grid item xs={2} >
+        <Grid item md={2} sm={3}>
           <input className='textInput' type='text' id="check3"/>
         </Grid>
-        <Grid item xs={2}>
+      </Grid>
+
+      <Grid item container md={6} sm={12} spacing={1} direction={'row'} justifyContent={'center'}>
+        <Grid item md={2} sm={3}>
           <input className='textInput' type='text' id="check4"/>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item md={2} sm={3}>
           <input className='textInput' type='text' id="check5"/>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item md={2} sm={3}>
           <input className='textInput' type='text' id="check6"/>
         </Grid>
       </Grid>
