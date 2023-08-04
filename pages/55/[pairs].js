@@ -507,23 +507,28 @@ export function Page({aData}) {
     <hr/>
 
     <Grid container>
-      <Grid item xs={1} spacing={2}>
-        <input className='textInput' type='text' id="check1"/>
+      <Grid item container md={6} sm={12} spacing={1} direction={'row'} justifyContent={'center'}>
+        <Grid item md={2} sm={3}>
+          <input className='textInput' type='text' id="check1"/>
+        </Grid>
+        <Grid item md={2} sm={3}>
+          <input className='textInput' type='text' id="check2"/>
+        </Grid>
+        <Grid item md={2} sm={3}>
+          <input className='textInput' type='text' id="check3"/>
+        </Grid>
       </Grid>
-      <Grid item xs={1} spacing={2}>
-        <input className='textInput' type='text' id="check2"/>
-      </Grid>
-      <Grid item xs={1} spacing={2}>
-        <input className='textInput' type='text' id="check3"/>
-      </Grid>
-      <Grid item xs={1} spacing={2}>
-        <input className='textInput' type='text' id="check4"/>
-      </Grid>
-      <Grid item xs={1} spacing={2}>
-        <input className='textInput' type='text' id="check5"/>
-      </Grid>
-      <Grid item xs={1} spacing={2}>
-        <input className='textInput' type='text' id="check6"/>
+
+      <Grid item container md={6} sm={12} spacing={1} direction={'row'} justifyContent={'center'}>
+        <Grid item md={2} sm={3}>
+          <input className='textInput' type='text' id="check4"/>
+        </Grid>
+        <Grid item md={2} sm={3}>
+          <input className='textInput' type='text' id="check5"/>
+        </Grid>
+        <Grid item md={2} sm={3}>
+          <input className='textInput' type='text' id="check6"/>
+        </Grid>
       </Grid>
       <Grid item xs={1} spacing={2}>
         <button type="button" className='pure-material-button-contained' onClick={() => {
