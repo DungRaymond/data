@@ -139,20 +139,22 @@ export function Page({aData}) {
                 return b.count - a.count
               })
 
-              setPick1(sorted.slice(0, 11))
+              setPick1(sorted.slice(0, 12))
             })
           }
         }}/>
       </Grid>
-      {pick1.map((each,i) => {
-        return(
-          <Grid item xs={1}>
-            <h3 key={i}>
-              {each.number} ({each.count})
-            </h3>
-          </Grid>
-        )
-      })}
+      <Grid item container sm={12}>
+        {pick1.map((each,i) => {
+          return(
+            <Grid item xs={1}>
+              <h3 key={i}>
+                {each.number} ({each.count})
+              </h3>
+            </Grid>
+          )
+        })}
+      </Grid>
     </Grid>
 
     <hr />
@@ -178,6 +180,8 @@ export function Page({aData}) {
           }
         }}/>
       </Grid>
+      <Grid item container sm={12}>
+
       {pick2.map((each,i) => {
         return(
           <Grid item xs={1}>
@@ -187,6 +191,7 @@ export function Page({aData}) {
           </Grid>
         )
       })}
+      </Grid>
     </Grid>
     <hr />
     
@@ -210,15 +215,18 @@ export function Page({aData}) {
           }
         }}/>
       </Grid>
-      {pick3.map((each,i) => {
-        return(
-          <Grid item xs={1}>
-            <h3 key={i}>
-              {each.number} ({each.count})
-            </h3>
-          </Grid>
-        )
-      })}
+      <Grid item container sm={12}>
+        {pick3.map((each,i) => {
+          return(
+            <Grid item xs={1}>
+              <h3 key={i}>
+                {each.number} ({each.count})
+              </h3>
+            </Grid>
+          )
+        })}
+
+      </Grid>
 
     </Grid>
     <hr />
@@ -245,15 +253,18 @@ export function Page({aData}) {
           }
         }}/>
       </Grid>
-      {pick4.map((each,i) => {
-        return(
-          <Grid item xs={1}>
-            <h3 key={i}>
-              {each.number} ({each.count})
-            </h3>
-          </Grid>
-        )
-      })}
+      <Grid item container sm={12}>
+        {pick4.map((each,i) => {
+          return(
+            <Grid item xs={1}>
+              <h3 key={i}>
+                {each.number} ({each.count})
+              </h3>
+            </Grid>
+          )
+        })}
+
+      </Grid>
 
     </Grid>
     <hr />
@@ -279,15 +290,19 @@ export function Page({aData}) {
           }
         }}/>
       </Grid>
-      {pick5.map((each,i) => {
-        return(
-          <Grid item xs={1}>
-            <h3 key={i}>
-              {each.number} ({each.count})
-            </h3>
-          </Grid>
-        )
-      })}
+      <Grid item container sm={12}>
+
+        {pick5.map((each,i) => {
+          return(
+            <Grid item xs={1}>
+              <h3 key={i}>
+                {each.number} ({each.count})
+              </h3>
+            </Grid>
+          )
+        })}
+
+      </Grid>
 
     </Grid>
 
@@ -314,16 +329,19 @@ export function Page({aData}) {
           }
         }}/>
       </Grid>
-      
-      {pick6.map((each,i) => {
-        return(
-          <Grid item xs={1}>
-            <h3 key={i}>
-              {each.number} ({each.count})
-            </h3>
-          </Grid>
-        )
-      })}
+      <Grid item container sm={12}>
+
+        {pick6.map((each,i) => {
+          return(
+            <Grid item xs={1}>
+              <h3 key={i}>
+                {each.number} ({each.count})
+              </h3>
+            </Grid>
+          )
+        })}
+        
+      </Grid>
     </Grid>
 
       <hr/>
