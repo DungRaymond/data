@@ -8,7 +8,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Grid } from '@mui/material'
-import { Bar, getElementsAtEvent } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 
 ChartJS.register(
@@ -21,7 +21,7 @@ ChartJS.register(
 );
 
 import {useState} from 'react';
-import useSWR from 'swr';
+// import useSWR from 'swr';
 import { useRouter } from 'next/router'
 
 
@@ -45,452 +45,237 @@ export function Page({aData}) {
 
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
+
+  const findMost12 = (pick, setState) => {
+    // console.log('here1');
+    const pivot = document.getElementById(pick).value;
+    if(pivot <= 45) {
+      axios.get(aData.basepath + '/api/getMode55')
+      .then(res => {
+        let arr = JSON.parse(res.data)
+        arr = arr[pivot - 1].modeList;
+        let sliced = arr.slice(0, pivot - 1);
+        sliced = sliced.concat(arr.slice(pivot, arr.length))
+        
+        let sorted = sliced.sort((a,b) => {
+          return b.count - a.count
+        })
+  
+        setState(sorted.slice(0, 12))
+      })
+    }
+  }
+
+  
+  const printMost12 = (pick) => {
+    console.log(pick);
+    pick.map((each,i) => {
+      return(
+        <Grid item xs={1}>
+          <h3 key={i}>
+            {each.number} [{each.count}]
+          </h3>
+        </Grid>
+        )
+      })
+  }
+
+  const findByCombo = (event) => {
+    if(event.code === 'Enter') {
+      const param1 = document.getElementById('has1').value;
+      const param2 = document.getElementById('has2').value;
+      const param3 = document.getElementById('has3').value;
+      const param4 = document.getElementById('has4').value;
+      
+      axios.get(aData.basepath + '/api/getResult55')
+      .then(res => {
+        let arr = (JSON.parse(res.data));
+        let includeArr = arr;
+        if(param1 && param1 < 46) {
+          includeArr = includeArr.filter((item) => {
+            return item.jackpot.includes(param1 < 10 ? '0' + param1 : param1)
+          })
+        }
+        if(param2 && param2 < 46) {
+          includeArr = includeArr.filter((item) => {
+            return item.jackpot.includes(param2 < 10 ? '0' + param2 : param2)
+          })
+        }
+        if(param3 && param3 < 46) {
+          includeArr = includeArr.filter((item) => {
+            return item.jackpot.includes(param3 < 10 ? '0' + param3 : param3)
+          })
+        }
+        if(param4 && param4 < 46) {
+          includeArr = includeArr.filter((item) => {
+            return item.jackpot.includes(param4 < 10 ? '0' + param4 : param4)
+          })
+        }
+        
+        setPair(includeArr)
+      })
+    }
+  }
+
+  const findAllCombo = () => {
+    const param1 = document.getElementById('check1').value;
+    const param2 = document.getElementById('check2').value;
+    const param3 = document.getElementById('check3').value;
+    const param4 = document.getElementById('check4').value;
+    const param5 = document.getElementById('check5').value;
+    const param6 = document.getElementById('check6').value;
+    const jackpot = [
+              param1 < 10 ? '0' + param1 : param1,
+              param2 < 10 ? '0' + param2 : param2,
+              param3 < 10 ? '0' + param3 : param3,
+              param4 < 10 ? '0' + param4 : param4,
+              param5 < 10 ? '0' + param5 : param5,
+              param6 < 10 ? '0' + param6 : param6
+            
+            ]
+    
+    axios.get( aData.basepath + '/api/getResult55')
+    .then(res => {
+      let arr = (JSON.parse(res.data));
+      const test = isInclude(arr, jackpot);
+      setChecked(test)
+    })
+  }
   
   return(
   <>
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
+    <Grid container spacing={1} justifyContent="space-between">
+      <Grid item lg={1} sm={1}>
         <button type='button' className='pure-material-button-contained' onClick={() => {
             router.push('/')
           }}>
-            Home
+            /
         </button>
       </Grid>
 
-      <Grid item xs={3}>
-        <div id="latest_result">{aData.next.value.map((each) => {
-          return <span className='circle' key={each + 'hehe'}>
-            {each}
-          </span>
-        })}
-          </div>
-      </Grid>
-
-      <Grid item xs={2}>
+      <Grid item sm={4}>
         <div className='arrowInput'>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            router.push('/55/' + queryParam[0] + '-' + (queryParam[1] - 1) + '-' + (queryParam[2] - 1) )
+            router.push('/55/' + queryParam[0] + '-' + (queryParam[2] - 16) + '-' + (queryParam[2] - 1) )
           }}>
-            prev
+            &lt;
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
-              router.push('/55/' + queryParam[0] + '-' + (queryParam[1] - 0 + 1) + '-' + (queryParam[2] - 0 + 1))
+              router.push('/55/' + queryParam[0] + '-' + (queryParam[2] - 16) + '-' + (queryParam[2] - 0 + 1))
             }
           }}>
-            next
+            &gt;
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
-              router.push('/55/0' + '-' + (aData.dataLength - 24) + '-' + (aData.dataLength))
+              router.push('/55/0-' + (aData.dataLength - 16) + '-' + (aData.dataLength))
             }
           }}>
-            last
+            Last
           </button>
 
         </div>
       </Grid>
 
-      <Grid item xs={5}>
+      <Grid item sm={4}>
         <div className='numberInput'>
-          <input className='textInput' type='text' id='first'/>
-          <input className='textInput' type='text' id='second'/>
-          <input className='textInput' type='text' id='third' />
-          <button type='button' className='pure-material-button-contained' onClick={() => {
-            const param1 = document.getElementById('first').value || 0;
-            const param2 = document.getElementById('second').value;
-            const param3 = document.getElementById('third').value || 899;
-            router.push('/55/0' + '-' + (param2||param3 - 21) + '-' + param3);
+          <input className='textInput' type='text' id='first' onKeyDown={(event) => {
+            if(event.code === 'Enter') {
+              setTerm()
             }
-            }>
-            Click here
-          </button>
+          }}/>
+          <input className='textInput' type='text' id='second' onKeyDown={(event) => {
+            if(event.code === 'Enter') {
+              setTerm()
+            }
+          }}/>
+          <input className='textInput' type='text' id='third' onKeyDown={(event) => {
+            if(event.code === 'Enter') {
+              setTerm()
+            }
+          }}/>
         </div>
       </Grid>
 
-      
+
     </Grid>
-
     <br/>
-
+    
+    <Grid container justifyContent="center">
+      <div id='latest_result'>{aData.next.value.map((each) => {
+        return <span className='circle' key={each + 'hoho'}>
+          {each}
+        </span>
+      })}
+        {/* <span>
+          {queryParam[2] - 0 + 1}
+        </span> */}
+      </div>
+    </Grid>
           
 
     <br/>
-
-    <Bar options={aData.options} data={aData.data}/>
-
+    <Grid container xs={12} sx={{height: '142vh'}}>
+      <Bar options={aData.options} data={aData.data} />
+    </Grid>
     <br/>
 
 
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
-        <input className='textInput' type='text' id='pick1' 
-        onKeyDown={(event) => {
-          if(event.code === 'Enter') {
-            const pivot = document.getElementById('pick1').value;
-            axios.get(aData.basepath + '/api/getMode55')
-            .then(res => {
-              let arr = JSON.parse(res.data)
-              arr = arr[pivot - 1].modeList;
-              let sliced = arr.slice(0, pivot - 1);
-              sliced = sliced.concat(arr.slice(pivot, arr.length))
-              
-              let sorted = sliced.sort((a,b) => {
-                return b.count - a.count
-              })
-
-              setPick1(sorted.slice(0, 12))
-            })
-          }
-        }}/>
-      </Grid>
-      <Grid item container sm={12}>
-        {pick1.map((each,i) => {
-          return(
+    {[['pick1', pick1, setPick1],['pick2', pick2, setPick2],
+    ['pick3', pick3, setPick3], ['pick4', pick4, setPick4], 
+    ['pick5', pick5, setPick5], ['pick6', pick6, setPick6]].map((each) => {
+      return (
+        <>
+          <Grid container spacing={1}>
             <Grid item xs={1}>
-              <h3 key={i}>
-                {each.number} ({each.count})
-              </h3>
+              <input className='textInput' type='text' id={each[0]} 
+              onKeyDown={(event) => {
+                if(event.code === 'Enter') {
+                  findMost12(each[0], each[2]);
+                }
+              }}/>
             </Grid>
-          )
-        })}
-      </Grid>
-    </Grid>
 
-    <hr />
+            <Grid item container sm={12}>
 
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
-        <input className='textInput' type='text' id='pick2' onKeyDown={(event) => {
-          if(event.code === 'Enter') {
-            const pivot = document.getElementById('pick2').value;
-            axios.get(aData.basepath + '/api/getMode55')
-            .then(res => {
-              let arr = JSON.parse(res.data)
-              arr = arr[pivot - 1].modeList;
-              let sliced = arr.slice(0, pivot - 1);
-              sliced = sliced.concat(arr.slice(pivot, arr.length))
-              
-              let sorted = sliced.sort((a,b) => {
-                return b.count - a.count
-              })
+              {each[1].map((each,i) => {
+                return(
+                  <Grid item xs={1}>
+                    <h3 key={i}>
+                      {each.number} [{each.count}]
+                    </h3>
+                  </Grid>
+                  )
+                })}
+            </Grid>
 
-              setPick2(sorted.slice(0, 11))
-            })
-          }
-        }}/>
-      </Grid>
-      <Grid item container sm={12}>
-
-      {pick2.map((each,i) => {
-        return(
-          <Grid item xs={1}>
-            <h3 key={i}>
-              {each.number} ({each.count})
-            </h3>
           </Grid>
-        )
-      })}
-      </Grid>
-    </Grid>
-    <hr />
-    
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
-        <input className='textInput' type='text' id='pick3' onKeyDown={(event) => {
-          if(event.code === 'Enter') {
-            const pivot = document.getElementById('pick3').value;
-            axios.get(aData.basepath + '/api/getMode55')
-            .then(res => {
-              let arr = JSON.parse(res.data)
-              arr = arr[pivot - 1].modeList;
-              let sliced = arr.slice(0, pivot - 1);
-              sliced = sliced.concat(arr.slice(pivot, arr.length))
-              
-              let sorted = sliced.sort((a,b) => {
-                return b.count - a.count
-              })
-              setPick3(sorted.slice(0, 11))
-            })
-          }
-        }}/>
-      </Grid>
-      <Grid item container sm={12}>
-        {pick3.map((each,i) => {
-          return(
-            <Grid item xs={1}>
-              <h3 key={i}>
-                {each.number} ({each.count})
-              </h3>
-            </Grid>
+        <hr />
+        </>
           )
         })}
-
-      </Grid>
-
-    </Grid>
-    <hr />
-
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
-        <input className='textInput' type='text' id='pick4' onKeyDown={(event) => {
-          if(event.code === 'Enter') {
-            const pivot = document.getElementById('pick4').value;
-            axios.get(aData.basepath + '/api/getMode55')
-            .then(res => {
-              let arr = JSON.parse(res.data)
-              arr = arr[pivot - 1].modeList;
-              let sliced = arr.slice(0, pivot - 1);
-              sliced.push(arr.slice(pivot, arr.length))
-              sliced = sliced.concat(arr.slice(pivot, arr.length))
-              
-              let sorted = sliced.sort((a,b) => {
-                return b.count - a.count
-              })
-
-              setPick4(sorted.slice(0, 11))
-            })
-          }
-        }}/>
-      </Grid>
-      <Grid item container sm={12}>
-        {pick4.map((each,i) => {
-          return(
-            <Grid item xs={1}>
-              <h3 key={i}>
-                {each.number} ({each.count})
-              </h3>
-            </Grid>
-          )
-        })}
-
-      </Grid>
-
-    </Grid>
-    <hr />
-
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
-        <input className='textInput' type='text' id='pick5' onKeyDown={(event) => {
-          if(event.code === 'Enter') {
-            const pivot = document.getElementById('pick5').value;
-            axios.get(aData.basepath + '/api/getMode55')
-            .then(res => {
-              let arr = JSON.parse(res.data)
-              arr = arr[pivot - 1].modeList;
-              let sliced = arr.slice(0, pivot - 1);
-              sliced = sliced.concat(arr.slice(pivot, arr.length))
-              
-              let sorted = sliced.sort((a,b) => {
-                return b.count - a.count
-              })
-
-              setPick5(sorted.slice(0, 11))
-            })
-          }
-        }}/>
-      </Grid>
-      <Grid item container sm={12}>
-
-        {pick5.map((each,i) => {
-          return(
-            <Grid item xs={1}>
-              <h3 key={i}>
-                {each.number} ({each.count})
-              </h3>
-            </Grid>
-          )
-        })}
-
-      </Grid>
-
-    </Grid>
-
-    <hr />
-
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
-        <input className='textInput' type='text' id='pick6' onKeyDown={(event) => {
-          if(event.code === 'Enter') {
-            const pivot = document.getElementById('pick6').value;
-            axios.get(aData.basepath + '/api/getMode55')
-            .then(res => {
-              let arr = JSON.parse(res.data)
-              arr = arr[pivot - 1].modeList;
-              let sliced = arr.slice(0, pivot - 1);
-              sliced = sliced.concat(arr.slice(pivot, arr.length))
-              
-              let sorted = sliced.sort((a,b) => {
-                return b.count - a.count
-              })
-
-              setPick6(sorted.slice(0, 11))
-            })
-          }
-        }}/>
-      </Grid>
-      <Grid item container sm={12}>
-
-        {pick6.map((each,i) => {
-          return(
-            <Grid item xs={1}>
-              <h3 key={i}>
-                {each.number} ({each.count})
-              </h3>
-            </Grid>
-          )
-        })}
-        
-      </Grid>
-    </Grid>
 
       <hr/>
 
     <Grid container>
       <Grid item xs={2}>
-        <input className='textInput' type='text' id="has1" onKeyDown={event => {
-          if(event.code === 'Enter') {
-            const param1 = document.getElementById('has1').value;
-            const param2 = document.getElementById('has2').value;
-            const param3 = document.getElementById('has3').value;
-            const param4 = document.getElementById('has4').value;
-            
-            axios.get(aData.basepath + '/api/getResult55')
-            .then(res => {
-              let arr = (JSON.parse(res.data));
-              let includeArr = arr;
-              if(param1) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param1)
-                })
-              }
-              if(param2) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param2)
-                })
-              }
-              if(param3) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param3)
-                })
-              }
-              if(param4) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param4)
-                })
-              }
-              setPair(includeArr)
-            })
-          }
-        }}/>
-        <input className='textInput' type='text' id="has2" onKeyDown={event => {
-          if(event.code === 'Enter') {
-            const param1 = document.getElementById('has1').value;
-            const param2 = document.getElementById('has2').value;
-            const param3 = document.getElementById('has3').value;
-            const param4 = document.getElementById('has4').value;
-            
-            axios.get(aData.basepath + '/api/getResult55')
-            .then(res => {
-              let arr = (JSON.parse(res.data));
-              let includeArr = arr;
-              if(param1) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param1)
-                })
-              }
-              if(param2) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param2)
-                })
-              }
-              if(param3) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param3)
-                })
-              }
-              if(param4) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param4)
-                })
-              }
-              setPair(includeArr)
-            })
-          }
-        }}/>
-        <input className='textInput' type='text' id="has3" onKeyDown={event => {
-          if(event.code === 'Enter') {
-            const param1 = document.getElementById('has1').value;
-            const param2 = document.getElementById('has2').value;
-            const param3 = document.getElementById('has3').value;
-            const param4 = document.getElementById('has4').value;
-            axios.get(aData.basepath + '/api/getResult55')
-            .then(res => {
-              let arr = (JSON.parse(res.data));
-              let includeArr = arr;
-              if(param1) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param1)
-                })
-              }
-              if(param2) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param2)
-                })
-              }
-              if(param3) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param3)
-                })
-              }
-              if(param4) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param4)
-                })
-              }
-              setPair(includeArr)
-            })
-          }
-        }}/>
-        <input className='textInput' type='text' id="has4" onKeyDown={event => {
-          if(event.code === 'Enter') {
-            const param1 = document.getElementById('has1').value;
-            const param2 = document.getElementById('has2').value;
-            const param3 = document.getElementById('has3').value;
-            const param4 = document.getElementById('has4').value;
-            
-            axios.get(aData.basepath + '/api/getResult55')
-            .then(res => {
-              let arr = (JSON.parse(res.data));
-              let includeArr = arr;
-              if(param1) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param1)
-                })
-              }
-              if(param2) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param2)
-                })
-              }
-              if(param3) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param3)
-                })
-              }
-              if(param4) {
-                includeArr = includeArr.filter((item) => {
-                  return item.jackpot.includes(param4)
-                })
-              }
-              setPair(includeArr)
-            })
-          }
-        }}/>
+          <input className='textInput' type='text' id="has1" onKeyDown={event => {
+            findByCombo(event)
+          }} />
+          <input className='textInput' type='text' id="has2" onKeyDown={event => {
+            findByCombo(event)
+          }}/>
+          <input className='textInput' type='text' id="has3" onKeyDown={event => {
+            findByCombo(event)
+          }}/>
+          <input className='textInput' type='text' id="has4" onKeyDown={event => {
+            findByCombo(event)
+          }}/>
       </Grid>
 
-      <Grid item container>
-        {pair.map((each) => {
+      <Grid item container sm={12} lg={11}>
+      {pair.map((each) => {
           return (
             <Grid item lg={3} xs={6} sm={6}>
               <span>
@@ -504,7 +289,8 @@ export function Page({aData}) {
                     const param2 = document.getElementById('has2').value;
                     const param3 = document.getElementById('has3').value;
                     const param4 = document.getElementById('has4').value;
-                    if(bong == param1 || bong == param2 || bong == param3 || bong == param4){
+                    let psyBong = parseInt(bong)
+                    if(psyBong == parseInt(param1) || psyBong == parseInt(param2) || psyBong == parseInt(param3) || psyBong == parseInt(param4)){
                       return <span className='bongcloud-white'>
                         {bong}
                       </span>
@@ -526,47 +312,17 @@ export function Page({aData}) {
 
     <Grid container>
       <Grid item container md={6} sm={12} spacing={1} direction={'row'} justifyContent={'center'}>
-        <Grid item md={2} sm={3}>
-          <input className='textInput' type='text' id="check1"/>
-        </Grid>
-        <Grid item md={2} sm={3}>
-          <input className='textInput' type='text' id="check2"/>
-        </Grid>
-        <Grid item md={2} sm={3}>
-          <input className='textInput' type='text' id="check3"/>
-        </Grid>
-      </Grid>
-
-      <Grid item container md={6} sm={12} spacing={1} direction={'row'} justifyContent={'center'}>
-        <Grid item md={2} sm={3}>
-          <input className='textInput' type='text' id="check4"/>
-        </Grid>
-        <Grid item md={2} sm={3}>
-          <input className='textInput' type='text' id="check5"/>
-        </Grid>
-        <Grid item md={2} sm={3}>
-          <input className='textInput' type='text' id="check6"/>
-        </Grid>
-      </Grid>
-      <Grid item xs={1} spacing={2}>
-        <button type="button" className='pure-material-button-contained' onClick={() => {
-            const param1 = document.getElementById('check1').value;
-            const param2 = document.getElementById('check2').value;
-            const param3 = document.getElementById('check3').value;
-            const param4 = document.getElementById('check4').value;
-            const param5 = document.getElementById('check5').value;
-            const param6 = document.getElementById('check6').value;
-            const jackpot = [param1, param2, param3, param4, param5, param6]
-            
-            axios.get(aData.basepath + '/api/getResult55')
-            .then(res => {
-              let arr = (JSON.parse(res.data));
-              const test = isInclude(arr, jackpot);
-              setChecked(test)
-            })
-        }}>
-          Click
-        </button>
+        {[1,2,3,4,5,6].map((each) => {
+          return (
+            <Grid item md={2} sm={3}>
+              <input className='textInput nb' type='text' id={"check" + each} onKeyDown={(event) => {
+                if(event.code === "Enter") {
+                  findAllCombo()
+                }
+              }}/>
+            </Grid>
+          )
+        })}
       </Grid>
 
       <Grid container item xs={12}>
@@ -661,10 +417,10 @@ export function Page({aData}) {
         display: inline-block;
         outline: none;
         font-height: 0.6em;
-        font-size: 24px;
-        width: 4em;
-        height: 1.4em;
-        margin: auto 2px;
+        font-size: 20px;
+        width: 3em;
+        height: 1.3em;
+        margin: 2px 1px;
         vertical-align: middle;
       }
       #latest_result > span {
@@ -672,17 +428,18 @@ export function Page({aData}) {
         display: inline-block;
         vertical-align: middle;
         text-align: center;
-        font-size: 28px;
+        font-size: 20px;
         font-weight: 600;
+        font-family: 'Helvetica';
         color: orange;
         background-color: grey;
-        border-radius: 10px;
+        border-radius: 6px;
         padding: 4px 8px 2px 8px;
         margin-left: 2px;
       }
 
       #latest_result > span:first-child {
-        margin-left: 0;
+        margin-left: 4px;
         border-left: none;
       }
       #latest_result > span:last-child {
@@ -691,28 +448,29 @@ export function Page({aData}) {
 
         .pure-material-button-contained {
           position: relative;
-          display: inline-block;
-          box-sizing: border-box;
-          border: none;
-          border-radius: 4px;
-          padding: 0 16px;
-          min-width: 64px;
-          height: 36px;
-          vertical-align: middle;
-          text-align: center;
-          text-overflow: ellipsis;
-          text-transform: uppercase;
-          color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
-          background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
-          box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-          font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
-          font-size: 14px;
-          font-weight: 500;
-          line-height: 36px;
-          overflow: hidden;
-          outline: none;
-          cursor: pointer;
-          transition: box-shadow 0.2s;
+        display: inline-block;
+        box-sizing: border-box;
+        border: none;
+        border-radius: 4px;
+        padding: 0 6px;
+        min-width: 52px;
+        height: 36px;
+        vertical-align: middle;
+        text-align: center;
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+        color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+        background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+        font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 36px;
+        overflow: hidden;
+        outline: none;
+        cursor: pointer;
+        transition: box-shadow 0.2s;
+        margin-right: 3px;
         }
         
         .pure-material-button-contained::-moz-focus-inner {
@@ -899,14 +657,20 @@ export async function getServerSideProps(context) {
 
   let aData = {
     options: {
+      indexAxis: 'y',
+      barThickness: '18',
+      maintainAspectRatio: false,
+      aspectRatio: 1,
       scales: {
         x: {
           stacked: true,
+          display: false,
         },
         y: {
           stacked: true,
-          display: false
         },
+        min: 0,
+        max: 2000,
       },
       responsive: true,
       plugins: {

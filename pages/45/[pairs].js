@@ -448,7 +448,7 @@ export function Page({aData}) {
         border: none;
         border-radius: 4px;
         padding: 0 6px;
-        min-width: 42px;
+        min-width: 52px;
         height: 36px;
         vertical-align: middle;
         text-align: center;
