@@ -21,7 +21,8 @@ export function HomePage() {
     <style jsx>{
       `
       .btn-bar {
-        padding: 0 400px;
+        display: flex;
+        justify-content: center;
       }
       /* Material style */
       button {
