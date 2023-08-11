@@ -8,7 +8,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { Grid } from '@mui/material';
+import { Grid, useMediaQuery } from '@mui/material';
 
 `use client`
 
@@ -30,7 +30,6 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 14;
 ChartJS.defaults.font.weight = '900';
 export function Page({aData}) {
   const [pick1, setPick1] = useState([])
@@ -45,6 +44,9 @@ export function Page({aData}) {
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
   // console.log(aData.data.datasets);
+
+  const matches = useMediaQuery('(max-width: 896px)', {defaultMatches: true})
+  ChartJS.defaults.font.size = 15;
 
   const setTerm = () => {
     const param1 = document.getElementById('first').value || 0;
@@ -70,6 +72,19 @@ export function Page({aData}) {
         setState(sorted.slice(0, 12))
       })
     }
+  }
+
+  
+  const printMost12 = (pick) => {
+    pick.map((each,i) => {
+      return(
+        <Grid item xs={1}>
+          <h3 key={i}>
+            {each.number} ({each.count})
+          </h3>
+        </Grid>
+        )
+      })
   }
 
   const findByCombo = (event) => {
@@ -108,6 +123,27 @@ export function Page({aData}) {
       })
     }
   }
+
+  const findAllCombo = () => {
+    const param1 = document.getElementById('check1').value;
+    const param2 = document.getElementById('check2').value;
+    const param3 = document.getElementById('check3').value;
+    const param4 = document.getElementById('check4').value;
+    const param5 = document.getElementById('check5').value;
+    const param6 = document.getElementById('check6').value;
+    const jackpot = [param1, param2, param3, param4, param5, param6]
+    
+    axios.get( aData.basepath + '/api/getResult45')
+    .then(res => {
+      let arr = (JSON.parse(res.data));
+      const test = isInclude(arr, jackpot);
+      setChecked(test)
+    })
+  }
+
+
+//SECTION - VIEW CONTENT START HERE
+
   return(
   <>
     <Grid container spacing={1}>
@@ -115,42 +151,34 @@ export function Page({aData}) {
         <button type='button' className='pure-material-button-contained' onClick={() => {
             router.push('/')
           }}>
-            Home
+            /
         </button>
       </Grid>
 
-      <Grid item sm={4} lg={3}>
-        <div id='latest_result'>{aData.next.value.map((each) => {
-          return <span className='circle' key={each + 'hoho'}>
-            {each}
-          </span>
-        })}
-          {/* <span>
-            {queryParam[2] - 0 + 1}
-          </span> */}
-        </div>
+      <Grid xs={2}>
+
       </Grid>
 
-      <Grid item xs={3}>
+      <Grid item sm={4}>
         <div className='arrowInput'>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 1) )
+            router.push('/45/' + queryParam[0] + '-' + (queryParam[2] - 16) + '-' + (queryParam[2] - 1) )
           }}>
-            prev
+            &lt;
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
-              router.push('/45/' + queryParam[0] + '-' + queryParam[1] + '-' + (queryParam[2] - 0 + 1))
+              router.push('/45/' + queryParam[0] + '-' + (queryParam[2] - 16) + '-' + (queryParam[2] - 0 + 1))
             }
           }}>
-            next
+            &gt;
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
-              router.push('/45/0-' + (aData.dataLength - 18) + '-' + (aData.dataLength))
+              router.push('/45/0-' + (aData.dataLength - 16) + '-' + (aData.dataLength))
             }
           }}>
-            last
+            Last
           </button>
 
         </div>
@@ -175,11 +203,29 @@ export function Page({aData}) {
           }}/>
         </div>
       </Grid>
+
+      <Grid item sm={3}>
+
+      </Grid>
+
+      <Grid item sm={4} lg={3}>
+        <div id='latest_result'>{aData.next.value.map((each) => {
+          return <span className='circle' key={each + 'hoho'}>
+            {each}
+          </span>
+        })}
+          {/* <span>
+            {queryParam[2] - 0 + 1}
+          </span> */}
+        </div>
+      </Grid>
     </Grid>
 
           <br/>
 
-    <Bar options={aData.options} data={aData.data} />
+    <Grid container xs={12} sx={{height: '130vh'}}>
+      <Bar options={aData.options} data={aData.data} />
+    </Grid>
 
     <br/>
 
@@ -316,15 +362,7 @@ export function Page({aData}) {
       </Grid>
       <Grid item container sm={12}>
 
-        {pick6.map((each,i) => {
-          return(
-            <Grid item xs={1}>
-              <h3 key={i}>
-                {each.number} ({each.count})
-              </h3>
-            </Grid>
-            )
-          })}
+        {printMost12(pick6)}
       </Grid>
     </Grid>
 
@@ -387,49 +425,18 @@ export function Page({aData}) {
 
     <Grid container justifyContent={'center'}>
       <Grid item container md={6} sm={12} spacing={1} direction={'row'} justifyContent={'center'}>
-        <Grid item md={2} sm={3}>
-          <input className='textInput' type='text' id="check1"/>
-        </Grid>
-        <Grid item md={2} sm={3}>
-          <input className='textInput' type='text' id="check2"/>
-        </Grid>
-        <Grid item md={2} sm={3}>
-          <input className='textInput' type='text' id="check3"/>
-        </Grid>
+        {[1,2,3,4,5,6].map((each) => {
+          return (
+            <Grid item md={2} sm={3}>
+              <input className='textInput nb' type='text' id={"check" + each} onKeyDown={(event) => {
+                if(event.code === "Enter") {
+                  findAllCombo()
+                }
+              }}/>
+            </Grid>
+          )
+        })}
       </Grid>
-
-      <Grid item container md={6} sm={12} spacing={1} direction={'row'} justifyContent={'center'}>
-        <Grid item md={2} sm={3}>
-          <input className='textInput' type='text' id="check4"/>
-        </Grid>
-        <Grid item md={2} sm={3}>
-          <input className='textInput' type='text' id="check5"/>
-        </Grid>
-        <Grid item md={2} sm={3}>
-          <input className='textInput' type='text' id="check6"/>
-        </Grid>
-      </Grid>
-
-        <Grid item xs={1}>
-          <button type="button" className='pure-material-button-contained' onClick={() => {
-              const param1 = document.getElementById('check1').value;
-              const param2 = document.getElementById('check2').value;
-              const param3 = document.getElementById('check3').value;
-              const param4 = document.getElementById('check4').value;
-              const param5 = document.getElementById('check5').value;
-              const param6 = document.getElementById('check6').value;
-              const jackpot = [param1, param2, param3, param4, param5, param6]
-              
-              axios.get( aData.basepath + '/api/getResult45')
-              .then(res => {
-                let arr = (JSON.parse(res.data));
-                const test = isInclude(arr, jackpot);
-                setChecked(test)
-              })
-          }}>
-            Click
-          </button>
-        </Grid>
 
         <Grid container item xs={12}>
           {checked.map(each => {
@@ -523,10 +530,10 @@ export function Page({aData}) {
         display: inline-block;
         outline: none;
         font-height: 0.6em;
-        font-size: 24px;
-        width: 3.5em;
+        font-size: 20px;
+        width: 3em;
         height: 1.3em;
-        margin: auto 2px;
+        margin: 2px 1px;
         vertical-align: middle;
       }
 
@@ -536,8 +543,8 @@ export function Page({aData}) {
         box-sizing: border-box;
         border: none;
         border-radius: 4px;
-        padding: 0 16px;
-        min-width: 64px;
+        padding: 0 6px;
+        min-width: 42px;
         height: 36px;
         vertical-align: middle;
         text-align: center;
@@ -547,7 +554,7 @@ export function Page({aData}) {
         background-color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
         box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
         font-family: var(--pure-material-font, "Roboto", "Segoe UI", BlinkMacSystemFont, system-ui, -apple-system);
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
         line-height: 36px;
         overflow: hidden;
@@ -643,12 +650,12 @@ export function Page({aData}) {
         display: inline-block;
         vertical-align: middle;
         text-align: center;
-        font-size: 28px;
+        font-size: 20px;
         font-weight: 600;
         font-family: 'Helvetica';
         color: orange;
         background-color: grey;
-        border-radius: 10px;
+        border-radius: 6px;
         padding: 4px 8px 2px 8px;
         margin-left: 2px;
       }
@@ -661,6 +668,7 @@ export function Page({aData}) {
   </>
   )
 }
+
 
 import axios from 'axios';
 
@@ -760,14 +768,20 @@ export async function getServerSideProps(context) {
 
   let aData = {
     options: {
+      indexAxis: 'y',
+      barThickness: '18',
+      maintainAspectRatio: false,
+      aspectRatio: 1,
       scales: {
         x: {
           stacked: true,
+          display: false,
         },
         y: {
           stacked: true,
-          display: false
         },
+        min: 0,
+        max: 2000,
       },
       responsive: true,
       plugins: {
@@ -829,4 +843,3 @@ export async function getServerSideProps(context) {
 }
 
 export default Page
-
