@@ -133,7 +133,15 @@ export function Page({aData}) {
     const param4 = document.getElementById('check4').value;
     const param5 = document.getElementById('check5').value;
     const param6 = document.getElementById('check6').value;
-    const jackpot = [param1, param2, param3, param4, param5, param6]
+    const jackpot = [
+              param1 < 10 ? '0' + param1 : param1,
+              param2 < 10 ? '0' + param2 : param2,
+              param3 < 10 ? '0' + param3 : param3,
+              param4 < 10 ? '0' + param4 : param4,
+              param5 < 10 ? '0' + param5 : param5,
+              param6 < 10 ? '0' + param6 : param6
+            
+            ]
     
     axios.get( aData.basepath + '/api/getResult45')
     .then(res => {
@@ -223,152 +231,44 @@ export function Page({aData}) {
       <Bar options={aData.options} data={aData.data} />
     </Grid>
 
+    <hr style={{padding: '1px 0'}}/>
+
     <br/>
-
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
-        <input className='textInput' type='text' id='pick1' 
-        onKeyDown={(event) => {
-          if(event.code === 'Enter') {
-            findMost12('pick1', setPick1);
-          }
-        }}/>
-      </Grid>
-      <Grid item container sm={12}>
-
-        {pick1.map((each,i) => {
-      return(
-        <Grid item xs={1}>
-          <h3 key={i}>
-            {each.number} [{each.count}]
-          </h3>
-        </Grid>
-        )
-      })}
-      </Grid>
-    </Grid>
-
-    <hr/>
     
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
-        <input className='textInput' type='text' id='pick2' onKeyDown={(event) => {
-          if(event.code === 'Enter') {
-            findMost12('pick2', setPick2)
-          }
-        }}/>
-      </Grid>
-      <Grid item container sm={12}>
+    {[['pick1', pick1, setPick1],['pick2', pick2, setPick2],
+    ['pick3', pick3, setPick3], ['pick4', pick4, setPick4], 
+    ['pick5', pick5, setPick5], ['pick6', pick6, setPick6]].map((each) => {
+      return (
+        <>
+          <Grid container spacing={1}>
+            <Grid item xs={1}>
+              <input className='textInput' type='text' id={each[0]} 
+              onKeyDown={(event) => {
+                if(event.code === 'Enter') {
+                  findMost12(each[0], each[2]);
+                }
+              }}/>
+            </Grid>
 
-        {pick2.map((each,i) => {
-      return(
-        <Grid item xs={1}>
-          <h3 key={i}>
-            {each.number} [{each.count}]
-          </h3>
-        </Grid>
-        )
-      })}
-      </Grid>
-    </Grid>
+            <Grid item container sm={12}>
 
-    <hr/>
+              {each[1].map((each,i) => {
+                return(
+                  <Grid item xs={1}>
+                    <h3 key={i}>
+                      {each.number} [{each.count}]
+                    </h3>
+                  </Grid>
+                  )
+                })}
+            </Grid>
 
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
-        <input className='textInput' type='text' id='pick3' onKeyDown={(event) => {
-          if(event.code === 'Enter') {
-            findMost12('pick3', setPick3)
-          }
-        }}/>
-      </Grid>
-      
-      <Grid item container sm={12}>
-
-
-        {pick3.map((each,i) => {
-      return(
-        <Grid item xs={1}>
-          <h3 key={i}>
-            {each.number} [{each.count}]
-          </h3>
-        </Grid>
-        )
-      })}
-      </Grid>
-    </Grid>
-
-    <hr/>
-
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
-        <input className='textInput' type='text' id='pick4' onKeyDown={(event) => {
-          if(event.code === 'Enter') {
-            findMost12('pick4', setPick4)
-          }
-        }}/>
-      </Grid>
-      <Grid item container sm={12}>
-
-        {pick4.map((each,i) => {
-      return(
-        <Grid item xs={1}>
-          <h3 key={i}>
-            {each.number} [{each.count}]
-          </h3>
-        </Grid>
-        )
-      })}
-      </Grid>
-    </Grid>
-
-    <hr/>
-
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
-        <input className='textInput' type='text' id='pick5' onKeyDown={(event) => {
-          if(event.code === 'Enter') {
-            findMost12('pick5', setPick5)
-          }
-        }}/>
-      </Grid>
-      <Grid item container sm={12}>
-        {pick5.map((each,i) => {
-      return(
-        <Grid item xs={1}>
-          <h3 key={i}>
-            {each.number} [{each.count}]
-          </h3>
-        </Grid>
-        )
-      })}
-
-      </Grid>
-    </Grid>
-
-    <hr/>
-
-    <Grid container spacing={1}>
-      <Grid item xs={1}>
-        <input className='textInput' type='text' id='pick6' onKeyDown={(event) => {
-          if(event.code === 'Enter') {
-            findMost12('pick6', setPick6)
-          }
-        }}/>
-      </Grid>
-      <Grid item container sm={12}>
-
-        {pick6.map((each,i) => {
-      return(
-        <Grid item xs={1}>
-          <h3 key={i}>
-            {each.number} [{each.count}]
-          </h3>
-        </Grid>
-        )
-      })}
-      </Grid>
-    </Grid>
+          </Grid>
+        <hr />
+        </>
+          )
+        })}
+    
 
     <hr/>
 
