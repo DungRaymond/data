@@ -30,7 +30,7 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.weight = '900';
+ChartJS.defaults.font.weight = '700';
 export function Page({aData}) {
   const [pick1, setPick1] = useState([])
   const [pick2, setPick2] = useState([])
@@ -46,7 +46,7 @@ export function Page({aData}) {
   // console.log(aData.data.datasets);
 
   const matches = useMediaQuery('(max-width: 896px)', {defaultMatches: true})
-  ChartJS.defaults.font.size = 15;
+  ChartJS.defaults.font.size = 16;
 
   const setTerm = () => {
     const param1 = document.getElementById('first').value || 0;
@@ -56,6 +56,7 @@ export function Page({aData}) {
   }
 
   const findMost12 = (pick, setState) => {
+    // console.log('here1');
     const pivot = document.getElementById(pick).value;
     if(pivot <= 45) {
       axios.get(aData.basepath + '/api/getMode45')
@@ -76,11 +77,12 @@ export function Page({aData}) {
 
   
   const printMost12 = (pick) => {
+    console.log(pick);
     pick.map((each,i) => {
       return(
         <Grid item xs={1}>
           <h3 key={i}>
-            {each.number} ({each.count})
+            {each.number} [{each.count}]
           </h3>
         </Grid>
         )
@@ -146,17 +148,13 @@ export function Page({aData}) {
 
   return(
   <>
-    <Grid container spacing={1}>
+    <Grid container spacing={1} justifyContent="space-between">
       <Grid item lg={1} sm={1}>
         <button type='button' className='pure-material-button-contained' onClick={() => {
             router.push('/')
           }}>
             /
         </button>
-      </Grid>
-
-      <Grid xs={2}>
-
       </Grid>
 
       <Grid item sm={4}>
@@ -204,23 +202,21 @@ export function Page({aData}) {
         </div>
       </Grid>
 
-      <Grid item sm={3}>
 
-      </Grid>
-
-      <Grid item sm={4} lg={3}>
-        <div id='latest_result'>{aData.next.value.map((each) => {
-          return <span className='circle' key={each + 'hoho'}>
-            {each}
-          </span>
-        })}
-          {/* <span>
-            {queryParam[2] - 0 + 1}
-          </span> */}
-        </div>
-      </Grid>
     </Grid>
+    <br/>
 
+    <Grid container justifyContent="center">
+      <div id='latest_result'>{aData.next.value.map((each) => {
+        return <span className='circle' key={each + 'hoho'}>
+          {each}
+        </span>
+      })}
+        {/* <span>
+          {queryParam[2] - 0 + 1}
+        </span> */}
+      </div>
+    </Grid>
           <br/>
 
     <Grid container xs={12} sx={{height: '130vh'}}>
@@ -241,14 +237,14 @@ export function Page({aData}) {
       <Grid item container sm={12}>
 
         {pick1.map((each,i) => {
-          return(
-            <Grid item xs={1}>
-              <h3 key={i}>
-                {each.number} ({each.count})
-              </h3>
-            </Grid>
-          )
-        })}
+      return(
+        <Grid item xs={1}>
+          <h3 key={i}>
+            {each.number} [{each.count}]
+          </h3>
+        </Grid>
+        )
+      })}
       </Grid>
     </Grid>
 
@@ -265,14 +261,14 @@ export function Page({aData}) {
       <Grid item container sm={12}>
 
         {pick2.map((each,i) => {
-          return(
-            <Grid item xs={1}>
-              <h3 key={i}>
-                {each.number} ({each.count})
-              </h3>
-            </Grid>
-          )
-        })}
+      return(
+        <Grid item xs={1}>
+          <h3 key={i}>
+            {each.number} [{each.count}]
+          </h3>
+        </Grid>
+        )
+      })}
       </Grid>
     </Grid>
 
@@ -291,14 +287,14 @@ export function Page({aData}) {
 
 
         {pick3.map((each,i) => {
-          return(
-            <Grid item xs={1}>
-              <h3 key={i}>
-                {each.number} ({each.count})
-              </h3>
-            </Grid>
-          )
-        })}
+      return(
+        <Grid item xs={1}>
+          <h3 key={i}>
+            {each.number} [{each.count}]
+          </h3>
+        </Grid>
+        )
+      })}
       </Grid>
     </Grid>
 
@@ -315,14 +311,14 @@ export function Page({aData}) {
       <Grid item container sm={12}>
 
         {pick4.map((each,i) => {
-          return(
-            <Grid item xs={1}>
-              <h3 key={i}>
-                {each.number} ({each.count})
-              </h3>
-            </Grid>
-          )
-        })}
+      return(
+        <Grid item xs={1}>
+          <h3 key={i}>
+            {each.number} [{each.count}]
+          </h3>
+        </Grid>
+        )
+      })}
       </Grid>
     </Grid>
 
@@ -338,14 +334,14 @@ export function Page({aData}) {
       </Grid>
       <Grid item container sm={12}>
         {pick5.map((each,i) => {
-          return(
-            <Grid item xs={1}>
-              <h3 key={i}>
-                {each.number} ({each.count})
-              </h3>
-            </Grid>
-          )
-        })}
+      return(
+        <Grid item xs={1}>
+          <h3 key={i}>
+            {each.number} [{each.count}]
+          </h3>
+        </Grid>
+        )
+      })}
 
       </Grid>
     </Grid>
@@ -362,7 +358,15 @@ export function Page({aData}) {
       </Grid>
       <Grid item container sm={12}>
 
-        {printMost12(pick6)}
+        {pick6.map((each,i) => {
+      return(
+        <Grid item xs={1}>
+          <h3 key={i}>
+            {each.number} [{each.count}]
+          </h3>
+        </Grid>
+        )
+      })}
       </Grid>
     </Grid>
 
