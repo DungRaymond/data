@@ -259,8 +259,8 @@ export function Page({aData}) {
       <hr/>
 
     <Grid container alignItems={'center'} justifyContent={'flex-start'}>
-      <Grid item xs={7} sm={5} lg={4}>
-        {[1,2,3,4].map((each) => {
+      <Grid item xs={8} sm={5} lg={4}>
+        {[1,2,3,4,5].map((each) => {
           return (
             <input className='textInput' type='text' id={"has" + each} onKeyDown={event => {
               findByCombo(event)
@@ -315,7 +315,7 @@ export function Page({aData}) {
     <hr/>
 
     <Grid container>
-      <Grid item container md={6} sm={12} spacing={1} direction={'row'} justifyContent={'center'}>
+      <Grid item container md={6} sm={12} spacing={1} alignItems={'center'} justifyContent={'flex-start'}>
         {[1,2,3,4,5,6].map((each) => {
           return (
             <Grid item md={2} sm={3}>

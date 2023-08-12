@@ -273,8 +273,8 @@ export function Page({aData}) {
     <hr/>
 
     <Grid container alignItems={'center'} justifyContent={'flex-start'}>
-      <Grid item xs={7} sm={5} lg={4}>
-        {[1,2,3,4].map((each) => {
+      <Grid item xs={8} sm={5} lg={4}>
+        {[1,2,3,4,5].map((each) => {
             return (
               <input className='textInput' type='text' id={"has" + each} onKeyDown={event => {
                 findByCombo(event)
