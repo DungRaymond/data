@@ -260,18 +260,13 @@ export function Page({aData}) {
 
     <Grid container>
       <Grid item xs={2}>
-          <input className='textInput' type='text' id="has1" onKeyDown={event => {
-            findByCombo(event)
-          }} />
-          <input className='textInput' type='text' id="has2" onKeyDown={event => {
-            findByCombo(event)
-          }}/>
-          <input className='textInput' type='text' id="has3" onKeyDown={event => {
-            findByCombo(event)
-          }}/>
-          <input className='textInput' type='text' id="has4" onKeyDown={event => {
-            findByCombo(event)
-          }}/>
+        {[1,2,3,4].map((each) => {
+          return (
+            <input className='textInput' type='text' id={"has" + each} onKeyDown={event => {
+              findByCombo(event)
+            }} />
+          )
+        })}
       </Grid>
 
       <Grid item container sm={12} lg={11}>
