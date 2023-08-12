@@ -284,12 +284,12 @@ export function Page({aData}) {
       </Grid>
 
       <Grid item sm={2} lg={1}>
-        <Button variant='contained'>
+        <button className='pure-material-button-contained'>
           <span style={{fontSize: '1.1rem'}}>
             {pair.length}
             
           </span>
-        </Button>
+        </button>
       </Grid>
 
       <Grid item container sm={12} lg={11}>
