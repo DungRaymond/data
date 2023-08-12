@@ -49,7 +49,7 @@ export function Page({aData}) {
   const findMost12 = (pick, setState) => {
     // console.log('here1');
     const pivot = document.getElementById(pick).value;
-    if(pivot <= 45) {
+    if(pivot <= 55) {
       axios.get(aData.basepath + '/api/getMode55')
       .then(res => {
         let arr = JSON.parse(res.data)
@@ -91,22 +91,22 @@ export function Page({aData}) {
       .then(res => {
         let arr = (JSON.parse(res.data));
         let includeArr = arr;
-        if(param1 && param1 < 46) {
+        if(param1 && param1 < 56) {
           includeArr = includeArr.filter((item) => {
             return item.jackpot.includes(param1 < 10 ? '0' + param1 : param1)
           })
         }
-        if(param2 && param2 < 46) {
+        if(param2 && param2 < 56) {
           includeArr = includeArr.filter((item) => {
             return item.jackpot.includes(param2 < 10 ? '0' + param2 : param2)
           })
         }
-        if(param3 && param3 < 46) {
+        if(param3 && param3 < 56) {
           includeArr = includeArr.filter((item) => {
             return item.jackpot.includes(param3 < 10 ? '0' + param3 : param3)
           })
         }
-        if(param4 && param4 < 46) {
+        if(param4 && param4 < 56) {
           includeArr = includeArr.filter((item) => {
             return item.jackpot.includes(param4 < 10 ? '0' + param4 : param4)
           })
