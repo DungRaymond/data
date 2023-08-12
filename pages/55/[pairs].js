@@ -258,8 +258,8 @@ export function Page({aData}) {
 
       <hr/>
 
-    <Grid container>
-      <Grid item xs={2}>
+    <Grid container alignItems={'center'} justifyContent={'flex-start'}>
+      <Grid item xs={7} sm={5} lg={4}>
         {[1,2,3,4].map((each) => {
           return (
             <input className='textInput' type='text' id={"has" + each} onKeyDown={event => {
@@ -267,6 +267,15 @@ export function Page({aData}) {
             }} />
           )
         })}
+      </Grid>
+
+      <Grid item sm={2} lg={1}>
+        <Button variant='contained'>
+          <span style={{fontSize: '1.1rem'}}>
+            {pair.length}
+            
+          </span>
+        </Button>
       </Grid>
 
       <Grid item container sm={12} lg={11}>
@@ -413,7 +422,7 @@ export function Page({aData}) {
         outline: none;
         font-height: 0.6em;
         font-size: 20px;
-        width: 3em;
+        width: 2.5em;
         height: 1.3em;
         margin: 2px 1px;
         vertical-align: middle;
