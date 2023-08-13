@@ -299,8 +299,9 @@ export function Page({aData}) {
                     const param2 = document.getElementById('has2').value;
                     const param3 = document.getElementById('has3').value;
                     const param4 = document.getElementById('has4').value;
+                    const param5 = document.getElementById('has5').value;
                     let psyBong = parseInt(bong)
-                    if(psyBong == parseInt(param1) || psyBong == parseInt(param2) || psyBong == parseInt(param3) || psyBong == parseInt(param4)){
+                    if(psyBong == parseInt(param1) || psyBong == parseInt(param2) || psyBong == parseInt(param3) || psyBong == parseInt(param4) || psyBong == parseInt(param5)){
                       return <span className='bongcloud-white'>
                         {bong}
                       </span>
