@@ -95,6 +95,7 @@ export function Page({aData}) {
       const param2 = document.getElementById('has2').value;
       const param3 = document.getElementById('has3').value;
       const param4 = document.getElementById('has4').value;
+      const param5 = document.getElementById('has5').value;
       
       axios.get(aData.basepath + '/api/getResult45')
       .then(res => {
@@ -118,6 +119,11 @@ export function Page({aData}) {
         if(param4 && param4 < 46) {
           includeArr = includeArr.filter((item) => {
             return item.jackpot.includes(param4 < 10 ? '0' + param4 : param4)
+          })
+        }
+        if(param5 && param5 < 46) {
+          includeArr = includeArr.filter((item) => {
+            return item.jackpot.includes(param5 < 10 ? '0' + param5 : param5)
           })
         }
         
