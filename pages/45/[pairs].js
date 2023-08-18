@@ -220,7 +220,7 @@ export function Page({aData}) {
     </Grid>
     <br/>
 
-    <Grid container justifyContent="center">
+    <Grid container item justifyContent="center">
       <div id='latest_result'>{aData.next.value.map((each) => {
         return <span className='circle' key={each + 'hoho'}>
           {each}
