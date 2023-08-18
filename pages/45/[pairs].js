@@ -49,10 +49,10 @@ export function Page({aData}) {
   ChartJS.defaults.font.size = 16;
 
   const setTerm = () => {
-    const param1 = document.getElementById('first').value || 0;
-    const param2 = document.getElementById('second').value || 1043;
-    const param3 = document.getElementById('third').value || 1061;
-    router.push('/45/0' + '-' + (param2||param3 - 18) + '-' + param3);
+    const param1 = document.getElementById('first').value;
+    const param2 = document.getElementById('second').value;
+    const param3 = document.getElementById('third').value || 1080;
+    router.push('/45/0' + '-' + (param2||param3 - 14) + '-' + param3);
   }
 
   const findMost12 = (pick, setState) => {
@@ -174,20 +174,20 @@ export function Page({aData}) {
       <Grid item sm={4}>
         <div className='arrowInput'>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            router.push('/45/' + queryParam[0] + '-' + (queryParam[2] - 16) + '-' + (queryParam[2] - 1) )
+            router.push('/45/' + queryParam[0] + '-' + (queryParam[1] - 1) + '-' + (queryParam[2] - 1) )
           }}>
             &lt;
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
-              router.push('/45/' + queryParam[0] + '-' + (queryParam[2] - 16) + '-' + (queryParam[2] - 0 + 1))
+              router.push('/45/' + queryParam[0] + '-' + (queryParam[1] - 0 + 1) + '-' + (queryParam[2] - 0 + 1))
             }
           }}>
             &gt;
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
-              router.push('/45/0-' + (aData.dataLength - 16) + '-' + (aData.dataLength))
+              router.push('/45/0-' + (aData.dataLength - 14) + '-' + (aData.dataLength))
             }
           }}>
             Last
