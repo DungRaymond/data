@@ -162,20 +162,20 @@ export function Page({aData}) {
       <Grid item sm={4}>
         <div className='arrowInput'>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            router.push('/55/' + queryParam[0] + '-' + (queryParam[2] - 16) + '-' + (queryParam[2] - 1) )
+            router.push('/55/' + queryParam[0] + '-' + (queryParam[1] - 1) + '-' + (queryParam[2] - 1) )
           }}>
             &lt;
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
-              router.push('/55/' + queryParam[0] + '-' + (queryParam[2] - 16) + '-' + (queryParam[2] - 0 + 1))
+              router.push('/55/' + queryParam[0] + '-' + (queryParam[1] - 0 + 1) + '-' + (queryParam[2] - 0 + 1))
             }
           }}>
             &gt;
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
-              router.push('/55/0-' + (aData.dataLength - 16) + '-' + (aData.dataLength))
+              router.push('/55/0-' + (aData.dataLength - 18) + '-' + (aData.dataLength))
             }
           }}>
             Last
