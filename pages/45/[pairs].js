@@ -9,7 +9,6 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { Button, Grid, useMediaQuery } from '@mui/material';
-import ChartistGraph from 'react-chartist';
 
 `use client`
 
@@ -45,14 +44,6 @@ export function Page({aData}) {
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
   // console.log(aData.data.datasets);
-
-  // const chartistOptions = {
-  //   high: 'auto',
-  //   low: 0,
-  //   axisX: {
-
-  //   }
-  // }
 
   const matches = useMediaQuery('(max-width: 896px)', {defaultMatches: true})
   ChartJS.defaults.font.size = 16;
