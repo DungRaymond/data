@@ -46,6 +46,14 @@ export function Page({aData}) {
   const queryParam = router.query.pairs.split('-');
   // console.log(aData.data.datasets);
 
+  // const chartistOptions = {
+  //   high: 'auto',
+  //   low: 0,
+  //   axisX: {
+
+  //   }
+  // }
+
   const matches = useMediaQuery('(max-width: 896px)', {defaultMatches: true})
   ChartJS.defaults.font.size = 16;
 
