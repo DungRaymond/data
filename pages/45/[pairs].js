@@ -49,10 +49,10 @@ export function Page({aData}) {
   ChartJS.defaults.font.size = 16;
 
   const setTerm = () => {
-    const param1 = document.getElementById('first').value;
-    const param2 = document.getElementById('second').value;
-    const param3 = document.getElementById('third').value || 1080;
-    router.push('/45/0' + '-' + (param2||param3 - 14) + '-' + param3);
+    const param1 = document.getElementById('first').value || queryParam[0];
+    const param2 = document.getElementById('second').value || queryParam[1];
+    const param3 = document.getElementById('third').value || queryParam[2];
+    router.push('/45/' + param1 + '-' + param2 + '-' + param3);
   }
 
   const findMost12 = (pick, setState) => {
