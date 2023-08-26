@@ -9,7 +9,6 @@ import {
 } from 'chart.js';
 import { Grid } from '@mui/material'
 import { Bar } from 'react-chartjs-2';
-import { BarChart } from 'chartist';
 
 
 ChartJS.register(
@@ -72,13 +71,20 @@ export function Page({aData}) {
     console.log(pick);
     pick.map((each,i) => {
       return(
-        <Grid item xs={1}>
+        <Grid item>
           <h3 key={i}>
             {each.number} [{each.count}]
           </h3>
         </Grid>
         )
       })
+  }
+
+  const setTerm = () => {
+    const param1 = document.getElementById('first').value || queryParam[0];
+    const param2 = document.getElementById('second').value || queryParam[1];
+    const param3 = document.getElementById('third').value || queryParam[2];
+    router.push('/55/' + param1 + '-' + param2 + '-' + param3);
   }
 
   const findByCombo = (event) => {
@@ -223,7 +229,7 @@ export function Page({aData}) {
           
 
     <br/>
-    <Grid container xs={12} sx={{height: '142vh'}}>
+    <Grid container sx={{height: '142vh'}}>
       <Bar options={aData.options} data={aData.data} />
     </Grid>
     <br/>
@@ -593,8 +599,8 @@ export async function getServerSideProps(context) {
     const response = await axios.get(process.env.basepath + `/api/getData55`); // get analyzed from result
     let statData = JSON.parse("[" + response.data + "]");
 
-    const freq = await axios.get(process.env.basepath + '/api/getFreq55') // get last 100 result
-    let freqData = JSON.parse("[" + freq.data + "]");
+    // const freq = await axios.get(process.env.basepath + '/api/getFreq55') // get last 100 result
+    // let freqData = JSON.parse("[" + freq.data + "]");
 
     const reverb = await axios.get(process.env.basepath + '/api/getResult55'); // get results term by term
     let resultData = JSON.parse(reverb.data);
@@ -606,7 +612,7 @@ export async function getServerSideProps(context) {
         value1 : statData[pam[0]].stat[i],
         value2 : statData[pam[1]].stat[i],
         value3 : statData[pam[2]].stat[i],
-        last100: freqData[freqData.length - 1].stat[i]
+        // last100: freqData[freqData.length - 1].stat[i]
       })
     }
 
@@ -721,16 +727,16 @@ export async function getServerSideProps(context) {
       //   }
       // ]
     },
-    last100: {
-      labels: finalData.labels,
-      datasets: [
-        {
-          label: 'frequency',
-          data: finalData.last100Data,
-          backgroundColor: 'rgba(208,9,241,0.7)'
-        }
-      ]
-    },
+    // last100: {
+    //   labels: finalData.labels,
+    //   datasets: [
+    //     {
+    //       label: 'frequency',
+    //       data: finalData.last100Data,
+    //       backgroundColor: 'rgba(208,9,241,0.7)'
+    //     }
+    //   ]
+    // },
     next: {
       value: finalData.next
       // ANCHOR
