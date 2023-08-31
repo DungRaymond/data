@@ -187,7 +187,7 @@ export function Page({aData}) {
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
-              router.push('/45/0-' + (aData.dataLength - 14) + '-' + (aData.dataLength))
+              router.push('/45/0-' + (aData.dataLength - 90) + '-' + (aData.dataLength))
             }
           }}>
             Last
@@ -713,12 +713,12 @@ export async function getServerSideProps(context) {
       labels: finalData.labels,
       datasets: [
         {
-          label: 'second pivot',
+          label: 'Total',
           data: finalData.data2,
           backgroundColor: 'rgba(47, 94, 249, 0.9)',
         },
         {
-          label: 'last diff',
+          label: 'Last',
           data: finalData.data3,
           backgroundColor: 'rgba(208,9,241,1)',
         },
