@@ -49,6 +49,9 @@ export function Page({aData}) {
   const findMost12 = (pick, setState) => {
     // console.log('here1');
     const pivot = document.getElementById(pick).value;
+    if(!pivot) {
+      setState([]);
+    }
     if(pivot <= 55) {
       axios.get(aData.basepath + '/api/getMode55')
       .then(res => {
