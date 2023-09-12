@@ -51,7 +51,10 @@ async function lott655() {
 
 async function printArr() {
   let res = await lott655();
-  console.log(JSON.stringify(arr55));
+  let temp = JSON.stringify(arr55)
+  temp = temp.slice(1, temp.length - 1);
+  temp = temp.replaceAll("},","},\n");
+  console.log(temp);
 }
 
 printArr();
