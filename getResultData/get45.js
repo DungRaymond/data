@@ -44,7 +44,7 @@ async function printArr() {
   let temp = JSON.stringify(arr45);
   temp = temp.slice(1, temp.length - 1);
   temp = temp.replaceAll("},","},\n");
-  console.log(temp);
+  console.log(",\n" + temp);
 }
 
 printArr();
