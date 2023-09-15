@@ -41,6 +41,8 @@ export function Page({aData}) {
   const [pair, setPair] = useState([])
   const [checked, setChecked] = useState([])
 
+  const plainArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]
+
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
   // console.log(aData.data.datasets);
@@ -296,6 +298,11 @@ export function Page({aData}) {
             
           </span>
         </button>
+
+      </Grid>
+
+      <Grid container item xs={12}>
+        
       </Grid>
 
       <Grid item container sm={12} lg={11}>
@@ -315,7 +322,9 @@ export function Page({aData}) {
                     const param4 = document.getElementById('has4').value;
                     const param5 = document.getElementById('has5').value;
                     let psyBong = parseInt(bong)
-                    if(psyBong == parseInt(param1) || psyBong == parseInt(param2) || psyBong == parseInt(param3) || psyBong == parseInt(param4) || psyBong == parseInt(param5)){
+                    if(psyBong == parseInt(param1) || psyBong == parseInt(param2) 
+                    || psyBong == parseInt(param3) || psyBong == parseInt(param4) 
+                    || psyBong == parseInt(param5)){
                       return <span className='bongcloud-white'>
                         {bong}
                       </span>
