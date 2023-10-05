@@ -15,14 +15,17 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.14",
+    "@visx/visx": "^3.3.0",
     "axios": "^1.4.0",
     "chart.js": "4.2.1",
     "next": "^13.1.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
-    "react-vis": "^1.12.1",
     "swr": "^2.0.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/node": "20.8.2",
+    "typescript": "^5.2.2"
+  }
 }
