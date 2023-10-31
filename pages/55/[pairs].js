@@ -218,16 +218,21 @@ export function Page({aData}) {
     </Grid>
     <br/>
     
-    <Grid container justifyContent="center">
-      <div id='latest_result'>{aData.next.value.map((each) => {
-        return <span className='circle' key={each + 'hoho'}>
-          {each}
+    <Grid container justifyContent="space-evenly">
+      <Grid item sm={6}>
+        <div id='latest_result'>{aData.next.value.map((each) => {
+          return <span className='circle' key={each + 'hoho'}>
+            {each}
+          </span>
+        })}
+        </div>
+
+      </Grid>
+      <Grid item sm={2}>
+        <span className='bongterm'>
+          {queryParam[2] - 0}
         </span>
-      })}
-        {/* <span>
-          {queryParam[2] - 0 + 1}
-        </span> */}
-      </div>
+      </Grid>
     </Grid>
           
 
@@ -402,12 +407,18 @@ export function Page({aData}) {
 
     <style jsx>{`
       .bongterm {
-        border: 1px black solid;
-        background-color: green;
-        color: yellow;
-        border-radius: 5px;
-        margin-right: 10px;
-        padding: 0 6px;
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+        font-family: 'Helvetica';
+        color: orange;
+        background-color: grey;
+        border-radius: 6px;
+        padding: 4px 8px 2px 8px;
+        margin-left: 2px;
       }
       .bongdate {
         border: 1px black solid;
