@@ -41,6 +41,7 @@ export function Page({aData}) {
   const [pick5, setPick5] = useState([])
   const [pick6, setPick6] = useState([])
   const [pair, setPair] = useState([])
+  const [last40, setLast40] = useState([])
   const [checked, setChecked] = useState([])
 
   const router = useRouter();
@@ -88,6 +89,18 @@ export function Page({aData}) {
     const param2 = document.getElementById('second').value || queryParam[1];
     const param3 = document.getElementById('third').value || queryParam[2];
     router.push('/55/' + param1 + '-' + param2 + '-' + param3);
+  }
+
+  const findLast40 = (event) => {
+    if(event.code === 'Enter') {
+      const count = document.getElementById('last40Input').value;
+      axios.get(aData.basepath + '/api/getResult55')
+      .then(res => {
+        let arr = (JSON.parse(res.data))
+        let slicedArr = arr.slice(arr.length - count, arr.length);
+        setLast40(slicedArr)
+      })
+    }
   }
 
   const findByCombo = (event) => {
@@ -337,6 +350,46 @@ export function Page({aData}) {
         })}
       </Grid>
     </Grid>
+
+    <hr/>
+
+    <input className='textInput' type='text' id={"last40Input"} onKeyDown={event => {
+              findLast40(event)
+      }} />
+
+    <Grid item container sm={12} lg={11}>
+      {last40.map((each) => {
+          return (
+            <Grid item lg={3} xs={6} sm={6}>
+              <span>
+                <h2>
+                  <span className="bongterm">{each.term}</span>
+                  <span className='bongdate'>{each.date}</span>
+                </h2>
+                <h2>
+                  {each.jackpot.map((bong) => {
+                    const param1 = document.getElementById('has1').value;
+                    const param2 = document.getElementById('has2').value;
+                    const param3 = document.getElementById('has3').value;
+                    const param4 = document.getElementById('has4').value;
+                    const param5 = document.getElementById('has5').value;
+                    let psyBong = parseInt(bong)
+                    if(psyBong == parseInt(param1) || psyBong == parseInt(param2) || psyBong == parseInt(param3) || psyBong == parseInt(param4) || psyBong == parseInt(param5)){
+                      return <span className='bongcloud-white'>
+                        {bong}
+                      </span>
+                    }
+                    return <span className='bongcloud'>
+                      {bong}
+                    </span>
+                  })}
+                </h2>
+
+              </span>
+            </Grid>
+          )
+        })}
+      </Grid>
 
     <hr/>
 
