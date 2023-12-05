@@ -38,9 +38,7 @@ export function Page({aData}) {
   const [pick4, setPick4] = useState([])
   const [pick5, setPick5] = useState([])
   const [pick6, setPick6] = useState([])
-  const [pair, setPair] = useState([])
   const [last40, setLast40] = useState([])
-  const [checked, setChecked] = useState([])
 
   const plainArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]
 
@@ -104,73 +102,6 @@ export function Page({aData}) {
     }
   }
 
-  const findByCombo = (event) => {
-    if(event.code === 'Enter') {
-      const param1 = document.getElementById('has1').value;
-      const param2 = document.getElementById('has2').value;
-      const param3 = document.getElementById('has3').value;
-      const param4 = document.getElementById('has4').value;
-      const param5 = document.getElementById('has5').value;
-      
-      axios.get(aData.basepath + '/api/getResult45')
-      .then(res => {
-        let arr = (JSON.parse(res.data));
-        let includeArr = arr;
-        if(param1 && param1 < 46) {
-          includeArr = includeArr.filter((item) => {
-            return item.jackpot.includes(param1 < 10 ? '0' + param1 : param1)
-          })
-        }
-        if(param2 && param2 < 46) {
-          includeArr = includeArr.filter((item) => {
-            return item.jackpot.includes(param2 < 10 ? '0' + param2 : param2)
-          })
-        }
-        if(param3 && param3 < 46) {
-          includeArr = includeArr.filter((item) => {
-            return item.jackpot.includes(param3 < 10 ? '0' + param3 : param3)
-          })
-        }
-        if(param4 && param4 < 46) {
-          includeArr = includeArr.filter((item) => {
-            return item.jackpot.includes(param4 < 10 ? '0' + param4 : param4)
-          })
-        }
-        if(param5 && param5 < 46) {
-          includeArr = includeArr.filter((item) => {
-            return item.jackpot.includes(param5 < 10 ? '0' + param5 : param5)
-          })
-        }
-        
-        setPair(includeArr)
-      })
-    }
-  }
-
-  const findAllCombo = () => {
-    const param1 = document.getElementById('check1').value;
-    const param2 = document.getElementById('check2').value;
-    const param3 = document.getElementById('check3').value;
-    const param4 = document.getElementById('check4').value;
-    const param5 = document.getElementById('check5').value;
-    const param6 = document.getElementById('check6').value;
-    const jackpot = [
-              param1 < 10 ? '0' + param1 : param1,
-              param2 < 10 ? '0' + param2 : param2,
-              param3 < 10 ? '0' + param3 : param3,
-              param4 < 10 ? '0' + param4 : param4,
-              param5 < 10 ? '0' + param5 : param5,
-              param6 < 10 ? '0' + param6 : param6
-            
-            ]
-    
-    axios.get( aData.basepath + '/api/getResult45')
-    .then(res => {
-      let arr = (JSON.parse(res.data));
-      const test = isInclude(arr, jackpot);
-      setChecked(test)
-    })
-  }
 
 
 //SECTION - VIEW CONTENT START HERE
@@ -298,68 +229,7 @@ export function Page({aData}) {
 
     <hr/>
 
-    <Grid container alignItems={'center'} justifyContent={'flex-start'}>
-      <Grid item xs={8} sm={5} lg={4}>
-        {[1,2,3,4,5].map((each) => {
-            return (
-              <input className='textInput' type='text' id={"has" + each} onKeyDown={event => {
-                findByCombo(event)
-              }} />
-            )
-          })}
-      </Grid>
-
-      <Grid item sm={2} lg={1}>
-        <button className='pure-material-button-contained'>
-          <span style={{fontSize: '1.1rem'}}>
-            {pair.length}
-            
-          </span>
-        </button>
-
-      </Grid>
-
-      <Grid container item xs={12}>
-        
-      </Grid>
-
-      <Grid item container sm={12} lg={11}>
-        {pair.map((each) => {
-          return (
-            <Grid item lg={3} xs={6} sm={6}>
-              <span>
-                <h2>
-                  <span className="bongterm">{each.term}</span>
-                  <span className='bongdate'>{each.date}</span>
-                </h2>
-                <h2>
-                  {each.jackpot.map((bong) => {
-                    const param1 = document.getElementById('has1').value;
-                    const param2 = document.getElementById('has2').value;
-                    const param3 = document.getElementById('has3').value;
-                    const param4 = document.getElementById('has4').value;
-                    const param5 = document.getElementById('has5').value;
-                    let psyBong = parseInt(bong)
-                    if(psyBong == parseInt(param1) || psyBong == parseInt(param2) 
-                    || psyBong == parseInt(param3) || psyBong == parseInt(param4) 
-                    || psyBong == parseInt(param5)){
-                      return <span className='bongcloud-white'>
-                        {bong}
-                      </span>
-                    }
-                    return <span className='bongcloud'>
-                      {bong}
-                    </span>
-                  })}
-                </h2>
-
-              </span>
-            </Grid>
-          )
-        })}
-      </Grid>
-
-    </Grid>
+    
 
     {/** PART 3 */}
 
@@ -367,6 +237,10 @@ export function Page({aData}) {
     <hr/>
 
     <input className='textInput' type='text' id={"last40Input"} onKeyDown={event => {
+              findLast40(event)
+      }} />
+
+    <input className='textInput' type='text' id={"last40Indicator"} onKeyDown={event => {
               findLast40(event)
       }} />
 
@@ -381,13 +255,9 @@ export function Page({aData}) {
                 </h2>
                 <h2>
                   {each.jackpot.map((bong) => {
-                    const param1 = document.getElementById('has1').value;
-                    const param2 = document.getElementById('has2').value;
-                    const param3 = document.getElementById('has3').value;
-                    const param4 = document.getElementById('has4').value;
-                    const param5 = document.getElementById('has5').value;
+                    const param1 = document.getElementById('last40Indicator').value;
                     let psyBong = parseInt(bong)
-                    if(psyBong == parseInt(param1) || psyBong == parseInt(param2) || psyBong == parseInt(param3) || psyBong == parseInt(param4) || psyBong == parseInt(param5)){
+                    if(psyBong == parseInt(param1)){
                       return <span className='bongcloud-white'>
                         {bong}
                       </span>
@@ -407,68 +277,6 @@ export function Page({aData}) {
     <hr/>
     <hr/>
 
-    <Grid container justifyContent={'center'}>
-      <Grid item container md={6} sm={12} spacing={1} direction={'row'} justifyContent={'center'}>
-        {[1,2,3,4,5,6].map((each) => {
-          return (
-            <Grid item md={2} sm={3}>
-              <input className='textInput nb' type='text' id={"check" + each} onKeyDown={(event) => {
-                if(event.code === "Enter") {
-                  findAllCombo()
-                }
-              }}/>
-            </Grid>
-          )
-        })}
-      </Grid>
-
-        <Grid container item xs={12}>
-          {checked.map(each => {
-            return (
-              <>
-                <Grid item xs={12}>
-                  {each.comb.map(item => {
-                    return <span className='bongcloud'>
-                      {item}
-                    </span>
-                  })}
-                </Grid>
-                  {each.filtered.map(eachJackpot => {
-                    return (
-                      <Grid item lg={3} xs={6} sm={6}>
-                        <span>
-                          <h2>
-                            <span className="bongterm">{eachJackpot.term}</span>
-                            <span className='bongdate'>{eachJackpot.date}</span>
-                          </h2>
-                          <h2>
-                            {eachJackpot.jackpot.map((bong) => {
-                              const param1 = each.comb[0];
-                              const param2 = each.comb[1];
-                              const param3 = each.comb[2];
-                              if(bong == param1 || bong == param2 || bong == param3){
-                                return <span className='bongcloud-white'>
-                                  {bong}
-                                </span>
-                              }
-                              return <span className='bongcloud'>
-                                {bong}
-                              </span>
-                            })}
-                          </h2>
-          
-                        </span>
-                      </Grid>
-                    )
-                  })}
-                <Grid item xs={12}>
-                  <hr/>
-                </Grid>
-              </>
-            )
-          })}
-        </Grid>
-      </Grid>
 
 
 
