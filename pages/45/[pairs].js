@@ -56,7 +56,7 @@ export function Page({aData}) {
     router.push('/45/' + param1 + '-' + param2 + '-' + param3);
   }
 
-  const findMost12 = (pick, setState) => {
+  const findMost20 = (pick, setState) => {
     // console.log('here1');
     const pivot = document.getElementById(pick).value;
     if(pivot <= 45) {
@@ -71,7 +71,7 @@ export function Page({aData}) {
           return b.count - a.count
         })
   
-        setState(sorted.slice(0, 12))
+        setState(sorted.slice(0, 20))
       })
     }
   }
@@ -202,7 +202,7 @@ export function Page({aData}) {
               <input className='textInput' type='text' id={each[0]} 
               onKeyDown={(event) => {
                 if(event.code === 'Enter') {
-                  findMost12(each[0], each[2]);
+                  findMost20(each[0], each[2]);
                 }
               }}/>
             </Grid>
@@ -233,8 +233,6 @@ export function Page({aData}) {
 
     {/** PART 3 */}
 
-    <hr/>
-    <hr/>
 
     <input className='textInput' type='text' id={"last40Input"} onKeyDown={event => {
               findLast40(event)
@@ -273,6 +271,9 @@ export function Page({aData}) {
           )
         })}
       </Grid>
+
+      <br/>
+      <br/>
     <hr/>
     <hr/>
     <hr/>
