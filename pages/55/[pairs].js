@@ -210,9 +210,14 @@ export function Page({aData}) {
               {each[1].map((each,i) => {
                 return(
                   <Grid item xs={1}>
-                    <h3 key={i}>
-                      {each.number} [{each.count}]
-                    </h3>
+                    <p className='pairShow' key={i}>
+                      {each.number} 
+                      <span className='pairCount'>
+                        <br/>
+                        {each.count}
+
+                      </span>
+                    </p>
                   </Grid>
                   )
                 })}
@@ -230,7 +235,12 @@ export function Page({aData}) {
       }} />
     <input className='textInput' type='text' id={"last40Indicator"} onKeyDown={event => {
               findLast40(event)
-
+      }} />
+    <input className='textInput' type='text' id={"last40Indicator2"} onKeyDown={event => {
+              findLast40(event)
+      }} />
+    <input className='textInput' type='text' id={"last40Indicator3"} onKeyDown={event => {
+              findLast40(event)
       }} />
 
       <br/>
@@ -247,8 +257,10 @@ export function Page({aData}) {
                 <h2>
                   {each.jackpot.map((bong) => {
                     const param1 = document.getElementById('last40Indicator').value;
+                    const param2 = document.getElementById('last40Indicator2').value;
+                    const param3 = document.getElementById('last40Indicator3').value;
                     let psyBong = parseInt(bong)
-                    if(psyBong == parseInt(param1)){
+                    if(psyBong == parseInt(param1) || psyBong == parseInt(param2) || psyBong == parseInt(param3)){
                       return <span className='bongcloud-white'>
                         {bong}
                       </span>
@@ -274,6 +286,20 @@ export function Page({aData}) {
     
 
     <style jsx>{`
+    .pairShow {
+      font-weight: 900;
+      font-family: 'Roboto', sans-serif;
+      background-color: beige;
+      color: ;
+      margin-right: 4px;
+      font-size: 18px;
+    }
+    .pairCount {
+      font-weight: 700;
+      font-size: 17px;
+      color: brown;
+      font-family: 'Roboto', sans-serif;
+    }
       .bongterm {
         position: relative;
         display: inline-block;
