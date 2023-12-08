@@ -63,7 +63,7 @@ export function Page({aData}) {
           return b.count - a.count
         })
   
-        setState(sorted.slice(0, 20))
+        setState(sorted.slice(0, 24))
       })
     }
   }
