@@ -248,7 +248,7 @@ export function Page({aData}) {
     <Grid item container sm={12} lg={11}>
       {last40.map((each) => {
           return (
-            <Grid item lg={3} xs={6} sm={6}>
+            <Grid item lg={3} xs={4} sm={4}>
               <span>
                 <h2>
                   <span className="bongterm">{each.term}</span>
@@ -300,45 +300,60 @@ export function Page({aData}) {
       color: brown;
       font-family: 'Roboto', sans-serif;
     }
-      .bongterm {
-        position: relative;
-        display: inline-block;
-        vertical-align: middle;
-        text-align: center;
-        font-size: 20px;
-        font-weight: 600;
-        font-family: 'Helvetica';
-        color: orange;
-        background-color: grey;
-        border-radius: 6px;
-        padding: 4px 8px 2px 8px;
-        margin-left: 2px;
-      }
-      .bongdate {
-        border: 1px black solid;
-        background-color: blue;
-        color: white;
-        border-radius: 5px;
-        padding: 0 6px;
-      }
-      .bongcloud {
-        border: 1px black solid;
-        background-color: orange;
-        border-radius: 5px;
-        margin-right: 4px;
-        padding: 0 3px;
-      }
-      .bongcloud:last-child {
-        margin-right: 0;
-      }
-      .bongcloud-white {
-        border: 1px black solid;
-        background-color: grey;
-        border-radius: 5px;
-        margin-right: 4px;
-        padding: 0 3px;
-        color: white;
-      }
+    .bongterm {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Roboto', sans-serif;
+      color: orange;
+      background-color: grey;
+      border-radius: 5px;
+      border: 1px black solid;
+      padding: 4px 4px 2px 4px;
+      margin-left: 2px;
+  }
+  .bongdate {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    background-color: blue;
+    border-radius: 5px;
+    border: 1px black solid;
+    padding: 4px 4px 2px 4px;
+    margin-left: 6px;
+  }
+  .bongcloud {
+    border-left: 1px black solid;
+    background-color: orange;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 5px;
+    margin-left: 3px;
+    padding: 0 1px;
+    padding-right: 2px;
+    font-size: 0.8em;
+  }
+  .bongcloud:last-child {
+    margin-right: 0;
+  }
+  .bongcloud-white {
+    border: 1px black solid;
+    background-color: pink;
+    border-radius: 5px;
+    margin-left: 3px;
+    padding: 0 1px;
+    padding-right: 2px;
+    color: ;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.8em;
+  }
       .bongcloud-white:last-child {
         margin-right: 0;
       }

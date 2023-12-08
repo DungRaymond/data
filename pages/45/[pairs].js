@@ -253,16 +253,20 @@ export function Page({aData}) {
               findLast40(event)
       }} />
 
+      <br/>
+      <br/>
+      <hr/>
+
     <Grid item container sm={12} lg={11}>
       {last40.map((each) => {
           return (
-            <Grid item lg={3} xs={6} sm={6}>
-              <span>
-                <h2>
+            <Grid item lg={3} xs={4} sm={4} borderRight="2px solid black">
+              <>
+                <p>
                   <span className="bongterm">{each.term}</span>
                   <span className='bongdate'>{each.date}</span>
-                </h2>
-                <h2>
+                </p>
+                <p>
                   {each.jackpot.map((bong) => {
                     const param1 = document.getElementById('last40Indicator').value;
                     const param2 = document.getElementById('last40Indicator2').value;
@@ -277,9 +281,9 @@ export function Page({aData}) {
                       {bong}
                     </span>
                   })}
-                </h2>
+                </p>
 
-              </span>
+              </>
             </Grid>
           )
         })}
@@ -302,6 +306,7 @@ export function Page({aData}) {
       color: ;
       margin-right: 4px;
       font-size: 18px;
+      padding: auto;
     }
     .pairCount {
       font-weight: 700;
@@ -314,39 +319,54 @@ export function Page({aData}) {
         display: inline-block;
         vertical-align: middle;
         text-align: center;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 600;
-        font-family: 'Helvetica';
+        font-family: 'Roboto', sans-serif;
         color: orange;
         background-color: grey;
-        border-radius: 6px;
-        padding: 4px 8px 2px 8px;
+        border-radius: 5px;
+        border: 1px black solid;
+        padding: 4px 4px 2px 4px;
         margin-left: 2px;
     }
     .bongdate {
-      border: 1px black solid;
-      background-color: blue;
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: 'Roboto', sans-serif;
       color: white;
+      background-color: blue;
       border-radius: 5px;
-      padding: 0 6px;
+      border: 1px black solid;
+      padding: 4px 4px 2px 4px;
+      margin-left: 6px;
     }
     .bongcloud {
-      border: 1px black solid;
+      border-left: 1px black solid;
       background-color: orange;
+      font-family: 'Roboto', sans-serif;
       border-radius: 5px;
-      margin-right: 4px;
-      padding: 0 3px;
+      margin-left: 3px;
+      padding: 0 1px;
+      padding-right: 2px;
+      font-size: 0.8em;
     }
     .bongcloud:last-child {
       margin-right: 0;
     }
     .bongcloud-white {
       border: 1px black solid;
-      background-color: grey;
+      background-color: pink;
       border-radius: 5px;
-      margin-right: 4px;
-      padding: 0 3px;
-      color: white;
+      margin-left: 3px;
+      padding: 0 1px;
+      padding-right: 2px;
+      color: ;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.8em;
     }
     .bongcloud-white:last-child {
       margin-right: 0;
