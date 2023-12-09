@@ -250,11 +250,11 @@ export function Page({aData}) {
           return (
             <Grid item lg={3} xs={4} sm={4}>
               <span>
-                <h2>
+                <p>
                   <span className="bongterm">{each.term}</span>
                   <span className='bongdate'>{each.date}</span>
-                </h2>
-                <h2>
+                </p>
+                <p>
                   {each.jackpot.map((bong) => {
                     const param1 = document.getElementById('last40Indicator').value;
                     const param2 = document.getElementById('last40Indicator2').value;
@@ -269,7 +269,7 @@ export function Page({aData}) {
                       {bong}
                     </span>
                   })}
-                </h2>
+                </p>
 
               </span>
             </Grid>
