@@ -248,7 +248,7 @@ export function Page({aData}) {
     <Grid item container sm={12} lg={11}>
       {last40.map((each) => {
           return (
-            <Grid item lg={3} xs={4} sm={4}>
+            <Grid item lg={3} xs={4} sm={4} borderRight="2px solid black">
               <span>
                 <p>
                   <span className="bongterm">{each.term}</span>
@@ -338,7 +338,7 @@ export function Page({aData}) {
     margin-left: 3px;
     padding: 0 1px;
     padding-right: 2px;
-    font-size: 0.8em;
+    font-size: 1em;
   }
   .bongcloud:last-child {
     margin-right: 0;

@@ -352,7 +352,7 @@ export function Page({aData}) {
       margin-left: 3px;
       padding: 0 1px;
       padding-right: 2px;
-      font-size: 0.8em;
+      font-size: 1em;
     }
     .bongcloud:last-child {
       margin-right: 0;
