@@ -39,6 +39,7 @@ export function Page({aData}) {
   const [pick5, setPick5] = useState([])
   const [pick6, setPick6] = useState([])
   const [last40, setLast40] = useState([])
+  const [data, setData] = useState([])
 
   const plainArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]
 
@@ -531,15 +532,15 @@ export async function getServerSideProps(context) {
     total: [],
     next: [],
     len: 0,
-    last100Data: []
+    // last100Data: []
   }
 
   try {
     const response = await axios.get( process.env.basepath + `/api/getData45`); // get analyzed from result
     let statData = JSON.parse("[" + response.data + "]");
 
-    const freq = await axios.get( process.env.basepath + '/api/getFreq45') // get last 100 result
-    let freqData = JSON.parse("[" + freq.data + "]");
+    // const freq = await axios.get( process.env.basepath + '/api/getFreq45') // get last 100 result
+    // let freqData = JSON.parse("[" + freq.data + "]");
 
     const reverb = await axios.get( process.env.basepath + '/api/getResult45'); // get results term by term
     let resultData = JSON.parse(reverb.data)
@@ -551,7 +552,7 @@ export async function getServerSideProps(context) {
         value1 : statData[pam[0]].stat[i],
         value2 : statData[pam[1]].stat[i],
         value3 : statData[pam[2]].stat[i],
-        last100: freqData[freqData.length - 1].stat[i]
+        // last100: freqData[freqData.length - 1].stat[i]
       })
     }
 
@@ -600,10 +601,10 @@ export async function getServerSideProps(context) {
     })
     finalData.len = resultData.length
 
-    let sortedLast100Data = sorted.map((each) => {
-      return each.last100
-    })
-    finalData.last100Data = sortedLast100Data;
+    // let sortedLast100Data = sorted.map((each) => {
+    //   return each.last100
+    // })
+    // finalData.last100Data = sortedLast100Data;
     
   } catch (error) {
     console.error(error);
@@ -654,6 +655,8 @@ export async function getServerSideProps(context) {
           backgroundColor: 'rgba(208,9,241,1)',
         },
       ],
+      // stat: statData,
+      // reverb: resultData,
       // datasets: [
       //   {
       //     label: 'count',
@@ -662,16 +665,16 @@ export async function getServerSideProps(context) {
       //   }
       // ]
     },
-    last100: {
-      labels: finalData.labels,
-      datasets: [
-        {
-          label: 'frequency',
-          data: finalData.last100Data,
-          backgroundColor: 'rgba(208,9,241,0.7)'
-        }
-      ]
-    },
+    // last100: {
+    //   labels: finalData.labels,
+    //   datasets: [
+    //     {
+    //       label: 'frequency',
+    //       data: finalData.last100Data,
+    //       backgroundColor: 'rgba(208,9,241,0.7)'
+    //     }
+    //   ]
+    // },
     next: {
       value: finalData.next
       // ANCHOR

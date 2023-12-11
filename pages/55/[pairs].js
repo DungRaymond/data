@@ -515,7 +515,7 @@ export async function getServerSideProps(context) {
     total: [],
     next: [],
     len: 0,
-    last100Data: []
+    // last100Data: []
   }
 
   try {
@@ -588,10 +588,10 @@ export async function getServerSideProps(context) {
     })
     finalData.len = resultData.length
 
-    let sortedLast100Data = sorted.map((each) => {
-      return each.last100
-    })
-    finalData.last100Data = sortedLast100Data;
+    // let sortedLast100Data = sorted.map((each) => {
+    //   return each.last100
+    // })
+    // finalData.last100Data = sortedLast100Data;
     
   } catch (error) {
     console.error(error);
@@ -660,6 +660,8 @@ export async function getServerSideProps(context) {
     //     }
     //   ]
     // },
+    // stat: statData,
+    // reverb: resultData,
     next: {
       value: finalData.next
       // ANCHOR
