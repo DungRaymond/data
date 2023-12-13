@@ -209,7 +209,7 @@ export function Page({aData}) {
 
               {each[1].map((each,i) => {
                 return(
-                  <Grid item xs={1}>
+                  <Grid item xs={1} textAlign={'center'} >
                     <p className='pairShow' key={i}>
                       {each.number} 
                       <span className='pairCount'>
@@ -352,7 +352,7 @@ export function Page({aData}) {
     padding-right: 2px;
     color: ;
     font-family: 'Roboto', sans-serif;
-    font-size: 0.8em;
+    font-size: 1.2em;
   }
       .bongcloud-white:last-child {
         margin-right: 0;

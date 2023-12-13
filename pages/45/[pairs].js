@@ -367,7 +367,7 @@ export function Page({aData}) {
       padding-right: 2px;
       color: ;
       font-family: 'Roboto', sans-serif;
-      font-size: 0.8em;
+      font-size: 1.2em;
     }
     .bongcloud-white:last-child {
       margin-right: 0;

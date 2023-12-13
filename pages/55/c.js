@@ -208,44 +208,74 @@ export default function Page({aData}) {
       </Grid>
 
       <style jsx>{`
+     .pairShow {
+      font-weight: 900;
+      font-family: 'Roboto', sans-serif;
+      background-color: beige;
+      color: ;
+      margin-right: 4px;
+      font-size: 18px;
+      padding: auto;
+    }
+    .pairCount {
+      font-weight: 700;
+      font-size: 17px;
+      color: brown;
+      font-family: 'Roboto', sans-serif;
+    }
      .bongterm {
         position: relative;
         display: inline-block;
         vertical-align: middle;
         text-align: center;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 600;
-        font-family: 'Helvetica';
+        font-family: 'Roboto', sans-serif;
         color: orange;
         background-color: grey;
-        border-radius: 6px;
-        padding: 4px 8px 2px 8px;
+        border-radius: 5px;
+        border: 1px black solid;
+        padding: 4px 4px 2px 4px;
         margin-left: 2px;
     }
     .bongdate {
-      border: 1px black solid;
-      background-color: blue;
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: 'Roboto', sans-serif;
       color: white;
+      background-color: blue;
       border-radius: 5px;
-      padding: 0 6px;
+      border: 1px black solid;
+      padding: 4px 4px 2px 4px;
+      margin-left: 6px;
     }
     .bongcloud {
-      border: 1px black solid;
+      border-left: 1px black solid;
       background-color: orange;
+      font-family: 'Roboto', sans-serif;
       border-radius: 5px;
-      margin-right: 4px;
-      padding: 0 3px;
+      margin-left: 3px;
+      padding: 0 1px;
+      padding-right: 2px;
+      font-size: 1.2em;
     }
     .bongcloud:last-child {
       margin-right: 0;
     }
     .bongcloud-white {
       border: 1px black solid;
-      background-color: grey;
+      background-color: pink;
       border-radius: 5px;
-      margin-right: 4px;
-      padding: 0 3px;
-      color: white;
+      margin-left: 3px;
+      padding: 0 1px;
+      padding-right: 2px;
+      color: ;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.2em;
     }
     .bongcloud-white:last-child {
       margin-right: 0;
