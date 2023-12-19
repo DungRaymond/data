@@ -180,7 +180,7 @@ export function Page({aData}) {
           
 
     <br/>
-    <Grid container sx={{height: '172vh'}}>
+    <Grid container sx={{width: '2320px', height: '40vh'}}>
       <Bar options={aData.options} data={aData.data} />
     </Grid>
     <br/>
@@ -602,17 +602,18 @@ export async function getServerSideProps(context) {
 
   let aData = {
     options: {
-      indexAxis: 'y',
-      barThickness: '18',
+      indexAxis: 'x',
+      barThickness: '22',
       maintainAspectRatio: false,
       aspectRatio: 1,
       scales: {
         x: {
           stacked: true,
-          display: false,
+          display: true,
         },
         y: {
           stacked: true,
+          display: false
         },
         min: 0,
         max: 2000,
