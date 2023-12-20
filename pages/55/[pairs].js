@@ -23,6 +23,7 @@ ChartJS.register(
 import {useState} from 'react';
 // import useSWR from 'swr';
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 
 import isInclude from '../../modules/combination.js'
@@ -103,6 +104,9 @@ export function Page({aData}) {
   
   return(
   <>
+      <Head>
+        <title>Power</title>
+      </Head>
     <Grid container spacing={1} justifyContent="space-between">
       <Grid item lg={1} sm={1}>
         <button type='button' className='pure-material-button-contained' onClick={() => {

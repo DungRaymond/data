@@ -13,6 +13,7 @@ import { Button, Grid, useMediaQuery } from '@mui/material';
 `use client`
 
 import {useState} from 'react';
+import Head from 'next/head'
 import isInclude from '../../modules/combination.js'
 
 
@@ -109,6 +110,9 @@ export function Page({aData}) {
 
   return(
   <>
+      <Head>
+        <title>Mega</title>
+      </Head>
     <Grid container spacing={1} justifyContent="space-between">
       <Grid item lg={1} sm={1}>
         <button type='button' className='pure-material-button-contained' onClick={() => {
@@ -185,7 +189,7 @@ export function Page({aData}) {
     </Grid>
           <br/>
 
-    <Grid container sx={{height: '130vh'}}>
+    <Grid container sx={{height: '40vh', width: '1880px'}}>
       <Bar options={aData.options} data={aData.data} />
     </Grid>
 
@@ -615,17 +619,18 @@ export async function getServerSideProps(context) {
 
   let aData = {
     options: {
-      indexAxis: 'y',
-      barThickness: '18',
+      indexAxis: 'x',
+      barThickness: '22',
       maintainAspectRatio: false,
       aspectRatio: 1,
       scales: {
         x: {
           stacked: true,
-          display: false,
+          display: true,
         },
         y: {
           stacked: true,
+          display: false,
         },
         min: 0,
         max: 2000,
