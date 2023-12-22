@@ -17,6 +17,18 @@ export function HomePage() {
         Power
       </button>
     </div>
+    <div className="btn-bar">
+      <button type='button' className='pure-material-button-contained' onClick={() => {
+        router.push("/combo/45")
+      }}>
+        Combo mega
+      </button>
+      <button type='button' className='pure-material-button-contained' onClick={() => {
+        router.push("/combo/55")
+      }}>
+        Combo power
+      </button>
+    </div>
     
     <style jsx>{
       `
