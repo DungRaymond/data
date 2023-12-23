@@ -1,4 +1,5 @@
 import { Button, Grid, useMediaQuery } from '@mui/material';
+import Head from 'next/head'
 
 `use client`
 
@@ -81,6 +82,9 @@ export default function Page({aData}) {
 
   return(
     <>
+    <Head>
+        <title>Power</title>
+      </Head>
 
 <Grid container alignItems={'center'} justifyContent={'flex-start'}>
       <Grid item xs={8} sm={5} lg={4}>

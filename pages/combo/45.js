@@ -4,6 +4,7 @@ import { Button, Grid, useMediaQuery } from '@mui/material';
 
 import {useState} from 'react';
 import isInclude from '../../modules/combination.js'
+import Head from 'next/head'
 
 export default function Page({aData}) {
 
@@ -81,6 +82,9 @@ export default function Page({aData}) {
 
   return(
     <>
+    <Head>
+        <title>Power</title>
+      </Head>
 
 <Grid container alignItems={'center'} justifyContent={'flex-start'}>
       <Grid item xs={8} sm={5} lg={4}>

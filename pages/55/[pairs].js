@@ -617,10 +617,10 @@ export async function getServerSideProps(context) {
         },
         y: {
           stacked: true,
-          display: false
+          display: true
         },
         min: 0,
-        max: 2000,
+        max: 400,
       },
       responsive: true,
       plugins: {
