@@ -607,7 +607,7 @@ export async function getServerSideProps(context) {
   let aData = {
     options: {
       indexAxis: 'x',
-      barThickness: '22',
+      barThickness: '20',
       maintainAspectRatio: false,
       aspectRatio: 1,
       scales: {
