@@ -49,7 +49,7 @@ export function Page({aData}) {
   // console.log(aData.data.datasets);
 
   const matches = useMediaQuery('(max-width: 896px)', {defaultMatches: true})
-  ChartJS.defaults.font.size = 16;
+  ChartJS.defaults.font.size = 18;
 
   const setTerm = () => {
     const param1 = document.getElementById('first').value || queryParam[0];
@@ -620,7 +620,7 @@ export async function getServerSideProps(context) {
   let aData = {
     options: {
       indexAxis: 'x',
-      barThickness: '22',
+      barThickness: '20',
       maintainAspectRatio: false,
       aspectRatio: 1,
       scales: {

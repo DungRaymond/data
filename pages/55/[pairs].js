@@ -30,7 +30,7 @@ import isInclude from '../../modules/combination.js'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 20;
+ChartJS.defaults.font.size = 18;
 ChartJS.defaults.font.weight = '700';
 
 export function Page({aData}) {
@@ -184,7 +184,7 @@ export function Page({aData}) {
           
 
     <br/>
-    <Grid container sx={{width: '2320px', height: '40vh'}}>
+    <Grid container sx={{width: '2220px', height: '40vh'}}>
       <Bar options={aData.options} data={aData.data} />
     </Grid>
     <br/>
