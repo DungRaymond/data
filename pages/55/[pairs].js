@@ -118,17 +118,29 @@ export function Page({aData}) {
 
       <Grid item sm={4}>
         <div className='arrowInput'>
-          <button type='button' className='pure-material-button-contained' onClick={() => {
-            router.push('/55/' + queryParam[0] + '-' + (queryParam[1] - 1) + '-' + (queryParam[2] - 1) )
+        <button type='button' className='pure-material-button-contained' onClick={() => {
+            router.push('/55/' + queryParam[0] + '-' + (queryParam[1] - 1) + '-' + (queryParam[2] - 0) )
           }}>
             &lt;
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            if(queryParam[2] < aData.dataLength) {
-              router.push('/55/' + queryParam[0] + '-' + (queryParam[1] - 0 + 1) + '-' + (queryParam[2] - 0 + 1))
+            if(queryParam[2] <= aData.dataLength) {
+              router.push('/55/' + queryParam[0] + '-' + (queryParam[1] - 0 + 1) + '-' + (queryParam[2] - 0))
             }
           }}>
             &gt;
+          </button>
+          <button type='button' className='pure-material-button-contained' onClick={() => {
+            router.push('/55/' + queryParam[0] + '-' + (queryParam[1] - 0 ) + '-' + (queryParam[2] - 1) )
+          }}>
+            &lt;&lt;
+          </button>
+          <button type='button' className='pure-material-button-contained' onClick={() => {
+            if(queryParam[2] < aData.dataLength) {
+              router.push('/55/' + queryParam[0] + '-' + (queryParam[1] - 0) + '-' + (queryParam[2] - 0 + 1))
+            }
+          }}>
+            &gt;&gt;
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
@@ -184,7 +196,7 @@ export function Page({aData}) {
           
 
     <br/>
-    <Grid container sx={{width: '2220px', height: '40vh'}}>
+    <Grid container sx={{width: '2220px', height: '36vh'}}>
       <Bar options={aData.options} data={aData.data} />
     </Grid>
     <br/>

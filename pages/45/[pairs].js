@@ -122,19 +122,31 @@ export function Page({aData}) {
         </button>
       </Grid>
 
-      <Grid item sm={4}>
+      <Grid item sm={5}>
         <div className='arrowInput'>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            router.push('/45/' + queryParam[0] + '-' + (queryParam[1] - 1) + '-' + (queryParam[2] - 1) )
+            router.push('/45/' + queryParam[0] + '-' + (queryParam[1] - 1) + '-' + (queryParam[2] - 0) )
           }}>
             &lt;
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
-            if(queryParam[2] < aData.dataLength) {
-              router.push('/45/' + queryParam[0] + '-' + (queryParam[1] - 0 + 1) + '-' + (queryParam[2] - 0 + 1))
+            if(queryParam[2] <= aData.dataLength) {
+              router.push('/45/' + queryParam[0] + '-' + (queryParam[1] - 0 + 1) + '-' + (queryParam[2] - 0))
             }
           }}>
             &gt;
+          </button>
+          <button type='button' className='pure-material-button-contained' onClick={() => {
+            router.push('/45/' + queryParam[0] + '-' + (queryParam[1] - 0 ) + '-' + (queryParam[2] - 1) )
+          }}>
+            &lt;&lt;
+          </button>
+          <button type='button' className='pure-material-button-contained' onClick={() => {
+            if(queryParam[2] < aData.dataLength) {
+              router.push('/45/' + queryParam[0] + '-' + (queryParam[1] - 0) + '-' + (queryParam[2] - 0 + 1))
+            }
+          }}>
+            &gt;&gt;
           </button>
           <button type='button' className='pure-material-button-contained' onClick={() => {
             if(queryParam[2] < aData.dataLength) {
@@ -147,7 +159,7 @@ export function Page({aData}) {
         </div>
       </Grid>
 
-      <Grid item sm={4}>
+      <Grid item sm={3}>
         <div className='numberInput'>
           <input className='textInput' type='text' id='first' onKeyDown={(event) => {
             if(event.code === 'Enter') {
@@ -189,7 +201,7 @@ export function Page({aData}) {
     </Grid>
           <br/>
 
-    <Grid container sx={{height: '40vh', width: '1880px'}}>
+    <Grid container sx={{height: '36vh', width: '1880px'}}>
       <Bar options={aData.options} data={aData.data} />
     </Grid>
 
