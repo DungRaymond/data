@@ -361,12 +361,12 @@ export function Page({aData}) {
   }
   .bongcloud-white {
     border: 1px black solid;
-    background-color: pink;
+    background-color: black;
     border-radius: 5px;
     margin-left: 3px;
     padding: 0 1px;
     padding-right: 2px;
-    color: ;
+    color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 1.2em;
   }
