@@ -79,17 +79,16 @@ export function Page({aData}) {
   }
 
   
-  const printMost12 = (pick) => {
-    console.log(pick);
-    pick.map((each,i) => {
-      return(
-        <Grid item xs={1}>
-          <h3 key={i}>
-            {each.number} [{each.count}]
-          </h3>
-        </Grid>
-        )
+  const findByTerm = (event)  => {
+    if(event.code === 'Enter') {
+      const count = document.getElementById('term1').value;
+      axios.get(aData.basepath + '/api/getResult45')
+      .then(res => {
+        let arr = (JSON.parse(res.data))
+        let slicedArr = arr.slice(arr.length - count, arr.length);
+        setLast40(slicedArr)
       })
+    }
   }
 
   const findLast40 = (event) => {
@@ -304,6 +303,30 @@ export function Page({aData}) {
             </Grid>
           )
         })}
+      </Grid>
+
+      <Grid item container>
+            <Grid item sm={3}>
+              <input className='textInput' type='text' id={"term1"} onKeyDown={event => {
+                findByTerm(event)
+              }} />
+            </Grid> 
+            <Grid item sm={3}>
+              <input className='textInput' type='text' id={"term2"} onKeyDown={event => {
+                findByTerm(event)
+              }} />
+            </Grid> 
+            <Grid item sm={3}>
+              <input className='textInput' type='text' id={"term3"} onKeyDown={event => {
+                findByTerm(event)
+              }} />
+            </Grid> 
+            <Grid item sm={3}>
+              <input className='textInput' type='text' id={"term4"} onKeyDown={event => {
+                findByTerm(event)
+              }} />
+            </Grid> 
+
       </Grid>
 
       <br/>
