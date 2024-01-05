@@ -41,6 +41,7 @@ export function Page({aData}) {
   const [pick4, setPick4] = useState([])
   const [pick5, setPick5] = useState([])
   const [pick6, setPick6] = useState([])
+  const [termplus6, setTermplus6] = useState([])
   const [last40, setLast40] = useState([])
 
   const router = useRouter();
@@ -68,7 +69,17 @@ export function Page({aData}) {
       })
     }
   }
-
+  const findByTerm = (event)  => {
+    if(event.code === 'Enter') {
+      const count = document.getElementById('term').value;
+      axios.get(aData.basepath + '/api/getResult45')
+      .then(res => {
+        let arr = (JSON.parse(res.data))
+        let slicedArr = arr.slice(count - 4, count - 0 + 2);
+        setTermplus6(slicedArr)
+      })
+    }
+  }
   
   const printMost12 = (pick) => {
     console.log(pick);
@@ -293,6 +304,47 @@ export function Page({aData}) {
         })}
       </Grid>
 
+      <Grid item container>
+            <Grid item sm={3}>
+              <input className='textInput' type='text' id={"term"} onKeyDown={event => {
+                findByTerm(event)
+              }} />
+            </Grid> 
+
+            <Grid item container sm={12} lg={12}>
+              {termplus6.map((each) => {
+                  return (
+                    <Grid item lg={3} xs={4} sm={4} borderRight="2px solid black">
+                      <>
+                        <p>
+                          <span className="bongterm2">{each.term}</span>
+                          <span className='bongdate2'>{each.date}</span>
+                        </p>
+                        <p>
+                          {each.jackpot.map((bong) => {
+                            const param1 = document.getElementById('last40Indicator').value;
+                            const param2 = document.getElementById('last40Indicator2').value;
+                            const param3 = document.getElementById('last40Indicator3').value;
+                            let psyBong = parseInt(bong)
+                            if(psyBong == parseInt(param1) || psyBong == parseInt(param2) || psyBong == parseInt(param3)){
+                              return <span className='bongcloud-white2'>
+                                {bong}
+                              </span>
+                            }
+                            return <span className='bongcloud2'>
+                              {bong}
+                            </span>
+                          })}
+                        </p>
+
+                      </>
+                    </Grid>
+                  )
+                })}
+            </Grid>
+
+      </Grid>
+
       <br/>
       <br/>
       <hr/>
@@ -370,9 +422,70 @@ export function Page({aData}) {
     font-family: 'Roboto', sans-serif;
     font-size: 1.2em;
   }
-      .bongcloud-white:last-child {
-        margin-right: 0;
-      }
+  .bongcloud-white:last-child {
+    margin-right: 0;
+  }
+
+
+
+  .bongterm2 {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    color: orange;
+    background-color: grey;
+    border-radius: 5px;
+    border: 1px black solid;
+    padding: 4px 4px 2px 4px;
+    margin-left: 2px;
+}
+.bongdate2 {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  background-color: blue;
+  border-radius: 5px;
+  border: 1px black solid;
+  padding: 4px 4px 2px 4px;
+  margin-left: 6px;
+}
+.bongcloud2 {
+  border-left: 1px black solid;
+  background-color: orange;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 5px;
+  margin-left: 3px;
+  padding: 0 1px;
+  padding-right: 2px;
+  font-size: 1.2em;
+}
+.bongcloud2:last-child {
+  margin-right: 0;
+}
+.bongcloud-white2 {
+  border: 1px black solid;
+  background-color: black;
+  border-radius: 5px;
+  margin-left: 3px;
+  padding: 0 1px;
+  padding-right: 2px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
+}
+.bongcloud-white2:last-child {
+  margin-right: 0;
+}
+
       input {
         position: relative;
         display: inline-block;
