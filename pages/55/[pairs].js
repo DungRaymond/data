@@ -54,25 +54,36 @@ export function Page({aData}) {
       setState([]);
     }
     if(pivot <= 55) {
-      axios.get(aData.basepath + '/api/getMode55')
-      .then(res => {
-        let arr = JSON.parse(res.data)
-        arr = arr[pivot - 1].modeList;
-        let sliced = arr.slice(0, pivot - 1);
-        sliced = sliced.concat(arr.slice(pivot, arr.length))
+      // axios.get(aData.basepath + '/api/getMode55')
+      // .then(res => {
+      //   let arr = JSON.parse(res.data)
+      //   arr = arr[pivot - 1].modeList;
+      //   let sliced = arr.slice(0, pivot - 1);
+      //   sliced = sliced.concat(arr.slice(pivot, arr.length))
         
-        let sorted = sliced.sort((a,b) => {
-          return b.count - a.count
-        })
+      //   let sorted = sliced.sort((a,b) => {
+      //     return b.count - a.count
+      //   })
   
-        setState(sorted.slice(0, 24))
+      //   setState(sorted.slice(0, 24))
+      // })
+
+      let arr = aData.getMode
+      arr = arr[pivot - 1].modeList;
+      let sliced = arr.slice(0, pivot - 1);
+      sliced = sliced.concat(arr.slice(pivot, arr.length))
+      
+      let sorted = sliced.sort((a,b) => {
+        return b.count - a.count
       })
+
+      setState(sorted.slice(0, 24))
     }
   }
   const findByTerm = (event)  => {
     if(event.code === 'Enter') {
       const count = document.getElementById('term').value;
-      axios.get(aData.basepath + '/api/getResult45')
+      axios.get(aData.basepath + '/api/getResult55')
       .then(res => {
         let arr = (JSON.parse(res.data))
         let slicedArr = arr.slice(count - 4, count - 0 + 2);
@@ -206,11 +217,13 @@ export function Page({aData}) {
     </Grid>
           
 
+
     <br/>
     <Grid container sx={{width: '2220px', height: '36vh'}}>
       <Bar options={aData.options} data={aData.data} />
     </Grid>
     <br/>
+
 
     <Grid container>
       
@@ -644,18 +657,19 @@ export async function getServerSideProps(context) {
     total: [],
     next: [],
     len: 0,
-    // last100Data: []
+    modeData: [],
+    resultData: []
   }
 
   try {
     const response = await axios.get(process.env.basepath + `/api/getData55`); // get analyzed from result
     let statData = JSON.parse("[" + response.data + "]");
 
-    // const freq = await axios.get(process.env.basepath + '/api/getFreq55') // get last 100 result
-    // let freqData = JSON.parse("[" + freq.data + "]");
-
     const reverb = await axios.get(process.env.basepath + '/api/getResult55'); // get results term by term
-    let resultData = JSON.parse(reverb.data);
+    finalData.resultData = JSON.parse(reverb.data);
+
+    const modeList = await axios.get(process.env.basepath + '/api/getMode55');
+    finalData.modeData = JSON.parse(modeList.data)
 
     // THE DATA WE NEED
     for(let i = 0; i < 55; i++){
@@ -706,7 +720,7 @@ export async function getServerSideProps(context) {
     finalData.total = sortedTotal;
 
     // ANCHOR
-    finalData.next = resultData[pam[2] - 1].jackpot
+    finalData.next = finalData.resultData[pam[2] - 1].jackpot
     
     finalData.labels = sortedLabels.map((each) => {
       if(!finalData.next.includes(each)) {
@@ -715,7 +729,7 @@ export async function getServerSideProps(context) {
         return '[' + each + ']'
       }
     })
-    finalData.len = resultData.length
+    finalData.len = finalData.resultData.length
 
     // let sortedLast100Data = sorted.map((each) => {
     //   return each.last100
@@ -772,26 +786,9 @@ export async function getServerSideProps(context) {
           backgroundColor: 'rgb(154, 59, 59, 0.9)',
         },
       ],
-      // datasets: [
-      //   {
-      //     label: 'count',
-      //     data: finalData.total,
-      //     backgroundColor: 'rgba(47, 94, 249, 0.7)'
-      //   }
-      // ]
     },
-    // last100: {
-    //   labels: finalData.labels,
-    //   datasets: [
-    //     {
-    //       label: 'frequency',
-    //       data: finalData.last100Data,
-    //       backgroundColor: 'rgba(208,9,241,0.7)'
-    //     }
-    //   ]
-    // },
-    // stat: statData,
-    // reverb: resultData,
+    getMode: finalData.modeData,
+    getResult: finalData.resultData,
     next: {
       value: finalData.next
       // ANCHOR

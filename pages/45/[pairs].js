@@ -63,19 +63,30 @@ export function Page({aData}) {
     // console.log('here1');
     const pivot = document.getElementById(pick).value;
     if(pivot <= 45) {
-      axios.get(aData.basepath + '/api/getMode45')
-      .then(res => {
-        let arr = JSON.parse(res.data)
-        arr = arr[pivot - 1].modeList;
-        let sliced = arr.slice(0, pivot - 1);
-        sliced = sliced.concat(arr.slice(pivot, arr.length))
+      // axios.get(aData.basepath + '/api/getMode45')
+      // .then(res => {
+      //   let arr = JSON.parse(res.data)
+      //   arr = arr[pivot - 1].modeList;
+      //   let sliced = arr.slice(0, pivot - 1);
+      //   sliced = sliced.concat(arr.slice(pivot, arr.length))
         
-        let sorted = sliced.sort((a,b) => {
-          return b.count - a.count
-        })
+      //   let sorted = sliced.sort((a,b) => {
+      //     return b.count - a.count
+      //   })
   
-        setState(sorted.slice(0, 24))
+      //   setState(sorted.slice(0, 24))
+      // })
+
+      let arr = aData.getMode
+      arr = arr[pivot - 1].modeList;
+      let sliced = arr.slice(0, pivot - 1);
+      sliced = sliced.concat(arr.slice(pivot, arr.length))
+      
+      let sorted = sliced.sort((a,b) => {
+        return b.count - a.count
       })
+
+      setState(sorted.slice(0, 24))
     }
   }
 
@@ -646,18 +657,18 @@ export async function getServerSideProps(context) {
     total: [],
     next: [],
     len: 0,
-    // last100Data: []
+    
   }
 
   try {
     const response = await axios.get( process.env.basepath + `/api/getData45`); // get analyzed from result
     let statData = JSON.parse("[" + response.data + "]");
 
-    // const freq = await axios.get( process.env.basepath + '/api/getFreq45') // get last 100 result
-    // let freqData = JSON.parse("[" + freq.data + "]");
-
     const reverb = await axios.get( process.env.basepath + '/api/getResult45'); // get results term by term
-    let resultData = JSON.parse(reverb.data)
+    finalData.resultData = JSON.parse(reverb.data)
+
+    const modeList = await axios.get(process.env.basepath + '/api/getMode45');
+    finalData.modeData = JSON.parse(modeList.data)
 
     // THE DATA WE NEED
     for(let i = 0; i < 45; i++){
@@ -704,7 +715,7 @@ export async function getServerSideProps(context) {
     finalData.total = sortedTotal;
 
     // ANCHOR
-    finalData.next = resultData[pam[2] - 1].jackpot||null
+    finalData.next = finalData.resultData[pam[2] - 1].jackpot||null
 
     finalData.labels = sortedLabels.map((each) => {
       if(!finalData.next.includes(each)) {
@@ -713,13 +724,8 @@ export async function getServerSideProps(context) {
         return '[' + each + ']'
       }
     })
-    finalData.len = resultData.length
+    finalData.len = finalData.resultData.length
 
-    // let sortedLast100Data = sorted.map((each) => {
-    //   return each.last100
-    // })
-    // finalData.last100Data = sortedLast100Data;
-    
   } catch (error) {
     console.error(error);
   }
@@ -770,26 +776,9 @@ export async function getServerSideProps(context) {
           backgroundColor: 'rgba(208,9,241,1)',
         },
       ],
-      // stat: statData,
-      // reverb: resultData,
-      // datasets: [
-      //   {
-      //     label: 'count',
-      //     data: finalData.total,
-      //     backgroundColor: 'rgba(253, 153, 3, 0.7)'
-      //   }
-      // ]
     },
-    // last100: {
-    //   labels: finalData.labels,
-    //   datasets: [
-    //     {
-    //       label: 'frequency',
-    //       data: finalData.last100Data,
-    //       backgroundColor: 'rgba(208,9,241,0.7)'
-    //     }
-    //   ]
-    // },
+    getMode: finalData.modeData,
+    getResult: finalData.resultData,
     next: {
       value: finalData.next
       // ANCHOR
