@@ -83,12 +83,14 @@ export function Page({aData}) {
   const findByTerm = (event)  => {
     if(event.code === 'Enter') {
       const count = document.getElementById('term').value;
-      axios.get(aData.basepath + '/api/getResult55')
-      .then(res => {
-        let arr = (JSON.parse(res.data))
-        let slicedArr = arr.slice(count - 4, count - 0 + 2);
-        setTermplus6(slicedArr)
-      })
+      // axios.get(aData.basepath + '/api/getResult55')
+      // .then(res => {
+      //   let arr = (JSON.parse(res.data))
+      //   let slicedArr = arr.slice(count - 4, count - 0 + 2);
+      //   setTermplus6(slicedArr)
+      // })
+      let slicedArr = aData.getResult.slice(count - 4, count - 0 + 2);
+      setTermplus6(slicedArr)
     }
   }
   
@@ -115,12 +117,15 @@ export function Page({aData}) {
   const findLast40 = (event) => {
     if(event.code === 'Enter') {
       const count = document.getElementById('last40Input').value;
-      axios.get(aData.basepath + '/api/getResult55')
-      .then(res => {
-        let arr = (JSON.parse(res.data))
-        let slicedArr = arr.slice(arr.length - count, arr.length);
-        setLast40(slicedArr)
-      })
+      // axios.get(aData.basepath + '/api/getResult55')
+      // .then(res => {
+      //   let arr = (JSON.parse(res.data))
+      //   let slicedArr = arr.slice(arr.length - count, arr.length);
+      //   setLast40(slicedArr)
+      // })
+      let arr = aData.getResult
+      let slicedArr = arr.slice(arr.length - count, arr.length);
+      setLast40(slicedArr)
     }
   }
   
