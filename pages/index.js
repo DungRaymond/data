@@ -16,6 +16,11 @@ export function HomePage() {
       }}>
         Power
       </button>
+      <button type='button' className='pure-material-button-contained' onClick={() => {
+        router.push("/56/0-878-899")
+      }}>
+        Power 6
+      </button>
     </div>
     <div className="btn-bar">
       <button type='button' className='pure-material-button-contained' onClick={() => {
