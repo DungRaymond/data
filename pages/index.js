@@ -7,17 +7,17 @@ export function HomePage() {
   <>
     <div className="btn-bar">
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push("/45/0-1045-1063")
+        router.push("/45/0-1120-1151")
       }}>
         Mega
       </button>
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push("/55/0-878-899")
+        router.push("/55/0-947-987")
       }}>
         Power
       </button>
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push("/56/0-878-899")
+        router.push("/56/0-947-987")
       }}>
         Power 6
       </button>
@@ -31,7 +31,12 @@ export function HomePage() {
       <button type='button' className='pure-material-button-contained' onClick={() => {
         router.push("/combo/55")
       }}>
-        Combo power
+        Combo 55
+      </button>
+      <button type='button' className='pure-material-button-contained' onClick={() => {
+        router.push("/combo/56")
+      }}>
+        Combo 56
       </button>
     </div>
     

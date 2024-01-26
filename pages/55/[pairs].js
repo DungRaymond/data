@@ -52,7 +52,7 @@ export function Page({aData}) {
     const pivot = document.getElementById(pick).value;
     if(!pivot) {
       setState([]);
-    }
+    } else
     if(pivot <= 55) {
       // axios.get(aData.basepath + '/api/getMode55')
       // .then(res => {
@@ -699,6 +699,8 @@ export async function getServerSideProps(context) {
         return each.key + ''
       }
     })
+
+    console.log(sortedLabels);
 
     // DEPRECATED
 

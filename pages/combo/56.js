@@ -5,6 +5,7 @@ import Head from 'next/head'
 
 import {useState} from 'react';
 import isInclude from '../../modules/combination.js'
+import isInclude4 from '../../modules/combination4.js'
 
 export default function Page({aData}) {
 
@@ -19,31 +20,37 @@ export default function Page({aData}) {
       const param3 = document.getElementById('has3').value;
       const param4 = document.getElementById('has4').value;
       const param5 = document.getElementById('has5').value;
+      const param6 = document.getElementById('has6').value;
       
         let includeArr = aData.data;
         if(param1 && param1 < 56) {
           includeArr = includeArr.filter((item) => {
-            return item.jackpot.includes(param1 < 10 ? '0' + param1 : param1)
+            return item.ketqua.includes(param1 < 10 ? '0' + param1 : param1)
           })
         }
         if(param2 && param2 < 56) {
           includeArr = includeArr.filter((item) => {
-            return item.jackpot.includes(param2 < 10 ? '0' + param2 : param2)
+            return item.ketqua.includes(param2 < 10 ? '0' + param2 : param2)
           })
         }
         if(param3 && param3 < 56) {
           includeArr = includeArr.filter((item) => {
-            return item.jackpot.includes(param3 < 10 ? '0' + param3 : param3)
+            return item.ketqua.includes(param3 < 10 ? '0' + param3 : param3)
           })
         }
         if(param4 && param4 < 56) {
           includeArr = includeArr.filter((item) => {
-            return item.jackpot.includes(param4 < 10 ? '0' + param4 : param4)
+            return item.ketqua.includes(param4 < 10 ? '0' + param4 : param4)
           })
         }
         if(param5 && param5 < 56) {
           includeArr = includeArr.filter((item) => {
-            return item.jackpot.includes(param5 < 10 ? '0' + param5 : param5)
+            return item.ketqua.includes(param5 < 10 ? '0' + param5 : param5)
+          })
+        }
+        if(param6 && param6 < 56) {
+          includeArr = includeArr.filter((item) => {
+            return item.ketqua.includes(param6 < 10 ? '0' + param5 : param5)
           })
         }
         
@@ -58,17 +65,19 @@ export default function Page({aData}) {
     const param4 = document.getElementById('check4').value;
     const param5 = document.getElementById('check5').value;
     const param6 = document.getElementById('check6').value;
-    const jackpot = [
+    const param7 = document.getElementById('check7').value;
+    const ketqua = [
               param1 < 10 ? '0' + param1 : param1,
               param2 < 10 ? '0' + param2 : param2,
               param3 < 10 ? '0' + param3 : param3,
               param4 < 10 ? '0' + param4 : param4,
               param5 < 10 ? '0' + param5 : param5,
-              param6 < 10 ? '0' + param6 : param6
+              param6 < 10 ? '0' + param6 : param6,
+              param7 < 10 ? '0' + param6 : param7,
             
             ]
     
-      const test = isInclude(aData.data, jackpot);
+      const test = isInclude(aData.data, ketqua);
       setChecked(test)
   }
 
@@ -89,7 +98,7 @@ export default function Page({aData}) {
 
 <Grid container alignItems={'center'} justifyContent={'flex-start'}>
       <Grid item xs={8} sm={5} lg={4}>
-        {[1,2,3,4,5].map((each) => {
+        {[1,2,3,4,5,6].map((each) => {
             return (
               <input className='textInput' type='text' id={"has" + each} onKeyDown={event => {
                 findByCombo(event)
@@ -118,16 +127,17 @@ export default function Page({aData}) {
                   <span className='bongdate'>{each.date}</span>
                 </h2>
                 <h2>
-                  {each.jackpot.map((bong) => {
+                  {each.ketqua.map((bong) => {
                     const param1 = document.getElementById('has1').value;
                     const param2 = document.getElementById('has2').value;
                     const param3 = document.getElementById('has3').value;
                     const param4 = document.getElementById('has4').value;
                     const param5 = document.getElementById('has5').value;
+                    const param6 = document.getElementById('has6').value;
                     let psyBong = parseInt(bong)
                     if(psyBong == parseInt(param1) || psyBong == parseInt(param2) 
                     || psyBong == parseInt(param3) || psyBong == parseInt(param4) 
-                    || psyBong == parseInt(param5)){
+                    || psyBong == parseInt(param5) || psyBong == parseInt(param6)){
                       return <span className='bongcloud-white'>
                         {bong}
                       </span>
@@ -151,7 +161,7 @@ export default function Page({aData}) {
     
     <Grid container justifyContent={'center'}>
       <Grid item container md={6} sm={12} spacing={1} direction={'row'} justifyContent={'center'}>
-        {[1,2,3,4,5,6].map((each) => {
+        {[1,2,3,4,5,6,7].map((each) => {
           return (
             <Grid item md={2} sm={3}>
               <input className='textInput nb' type='text' id={"check" + each} onKeyDown={(event) => {
@@ -175,16 +185,16 @@ export default function Page({aData}) {
                     </span>
                   })}
                 </Grid>
-                  {each.filtered.map(eachJackpot => {
+                  {each.filtered.map(eachketqua => {
                     return (
                       <Grid item lg={3} xs={6} sm={6}>
                         <span>
                           <h2>
-                            <span className="bongterm">{eachJackpot.term}</span>
-                            <span className='bongdate'>{eachJackpot.date}</span>
+                            <span className="bongterm">{eachketqua.term}</span>
+                            <span className='bongdate'>{eachketqua.date}</span>
                           </h2>
                           <h2>
-                            {eachJackpot.jackpot.map((bong) => {
+                            {eachketqua.ketqua.map((bong) => {
                               const param1 = each.comb[0];
                               const param2 = each.comb[1];
                               const param3 = each.comb[2];
@@ -211,6 +221,76 @@ export default function Page({aData}) {
           })}
         </Grid>
       </Grid>
+
+
+<hr/>
+<hr/>
+<hr/>
+
+{/*     
+    <Grid container justifyContent={'center'}>
+      <Grid item container md={6} sm={12} spacing={1} direction={'row'} justifyContent={'center'}>
+        {[1,2,3,4,5,6,7].map((each) => {
+          return (
+            <Grid item md={2} sm={3}>
+              <input className='textInput nb' type='text' id={"check" + each} onKeyDown={(event) => {
+                if(event.code === "Enter") {
+                  findAllCombo()
+                }
+              }}/>
+            </Grid>
+          )
+        })}
+      </Grid>
+
+        <Grid container item xs={12} justifyContent={'space-between'}>
+          {checked.map(each => {
+            return (
+              <>
+                <Grid item xs={12}>
+                  {each.comb.map(item => {
+                    return <span className='bongcloud'>
+                      {item}
+                    </span>
+                  })}
+                </Grid>
+                  {each.filtered.map(eachketqua => {
+                    return (
+                      <Grid item lg={3} xs={6} sm={6}>
+                        <span>
+                          <h2>
+                            <span className="bongterm">{eachketqua.term}</span>
+                            <span className='bongdate'>{eachketqua.date}</span>
+                          </h2>
+                          <h2>
+                            {eachketqua.ketqua.map((bong) => {
+                              const param1 = each.comb[0];
+                              const param2 = each.comb[1];
+                              const param3 = each.comb[2];
+                              const param4 = each.comb[3];
+                              if(bong == param1 || bong == param2 || bong == param3 || bong == param4){
+                                return <span className='bongcloud-white'>
+                                  {bong}
+                                </span>
+                              }
+                              return <span className='bongcloud'>
+                                {bong}
+                              </span>
+                            })}
+                          </h2>
+          
+                        </span>
+                      </Grid>
+                    )
+                  })}
+                <Grid item xs={12}>
+                  <hr/>
+                </Grid>
+              </>
+            )
+          })}
+        </Grid>
+      </Grid> */}
 
       <style jsx>{`
      .pairShow {
@@ -432,6 +512,7 @@ export default function Page({aData}) {
 import axios from 'axios';
 
 export async function getServerSideProps(context) {
+
   let aData = {
     basepath: process.env.basepath,
     data: []
@@ -439,7 +520,7 @@ export async function getServerSideProps(context) {
 
   const reverb = await axios.get(process.env.basepath + '/api/getResult55'); // get results term by term
     aData.data = JSON.parse(reverb.data);
-
+  
   return {
     props: { aData }, // will be passed to the page component as props
     // props: { data: 'hello'}

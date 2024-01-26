@@ -20,10 +20,7 @@ export default function Page({aData}) {
       const param4 = document.getElementById('has4').value;
       const param5 = document.getElementById('has5').value;
       
-      axios.get(aData.basepath + '/api/getResult45')
-      .then(res => {
-        let arr = (JSON.parse(res.data));
-        let includeArr = arr;
+        let includeArr = aData.data;
         if(param1 && param1 < 46) {
           includeArr = includeArr.filter((item) => {
             return item.jackpot.includes(param1 < 10 ? '0' + param1 : param1)
@@ -51,7 +48,6 @@ export default function Page({aData}) {
         }
         
         setPair(includeArr)
-      })
     }
   }
 
@@ -72,19 +68,26 @@ export default function Page({aData}) {
             
             ]
     
-    axios.get( aData.basepath + '/api/getResult45')
-    .then(res => {
-      let arr = (JSON.parse(res.data));
-      const test = isInclude(arr, jackpot);
+    
+      const test = isInclude(aData.data, jackpot);
       setChecked(test)
-    })
+
   }
 
   return(
     <>
     <Head>
-        <title>Power</title>
+        <title>Combo 45</title>
       </Head>
+      <Grid container spacing={1} justifyContent="space-between">
+      <Grid item lg={1} sm={1}>
+        <button type='button' className='pure-material-button-contained' onClick={() => {
+            router.push('/')
+          }}>
+            /
+        </button>
+      </Grid>
+      </Grid>
 
 <Grid container alignItems={'center'} justifyContent={'flex-start'}>
       <Grid item xs={8} sm={5} lg={4}>
@@ -432,9 +435,12 @@ import axios from 'axios';
 
 export async function getServerSideProps(context) {
   let aData = {
-    basepath: process.env.basepath
+    basepath: process.env.basepath,
+    data: []
   }
 
+  const reverb = await axios.get(process.env.basepath + '/api/getResult45'); // get results term by term
+    aData.data = JSON.parse(reverb.data);
   return {
     props: { aData }, // will be passed to the page component as props
     // props: { data: 'hello'}

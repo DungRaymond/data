@@ -60,8 +60,10 @@ export function Page({aData}) {
   }
 
   const findMost20 = (pick, setState) => {
-    // console.log('here1');
     const pivot = document.getElementById(pick).value;
+    if(!pivot) {
+      setState([]);
+    } else
     if(pivot <= 45) {
       // axios.get(aData.basepath + '/api/getMode45')
       // .then(res => {
@@ -692,7 +694,8 @@ export async function getServerSideProps(context) {
         return each.key + ''
       }
     })
-    // finalData.labels = sortedLabels;
+
+    console.log(sortedLabels);
 
     let sortedData1 = sorted.map((each) => {
       return each.value1

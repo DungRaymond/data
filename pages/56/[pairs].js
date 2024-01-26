@@ -48,11 +48,10 @@ export function Page({aData}) {
   const queryParam = router.query.pairs.split('-');
 
   const findMost20 = (pick, setState) => {
-    // console.log('here1');
     const pivot = document.getElementById(pick).value;
     if(!pivot) {
       setState([]);
-    }
+    } else
     if(pivot <= 55) {
       // axios.get(aData.basepath + '/api/getMode55')
       // .then(res => {
@@ -94,18 +93,18 @@ export function Page({aData}) {
     }
   }
   
-  const printMost12 = (pick) => {
-    console.log(pick);
-    pick.map((each,i) => {
-      return(
-        <Grid item>
-          <h3 key={i}>
-            {each.number} [{each.count}]
-          </h3>
-        </Grid>
-        )
-      })
-  }
+  // const printMost12 = (pick) => {
+  //   console.log(pick);
+  //   pick.map((each,i) => {
+  //     return(
+  //       <Grid item>
+  //         <h3 key={i}>
+  //           {each.number} [{each.count}]
+  //         </h3>
+  //       </Grid>
+  //       )
+  //     })
+  // }
 
   const setTerm = () => {
     const param1 = document.getElementById('first').value || queryParam[0];
@@ -699,6 +698,7 @@ export async function getServerSideProps(context) {
       }
     })
 
+    console.log(sortedLabels);
     // DEPRECATED
 
     let sortedData1 = sorted.map((each) => {
