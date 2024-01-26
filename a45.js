@@ -12,7 +12,7 @@ async function makeAnalytic45(){
     
     for await (let item of each.jackpot){
       // console.log(item -1);
-      let index = item -1;
+      let index = item - 1;
       temp[index] += 1;
       // console.log('here3')
     }

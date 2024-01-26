@@ -290,7 +290,7 @@ export function Page({aData}) {
     <Grid item container sm={12} lg={11}>
       {last40.map((each) => {
           return (
-            <Grid item lg={3} xs={4} sm={4} borderRight="2px solid black">
+            <Grid item lg={4} xs={4} sm={4} borderRight="2px solid black">
               <>
                 <p>
                   <span className="bongterm">{each.term}</span>
@@ -329,7 +329,7 @@ export function Page({aData}) {
             <Grid item container sm={12} lg={12}>
               {termplus6.map((each) => {
                   return (
-                    <Grid item lg={3} xs={4} sm={4} borderRight="2px solid black">
+                    <Grid item lg={4} xs={4} sm={4} borderRight="2px solid black">
                       <>
                         <p>
                           <span className="bongterm2">{each.term}</span>

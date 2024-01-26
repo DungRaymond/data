@@ -111,7 +111,7 @@ export default function Page({aData}) {
       <Grid item container sm={12} lg={11}>
         {pair.map((each) => {
           return (
-            <Grid item lg={3} xs={6} sm={6}>
+            <Grid item lg={4} xs={6} sm={6}>
               <span>
                 <h2>
                   <span className="bongterm">{each.term}</span>
