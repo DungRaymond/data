@@ -18,7 +18,7 @@ async function lott645() {
     DoSearch(true);
     const waitres = await waitUI();
     let ngayquay = document.getElementsByTagName('td')[0];
-    let kyquay = document.getElementsByTagName('a')[98];
+    let kyquay = document.getElementsByTagName('a')[99];
     let bongtron = document.getElementsByTagName('span');
     let result = {
       date : ngayquay.innerHTML,
