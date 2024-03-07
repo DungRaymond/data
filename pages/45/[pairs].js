@@ -31,7 +31,9 @@ import { useRouter } from 'next/router'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.weight = '700';
+ChartJS.defaults.font.weight = '500';
+ChartJS.defaults.font.size = 18;
+
 export function Page({aData}) {
   const [pick1, setPick1] = useState([])
   const [pick2, setPick2] = useState([])
@@ -50,7 +52,6 @@ export function Page({aData}) {
   // console.log(aData.data.datasets);
 
   const matches = useMediaQuery('(max-width: 896px)', {defaultMatches: true})
-  ChartJS.defaults.font.size = 18;
 
   const setTerm = () => {
     const param1 = document.getElementById('first').value || queryParam[0];
