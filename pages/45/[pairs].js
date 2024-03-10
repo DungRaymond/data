@@ -359,6 +359,10 @@ export function Page({aData}) {
                 })}
             </Grid>
 
+            <Grid container sx={{height: '36vh', width: '1880px'}}>
+              <Bar options={aData.options} data={aData.data} />
+            </Grid>
+
       </Grid>
 
       <br/>
