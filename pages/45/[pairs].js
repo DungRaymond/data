@@ -215,7 +215,7 @@ export function Page({aData}) {
     </Grid>
           <br/>
 
-    <Grid container sx={{height: '36vh', width: '1880px'}}>
+    <Grid container sx={{height: '46vh', width: '1880px'}}>
       <Bar options={aData.options} data={aData.data} />
     </Grid>
 
@@ -361,7 +361,7 @@ export function Page({aData}) {
 
 {/* SECTION */}
 {/* //bar2 */}
-            <Grid container sx={{height: '36vh', width: '1880px'}}>
+            <Grid container sx={{height: '46vh', width: '1880px'}}>
               <Bar options={aData.options} data={aData.data} />
             </Grid>
 
