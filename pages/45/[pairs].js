@@ -359,8 +359,8 @@ export function Page({aData}) {
                 })}
             </Grid>
 
-//SECTION
-//bar2
+{/* SECTION */}
+{/* //bar2 */}
             <Grid container sx={{height: '36vh', width: '1880px'}}>
               <Bar options={aData.options} data={aData.data} />
             </Grid>

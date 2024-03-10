@@ -360,6 +360,11 @@ export function Page({aData}) {
                 })}
             </Grid>
 
+            <Grid container sx={{width: '2220px', height: '36vh'}}>
+              <Bar options={aData.options} data={aData.data} />
+            </Grid>
+            <br/>
+
       </Grid>
 
       <br/>
