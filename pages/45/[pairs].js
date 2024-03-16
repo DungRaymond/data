@@ -66,19 +66,6 @@ export function Page({aData}) {
       setState([]);
     } else
     if(pivot <= 45) {
-      // axios.get(aData.basepath + '/api/getMode45')
-      // .then(res => {
-      //   let arr = JSON.parse(res.data)
-      //   arr = arr[pivot - 1].modeList;
-      //   let sliced = arr.slice(0, pivot - 1);
-      //   sliced = sliced.concat(arr.slice(pivot, arr.length))
-        
-      //   let sorted = sliced.sort((a,b) => {
-      //     return b.count - a.count
-      //   })
-  
-      //   setState(sorted.slice(0, 24))
-      // })
 
       let arr = aData.getMode
       arr = arr[pivot - 1].modeList;
@@ -107,7 +94,7 @@ export function Page({aData}) {
     }
   }
 
-  const findLast40 = (event) => {
+  const findLast40 = (event, box) => {
     if(event.key === 'Enter') {
       const count = document.getElementById('last40Input').value;
       axios.get(aData.basepath + '/api/getResult45')
@@ -226,10 +213,10 @@ export function Page({aData}) {
     
     {[['pick1', pick1, setPick1],['pick2', pick2, setPick2],
     ['pick3', pick3, setPick3], ['pick4', pick4, setPick4], 
-    ['pick5', pick5, setPick5], ['pick6', pick6, setPick6]].map((each) => {
+    ['pick5', pick5, setPick5], ['pick6', pick6, setPick6]].map((each,i) => {
       return (
         <>
-          <Grid container spacing={1}>
+          <Grid container spacing={1} key={"pick" + i}>
             <Grid item xs={1}>
               <input className='textInput' type='text' id={each[0]} 
               onKeyDown={(event) => {
@@ -275,14 +262,14 @@ export function Page({aData}) {
               findLast40(event)
       }} />
 
-    <input className='textInput' type='text' id={"last40Indicator"} onKeyDown={event => {
-              findLast40(event)
+    <input className='textInput box1' type='text' id={"last40Indicator"} onKeyDown={event => {
+              findLast40(event,'box1')
       }} />
-      <input className='textInput' type='text' id={"last40Indicator2"} onKeyDown={event => {
-              findLast40(event)
+      <input className='textInput box2' type='text' id={"last40Indicator2"} onKeyDown={event => {
+              findLast40(event, 'box2')
       }} />
-    <input className='textInput' type='text' id={"last40Indicator3"} onKeyDown={event => {
-              findLast40(event)
+    <input className='textInput box3' type='text' id={"last40Indicator3"} onKeyDown={event => {
+              findLast40(event, 'box3')
       }} />
 
       <br/>
@@ -646,6 +633,24 @@ export function Page({aData}) {
       #latest_result > span:first-child {
         margin-left: 4px;
         border-left: none;
+      }
+      .box1 {
+        border: 1px solid black;
+        border-radius: 3px;
+        background-color: RGB(255,235,17,0.7);
+        text-align: center;
+      }
+      .box2 {
+        border: 1px solid black;
+        border-radius: 3px;
+        background-color: RGB(117,6,229,0.7);
+        text-align: center;
+      }
+      .box3 {
+        border: 1px solid black;
+        border-radius: 3px;
+        background-color: rgb(211,6,6,0.7);
+        text-align: center;
       }
     `}</style>
   </>
