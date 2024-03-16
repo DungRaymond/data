@@ -81,7 +81,7 @@ export function Page({aData}) {
     }
   }
   const findByTerm = (event)  => {
-    if(event.code === 'Enter') {
+    if(event.key === 'Enter') {
       const count = document.getElementById('term').value;
       // axios.get(aData.basepath + '/api/getResult55')
       // .then(res => {
@@ -115,7 +115,7 @@ export function Page({aData}) {
   }
 
   const findLast40 = (event) => {
-    if(event.code === 'Enter') {
+    if(event.key === 'Enter') {
       const count = document.getElementById('last40Input').value;
       // axios.get(aData.basepath + '/api/getResult55')
       // .then(res => {
@@ -183,17 +183,17 @@ export function Page({aData}) {
       <Grid item sm={4}>
         <div className='numberInput'>
           <input className='textInput' type='text' id='first' onKeyDown={(event) => {
-            if(event.code === 'Enter') {
+            if(event.key === 'Enter') {
               setTerm()
             }
           }}/>
           <input className='textInput' type='text' id='second' onKeyDown={(event) => {
-            if(event.code === 'Enter') {
+            if(event.key === 'Enter') {
               setTerm()
             }
           }}/>
           <input className='textInput' type='text' id='third' onKeyDown={(event) => {
-            if(event.code === 'Enter') {
+            if(event.key === 'Enter') {
               setTerm()
             }
           }}/>
@@ -244,7 +244,7 @@ export function Page({aData}) {
             <Grid item xs={1}>
               <input className='textInput' type='text' id={each[0]} 
               onKeyDown={(event) => {
-                if(event.code === 'Enter') {
+                if(event.key === 'Enter') {
                   findMost20(each[0], each[2]);
                 }
               }}/>
