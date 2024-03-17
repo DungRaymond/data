@@ -709,7 +709,7 @@ export async function getServerSideProps(context) {
       }
     })
 
-    console.log(sortedLabels);
+    // console.log(sortedLabels);
 
     let sortedData1 = sorted.map((each) => {
       return each.value1
