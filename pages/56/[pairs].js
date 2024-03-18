@@ -83,29 +83,11 @@ export function Page({aData}) {
     if(event.key === 'Enter') {
       event.preventDefault();
       const count = document.getElementById('term').value;
-      // axios.get(aData.basepath + '/api/getResult55')
-      // .then(res => {
-      //   let arr = (JSON.parse(res.data))
-      //   let slicedArr = arr.slice(count - 4, count - 0 + 2);
-      //   setTermplus6(slicedArr)
-      // })
       let slicedArr = aData.getResult.slice(count - 4, count - 0 + 2);
       setTermplus6(slicedArr)
     }
   }
   
-  // const printMost12 = (pick) => {
-  //   console.log(pick);
-  //   pick.map((each,i) => {
-  //     return(
-  //       <Grid item>
-  //         <h3 key={i}>
-  //           {each.number} [{each.count}]
-  //         </h3>
-  //       </Grid>
-  //       )
-  //     })
-  // }
 
   const setTerm = () => {
     const param1 = document.getElementById('first').value || queryParam[0];
@@ -117,12 +99,6 @@ export function Page({aData}) {
   const findLast40 = (event) => {
     if(event.key === 'Enter') {
       const count = document.getElementById('last40Input').value;
-      // axios.get(aData.basepath + '/api/getResult55')
-      // .then(res => {
-      //   let arr = (JSON.parse(res.data))
-      //   let slicedArr = arr.slice(arr.length - count, arr.length);
-      //   setLast40(slicedArr)
-      // })
       let arr = aData.getResult
       let slicedArr = arr.slice(arr.length - count, arr.length);
       setLast40(slicedArr)
@@ -278,15 +254,15 @@ export function Page({aData}) {
     <input className='textInput' type='text' id={"last40Input"} onKeyDown={event => {
               findLast40(event)
       }} />
-    <input className='textInput' type='text' id={"last40Indicator"} onKeyDown={event => {
-              findLast40(event)
-      }} />
-    <input className='textInput' type='text' id={"last40Indicator2"} onKeyDown={event => {
-              findLast40(event)
-      }} />
-    <input className='textInput' type='text' id={"last40Indicator3"} onKeyDown={event => {
-              findLast40(event)
-      }} />
+        <input className='textInput box1' type='text' id={"last40Indicator"} onKeyDown={event => {
+                  findLast40(event,'box1')
+          }} />
+          <input className='textInput box2' type='text' id={"last40Indicator2"} onKeyDown={event => {
+                  findLast40(event, 'box2')
+          }} />
+        <input className='textInput box3' type='text' id={"last40Indicator3"} onKeyDown={event => {
+                  findLast40(event, 'box3')
+          }} />
 
       <br/>
 
@@ -647,6 +623,23 @@ export function Page({aData}) {
         .pure-material-button-contained:disabled::after {
           opacity: 0;
         }
+        .box1 {
+          border: 1px solid black;
+          border-radius: 3px;
+          background-color: RGB(255,235,17,0.7);
+          text-align: center;
+        }
+        .box2 {
+          border: 1px solid black;
+          border-radius: 3px;
+          background-color: RGB(117,6,229,0.7);
+          text-align: center;
+        }
+        .box3 {
+          border: 1px solid black;
+          border-radius: 3px;
+          background-color: rgb(211,6,6,0.7);
+          text-align: center;
     `}</style>
   </>
   )

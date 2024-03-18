@@ -349,12 +349,12 @@ export function Page({aData}) {
 
 {/* SECTION */}
 {/* //bar2 */}
-            <Grid container sx={{height: '46vh', width: '1880px'}}>
-              <Bar options={aData.options} data={aData.data} />
-            </Grid>
 
 
       </Grid>
+            <Grid container sx={{height: '46vh', width: '1880px'}}>
+              <Bar options={aData.options} data={aData.data} />
+            </Grid>
 
       <br/>
       <br/>
