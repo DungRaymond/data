@@ -9,7 +9,7 @@ function waitUI() {
 
 
 async function lott655() {
-  for(let i = 3; i >= 1; i--) {
+  for(let i = 1; i >= 0; i--) {
     let chonkyquay = document.getElementsByTagName('select')[1];
     // let doso = document.getElementsByClassName('choi_ngay')[11];
     chonkyquay.options[i].selected = true;
@@ -17,7 +17,7 @@ async function lott655() {
     DoSearch(true);
     const waitres = await waitUI();
     let ngayquay = document.getElementsByTagName('td')[0];
-    let kyquay = document.getElementsByTagName('a')[95];
+    let kyquay = document.getElementsByTagName('a')[96];
     let bongtron = document.getElementsByTagName('span');
     let result = {
       date : ngayquay.innerHTML,
