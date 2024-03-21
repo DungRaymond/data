@@ -13,7 +13,7 @@ export default function Page({aData}) {
 
 
   const findByCombo = (event) => {
-    if(event.code === 'Enter') {
+    if(event.key === 'Enter') {
       const param1 = document.getElementById('has1').value;
       const param2 = document.getElementById('has2').value;
       const param3 = document.getElementById('has3').value;
