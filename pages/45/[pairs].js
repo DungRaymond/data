@@ -258,19 +258,25 @@ export function Page({aData}) {
     {/** PART 3 */}
 
 
-    <input className='textInput' type='text' id={"last40Input"} onKeyDown={event => {
-              findLast40(event)
-      }} />
+        <input className='textInput' type='text' id={"last40Input"} onKeyDown={event => {
+                  findLast40(event)
+          }} />
 
-    <input className='textInput box1' type='text' id={"last40Indicator"} onKeyDown={event => {
-              findLast40(event,'box1')
-      }} />
-      <input className='textInput box2' type='text' id={"last40Indicator2"} onKeyDown={event => {
-              findLast40(event, 'box2')
-      }} />
-    <input className='textInput box3' type='text' id={"last40Indicator3"} onKeyDown={event => {
-              findLast40(event, 'box3')
-      }} />
+        <input className='textInput box1' type='text' id={"last40Indicator"} onKeyDown={event => {
+                  findLast40(event,'box1')
+          }} />
+          <input className='textInput box2' type='text' id={"last40Indicator2"} onKeyDown={event => {
+                  findLast40(event, 'box2')
+          }} />
+        <input className='textInput box3' type='text' id={"last40Indicator3"} onKeyDown={event => {
+                  findLast40(event, 'box3')
+          }} />
+        <input className='textInput box4' type='text' id={"last40Indicator4"} onKeyDown={event => {
+                  findLast40(event, 'box4')
+          }} />
+        <input className='textInput box5' type='text' id={"last40Indicator5"} onKeyDown={event => {
+                  findLast40(event, 'box5')
+          }} />
 
       <br/>
       <br/>
@@ -290,15 +296,41 @@ export function Page({aData}) {
                     const param1 = document.getElementById('last40Indicator').value;
                     const param2 = document.getElementById('last40Indicator2').value;
                     const param3 = document.getElementById('last40Indicator3').value;
+                    const param4 = document.getElementById('last40Indicator4').value;
+                    const param5 = document.getElementById('last40Indicator5').value;
                     let psyBong = parseInt(bong)
-                    if(psyBong == parseInt(param1) || psyBong == parseInt(param2) || psyBong == parseInt(param3)){
-                      return <span className='bongcloud-white'>
-                        {bong}
-                      </span>
+                    switch(psyBong) {
+                      case parseInt(param1):
+                        return <span className='bongcloud-green'>
+                          {bong}
+                        </span>;
+                        break;
+                      case parseInt(param2):
+                        return <span className='bongcloud-purple'>
+                          {bong}
+                        </span>;
+                        break;
+                      case parseInt(param3):
+                        return <span className='bongcloud-red'>
+                          {bong}
+                        </span>;
+                        break;
+                      case parseInt(param4):
+                        return <span className='bongcloud-orange'>
+                          {bong}
+                        </span>;
+                        break;
+                      case parseInt(param5):
+                        return <span className='bongcloud-pink'>
+                          {bong}
+                        </span>;
+                        break;
+                      default:
+                        return <span className='bongcloud'>
+                          {bong}
+                        </span>
+
                     }
-                    return <span className='bongcloud'>
-                      {bong}
-                    </span>
                   })}
                 </p>
 
@@ -413,7 +445,8 @@ export function Page({aData}) {
     }
     .bongcloud {
       border-left: 1px black solid;
-      background-color: orange;
+      background-color: rgb(54,54,54,0.9);
+      color: yellow;
       font-family: 'Roboto', sans-serif;
       border-radius: 5px;
       margin-left: 3px;
@@ -424,16 +457,60 @@ export function Page({aData}) {
     .bongcloud:last-child {
       margin-right: 0;
     }
-    .bongcloud-white {
-      border: 1px black solid;
-      background-color: black;
+    .bongcloud-green {
+      border: 2px black solid;
+      background-color: RGB(37,160,9,0.7);
       border-radius: 5px;
       margin-left: 3px;
       padding: 0 1px;
       padding-right: 2px;
-      color: white;
+      color: black;
       font-family: 'Roboto', sans-serif;
-      font-size: 1.2em;
+      font-size: 1.3em;
+    }
+    .bongcloud-purple {
+      border: 2px black solid;
+      background-color: RGB(168,5,252,0.9);
+      border-radius: 5px;
+      margin-left: 3px;
+      padding: 0 1px;
+      padding-right: 2px;
+      color: black;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.3em;
+    }
+    .bongcloud-red {
+      border: 2px black solid;
+      background-color: RGB(255,15,15,0.7);
+      border-radius: 5px;
+      margin-left: 3px;
+      padding: 0 1px;
+      padding-right: 2px;
+      color: black;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.3em;
+    }
+    .bongcloud-orange {
+      border: 2px black solid;
+      background-color: orange;
+      border-radius: 5px;
+      margin-left: 3px;
+      padding: 0 1px;
+      padding-right: 2px;
+      color: black;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.3em;
+    }
+    .bongcloud-pink {
+      border: 2px black solid;
+      background-color: RGB(206,114,203,0.7);
+      border-radius: 5px;
+      margin-left: 3px;
+      padding: 0 1px;
+      padding-right: 2px;
+      color: black;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.3em;
     }
     .bongcloud-white:last-child {
       margin-right: 0;
@@ -637,7 +714,7 @@ export function Page({aData}) {
       .box1 {
         border: 1px solid black;
         border-radius: 3px;
-        background-color: RGB(255,235,17,0.7);
+        background-color: RGB(37,160,9,0.7);
         text-align: center;
       }
       .box2 {
@@ -650,6 +727,18 @@ export function Page({aData}) {
         border: 1px solid black;
         border-radius: 3px;
         background-color: rgb(211,6,6,0.7);
+        text-align: center;
+      }
+      .box4 {
+        border: 1px solid black;
+        border-radius: 3px;
+        background-color: orange;
+        text-align: center;
+      }
+      .box5 {
+        border: 1px solid black;
+        border-radius: 3px;
+        background-color: RGB(206,114,203,0.7);
         text-align: center;
       }
     `}</style>
