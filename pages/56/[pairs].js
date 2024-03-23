@@ -717,7 +717,7 @@ export function Page({aData}) {
         .box4 {
           border: 1px solid black;
           border-radius: 3px;
-          background-color: RGB(73,73,73,0.7);
+          background-color: orange;
           text-align: center;
         }
         .box5 {
