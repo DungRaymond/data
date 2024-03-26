@@ -11,11 +11,11 @@ export function HomePage() {
       }}>
         Mega
       </button>
-      <button type='button' className='pure-material-button-contained' onClick={() => {
+      {/* <button type='button' className='pure-material-button-contained' onClick={() => {
         router.push("/55/0-947-987")
       }}>
         Power
-      </button>
+      </button> */}
       <button type='button' className='pure-material-button-contained' onClick={() => {
         router.push("/56/0-947-987")
       }}>
@@ -33,11 +33,11 @@ export function HomePage() {
       }}>
         Combo 55
       </button>
-      <button type='button' className='pure-material-button-contained' onClick={() => {
+      {/* <button type='button' className='pure-material-button-contained' onClick={() => {
         router.push("/combo/56")
       }}>
         Combo 56
-      </button>
+      </button> */}
     </div>
     
     <style jsx>{

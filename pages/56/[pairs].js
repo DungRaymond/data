@@ -53,20 +53,6 @@ export function Page({aData}) {
       setState([]);
     } else
     if(pivot <= 55) {
-      // axios.get(aData.basepath + '/api/getMode55')
-      // .then(res => {
-      //   let arr = JSON.parse(res.data)
-      //   arr = arr[pivot - 1].modeList;
-      //   let sliced = arr.slice(0, pivot - 1);
-      //   sliced = sliced.concat(arr.slice(pivot, arr.length))
-        
-      //   let sorted = sliced.sort((a,b) => {
-      //     return b.count - a.count
-      //   })
-  
-      //   setState(sorted.slice(0, 24))
-      // })
-
       let arr = aData.getMode
       arr = arr[pivot - 1].modeList;
       let sliced = arr.slice(0, pivot - 1);
@@ -216,8 +202,8 @@ export function Page({aData}) {
     ['pick5', pick5, setPick5], ['pick6', pick6, setPick6]].map((each) => {
       return (
         <>
-          <Grid container spacing={1}>
-            <Grid item xs={1}>
+          <Grid container spacing={0}>
+            <Grid item xs={0}>
               <input className='textInput' type='text' id={each[0]} 
               onKeyDown={(event) => {
                 if(event.key === 'Enter') {
@@ -230,7 +216,7 @@ export function Page({aData}) {
 
               {each[1].map((each,i) => {
                 return(
-                  <Grid item xs={1} textAlign={'center'} >
+                  <Grid item xs={0.5} textAlign={'center'} >
                     <p className='pairShow' key={i}>
                       {each.number} 
                       <span className='pairCount'>
