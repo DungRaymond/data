@@ -35,6 +35,8 @@ ChartJS.defaults.font.weight = '700';
 
 export function Page({aData}) {
 
+  const plainArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]
+
   const [pick1, setPick1] = useState([])
   const [pick2, setPick2] = useState([])
   const [pick3, setPick3] = useState([])
@@ -43,6 +45,12 @@ export function Page({aData}) {
   const [pick6, setPick6] = useState([])
   const [termplus6, setTermplus6] = useState([])
   const [last40, setLast40] = useState([])
+  const [next1, setNext1] = useState([])
+  const [next2, setNext2] = useState([])
+  const [next3, setNext3] = useState([])
+  const [next4, setNext4] = useState([])
+  const [next5, setNext5] = useState([])
+  const [next6, setNext6] = useState([])
 
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
@@ -65,6 +73,29 @@ export function Page({aData}) {
       setState(sorted.slice(0, 24))
     }
   }
+
+  const findAllNext = (pick, setState) => {
+    const pivot = document.getElementById(pick).value;
+    let arr = aData.data;
+    if(!pivot) {
+      setState([]);
+    } else
+    if(pivot <= 55) {
+      arr = arr.filter((item) => {
+        return item.ketqua.includes(pivot < 10 ? '0' + pivot : pivot)
+      })
+
+      // sort
+
+      //
+
+      setState(includeArr)
+
+    }
+  }
+
+
+  //
   const findByTerm = (event)  => {
     if(event.key === 'Enter') {
       event.preventDefault();
@@ -197,9 +228,9 @@ export function Page({aData}) {
     </Grid>
 
 
-    {[['pick1', pick1, setPick1],['pick2', pick2, setPick2],
-    ['pick3', pick3, setPick3], ['pick4', pick4, setPick4], 
-    ['pick5', pick5, setPick5], ['pick6', pick6, setPick6]].map((each) => {
+    {[['pick1', pick1, setPick1, next1, setNext1],['pick2', pick2, setPick2, next2, setNext2],
+    ['pick3', pick3, setPick3, next3, setNext3], ['pick4', pick4, setPick4, next4, setNext4], 
+    ['pick5', pick5, setPick5, next5, setNext5], ['pick6', pick6, setPick6, next6, setNext6]].map((each) => {
       return (
         <>
           <Grid container spacing={0}>
@@ -208,6 +239,7 @@ export function Page({aData}) {
               onKeyDown={(event) => {
                 if(event.key === 'Enter') {
                   findMost20(each[0], each[2]);
+                  
                 }
               }}/>
             </Grid>
@@ -216,18 +248,33 @@ export function Page({aData}) {
 
               {each[1].map((each,i) => {
                 return(
-                  <Grid item xs={1} sm={0.5} textAlign={'center'} >
-                    <p className='pairShow' key={i}>
-                      {each.number} 
-                      <span className='pairCount'>
-                        <br/>
-                        {each.count}
+                  <>
+                    <Grid item xs={1} sm={0.5} textAlign={'center'} >
+                      <p className='pairShow' key={i}>
+                        {each.number} 
+                        <span className='pairCount'>
+                          <br/>
+                          {each.count}
 
-                      </span>
-                    </p>
-                  </Grid>
+                        </span>
+                      </p>
+                    </Grid>              
+                  </>
                   )
                 })}
+
+              {each[3].map((each, i) => {
+                return(
+                  <>
+                    <Grid item xs={1} sm={0.5}>
+                      <p key={i}>{each}</p>
+                    </Grid>  
+                  </>
+                )
+              })}                
+
+
+
             </Grid>
 
           </Grid>

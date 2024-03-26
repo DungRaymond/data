@@ -3,4 +3,5 @@ Thay đổi lại cách render data của các bar = các input vì vốn đã l
 Thêm css màu cho các ball số trùng qua các kỳ
 Làm chức năng sort theo last cùng với total. Nói chung là theo range tùy chọn
 
-Làm trước chức năng thống kê những số xuất hiện sau khi 1 số xuất hiếnj
+Làm trước chức năng thống kê những số xuất hiện sau khi 1 số xuất hiện
+                                                        2 số xuất hiện
