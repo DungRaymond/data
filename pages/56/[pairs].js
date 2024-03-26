@@ -216,7 +216,7 @@ export function Page({aData}) {
 
               {each[1].map((each,i) => {
                 return(
-                  <Grid item xs={0.5} textAlign={'center'} >
+                  <Grid item xs={1} sm={0.5} textAlign={'center'} >
                     <p className='pairShow' key={i}>
                       {each.number} 
                       <span className='pairCount'>
