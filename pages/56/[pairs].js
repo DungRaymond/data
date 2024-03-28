@@ -82,7 +82,7 @@ export function Page({aData}) {
     } else
     if(pivot <= 55) {
       let temp = [];
-      for(let i = 0; i < arr.length; i++) {
+      for(let i = 0; i < arr.length - 1; i++) {
         if(arr[i].ketqua.includes(pivot < 10 ? '0' + pivot : pivot)) {
           temp.push(...arr[i+1].ketqua)
         }
@@ -100,7 +100,6 @@ export function Page({aData}) {
       let sliced = sorted.filter(item => {
         return (item[0] - pivot != 0)
       })
-      console.log(sliced);
 
       setState(sliced.slice(0,24))
 
@@ -851,7 +850,6 @@ export async function getServerSideProps(context) {
       }
     })
 
-    console.log(sortedLabels);
     // DEPRECATED
 
     let sortedData1 = sorted.map((each) => {
