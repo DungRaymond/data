@@ -240,6 +240,7 @@ export function Page({aData}) {
       
     </Grid>
 
+{/* //SECTION single number review */}
 
     {[['pick1', pick1, setPick1, next1, setNext1],['pick2', pick2, setPick2, next2, setNext2],
     ['pick3', pick3, setPick3, next3, setNext3], ['pick4', pick4, setPick4, next4, setNext4], 
@@ -279,10 +280,10 @@ export function Page({aData}) {
               {each[3].map((each, i) => {
                 return(
                   <>
-                      <Grid item xs={1} sm={0.5}>
-                        <p className='pairShow' key={i}>
+                      <Grid item xs={1} sm={0.5} textAlign={'center'}>
+                        <p className='pairShow2' key={i}>
                           {each[0]}
-                          <span className='pairCount'>
+                          <span className='pairCount2'>
                           <br/>
                           {each[1]}
 
@@ -447,6 +448,20 @@ export function Page({aData}) {
       font-size: 18px;
     }
     .pairCount {
+      font-weight: 700;
+      font-size: 17px;
+      color: brown;
+      font-family: 'Roboto', sans-serif;
+    }
+    .pairShow2 {
+      font-weight: 900;
+      font-family: 'Roboto', sans-serif;
+      background-color: rgb(139, 224, 222, 0.6);
+      color: ;
+      margin-right: 4px;
+      font-size: 18px;
+    }
+    .pairCount2 {
       font-weight: 700;
       font-size: 17px;
       color: brown;
