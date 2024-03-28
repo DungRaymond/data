@@ -43,7 +43,13 @@ export function Page({aData}) {
   const [pick6, setPick6] = useState([])
   const [last40, setLast40] = useState([])
   const [termplus6, setTermplus6] = useState([])
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
+  const [next1, setNext1] = useState([])
+  const [next2, setNext2] = useState([])
+  const [next3, setNext3] = useState([])
+  const [next4, setNext4] = useState([])
+  const [next5, setNext5] = useState([])
+  const [next6, setNext6] = useState([])
 
   const plainArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45]
 
@@ -77,6 +83,39 @@ export function Page({aData}) {
       })
 
       setState(sorted.slice(0, 24))
+    }
+  }
+
+  const findAllNext = (pick, setState) => {
+    const pivot = document.getElementById(pick).value;
+    let arr = aData.getResult;
+    if(!pivot) {
+      setState([]);
+    } else
+    if(pivot <= 45) {
+      let temp = [];
+      for(let i = 0; i < arr.length; i++) {
+        if(arr[i].jackpot.includes(pivot < 10 ? '0' + pivot : pivot)) {
+          temp.push(...arr[i+1].jackpot)
+        }
+      }
+      let items = {};
+      temp.forEach(function(x) { 
+        items[x] = (items[x] || 0)+1;
+      });
+
+      
+      let itemsArr = Object.keys(items).map((key) => [key, items[key]]);
+      let sorted = itemsArr.sort((a,b) => {
+        return b[1] - a[1];
+      })
+      let sliced = sorted.filter(item => {
+        return (item[0] - pivot != 0)
+      })
+      console.log(sliced);
+
+      setState(sliced.slice(0,24))
+
     }
   }
 
@@ -211,9 +250,9 @@ export function Page({aData}) {
 
     <br/>
     
-    {[['pick1', pick1, setPick1],['pick2', pick2, setPick2],
-    ['pick3', pick3, setPick3], ['pick4', pick4, setPick4], 
-    ['pick5', pick5, setPick5], ['pick6', pick6, setPick6]].map((each,i) => {
+    {[['pick1', pick1, setPick1, next1, setNext1],['pick2', pick2, setPick2, next2, setNext2],
+    ['pick3', pick3, setPick3, next3, setNext3], ['pick4', pick4, setPick4, next4, setNext4], 
+    ['pick5', pick5, setPick5, next5, setNext5], ['pick6', pick6, setPick6, next6, setNext6]].map((each,i) => {
       return (
         <>
           <Grid container spacing={1} key={"pick" + i}>
@@ -222,6 +261,7 @@ export function Page({aData}) {
               onKeyDown={(event) => {
                 if(event.key === 'Enter') {
                   findMost20(each[0], each[2]);
+                  findAllNext(each[0], each[4])
                 }
               }}/>
             </Grid>
@@ -229,19 +269,36 @@ export function Page({aData}) {
             <Grid item container sm={12}>
 
               {each[1].map((each,i) => {
-                return(
-                  <Grid item xs={1} sm={0.5} textAlign={'center'}>
-                    <p className='pairShow' key={i}>
-                      {each.number} 
-                      <span className='pairCount'>
-                        <br/>
-                        {each.count}
+                  return(
+                    <>
+                      <Grid item xs={1} sm={0.5} textAlign={'center'} >
+                        <p className='pairShow' key={i}>
+                          {each.number} 
+                          <span className='pairCount'>
+                            <br/>
+                            {each.count}
 
-                      </span>
-                    </p>
-                  </Grid>
+                          </span>
+                        </p>
+                      </Grid>              
+                    </>
+                    )
+                  })}
+
+                {each[3].map((each, i) => {
+                  return(
+                    <>
+                      <Grid item xs={1} sm={3}>
+                        <p className='pairShow' key={i}>
+                          {each}
+                        </p>
+                      </Grid>  
+                    </>
                   )
-                })}
+                })}   
+
+
+
             </Grid>
 
           </Grid>

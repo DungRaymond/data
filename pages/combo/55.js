@@ -155,7 +155,7 @@ export default function Page({aData}) {
           return (
             <Grid item md={2} sm={3}>
               <input className='textInput nb' type='text' id={"check" + each} onKeyDown={(event) => {
-                if(event.code === "Enter") {
+                if(event.key === "Enter") {
                   findAllCombo()
                 }
               }}/>

@@ -76,20 +76,33 @@ export function Page({aData}) {
 
   const findAllNext = (pick, setState) => {
     const pivot = document.getElementById(pick).value;
-    let arr = aData.data;
+    let arr = aData.getResult;
     if(!pivot) {
       setState([]);
     } else
     if(pivot <= 55) {
-      arr = arr.filter((item) => {
-        return item.ketqua.includes(pivot < 10 ? '0' + pivot : pivot)
+      let temp = [];
+      for(let i = 0; i < arr.length; i++) {
+        if(arr[i].ketqua.includes(pivot < 10 ? '0' + pivot : pivot)) {
+          temp.push(...arr[i+1].ketqua)
+        }
+      }
+      let items = {};
+      temp.forEach(function(x) { 
+        items[x] = (items[x] || 0)+1;
+      });
+
+      
+      let itemsArr = Object.keys(items).map((key) => [key, items[key]]);
+      let sorted = itemsArr.sort((a,b) => {
+        return b[1] - a[1];
       })
+      let sliced = sorted.filter(item => {
+        return (item[0] - pivot != 0)
+      })
+      console.log(sliced);
 
-      // sort
-
-      //
-
-      setState(includeArr)
+      setState(sliced.slice(0,24))
 
     }
   }
@@ -239,7 +252,7 @@ export function Page({aData}) {
               onKeyDown={(event) => {
                 if(event.key === 'Enter') {
                   findMost20(each[0], each[2]);
-                  
+                  findAllNext(each[0], each[4])
                 }
               }}/>
             </Grid>
@@ -266,10 +279,17 @@ export function Page({aData}) {
               {each[3].map((each, i) => {
                 return(
                   <>
-                    <Grid item xs={1} sm={0.5}>
-                      <p key={i}>{each}</p>
-                    </Grid>  
-                  </>
+                      <Grid item xs={1} sm={0.5}>
+                        <p className='pairShow' key={i}>
+                          {each[0]}
+                          <span className='pairCount'>
+                          <br/>
+                          {each[1]}
+
+                        </span>
+                        </p>
+                      </Grid>  
+                    </>
                 )
               })}                
 
