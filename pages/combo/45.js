@@ -130,11 +130,11 @@ export default function Page({aData}) {
                     if(psyBong == parseInt(param1) || psyBong == parseInt(param2) 
                     || psyBong == parseInt(param3) || psyBong == parseInt(param4) 
                     || psyBong == parseInt(param5)){
-                      return <span className='bongcloud-white'>
+                      return <span className='bongcloud-white' key={bong + "key"}>
                         {bong}
                       </span>
                     }
-                    return <span className='bongcloud'>
+                    return <span key={bong + "key"} className='bongcloud'>
                       {bong}
                     </span>
                   })}

@@ -1,7 +1,7 @@
-làm Bar sắp xếp total theo mốc tuỳ chọn (ví dụ lấy phân bổ từ 1-1000 và giữ nguyên phân bổ đó để xem sự thay đổi tần suất)
-Thay đổi lại cách render data của các bar = các input vì vốn đã load toàn bộ data từ server -> không cần slug link nữa
-Làm chức năng sort theo last cùng với total. Nói chung là theo range tùy chọn
 
-Thêm css màu cho các ball số trùng qua các kỳ - done
-Làm trước chức năng thống kê những số xuất hiện sau khi 1 số xuất hiện - done
-                                                        2 số xuất hiện
+Thêm css màu cho các ball số trùng qua các kỳ //TODO
+Làm trước chức năng thống kê những số xuất hiện sau khi 1 số xuất hiện //TODO
+                                                        2 số xuất hiện //FIXME
+làm Bar sắp xếp total theo mốc tuỳ chọn (ví dụ lấy phân bổ từ 1-1000 và giữ nguyên phân bổ đó để xem sự thay đổi tần suất) //FIXME
+Thay đổi lại cách render data của các bar = các input vì vốn đã load toàn bộ data từ server -> không cần slug link nữa //FIXME
+Làm chức năng sort theo last cùng với total. Nói chung là theo range tùy chọn //FIXME
