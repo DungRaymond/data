@@ -9,8 +9,8 @@ function waitUI() {
 
 
 async function lott655() {
-  for(let i = 1; i >= 0; i--) {
-    let chonkyquay = document.getElementsByTagName('select')[1];
+  let chonkyquay = document.getElementsByTagName('select')[1];
+  for(let i = 3; i > 1; i--) {
     // let doso = document.getElementsByClassName('choi_ngay')[11];
     chonkyquay.options[i].selected = true;
     // doso.click();
@@ -42,8 +42,12 @@ async function lott655() {
       magicnum: bongtron[103].innerHTML
     };
     console.log(kyquay.innerHTML)
-    arr55.push(result)
+    result.ketqua ? arr55.push(result) : console.log("-");
   }
+
+  chonkyquay.options[1].selected = true;
+  DoSearch(true);
+  
   
   return arr55;
 }
