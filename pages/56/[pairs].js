@@ -259,23 +259,6 @@ export function Page({aData}) {
 
             <Grid item container sm={12}>
 
-              {each[1].map((each,i) => {
-                return(
-                  <>
-                    <Grid item xs={1} sm={0.5} textAlign={'center'} >
-                      <p className='pairShow' key={i}>
-                        {each.number} 
-                        <span className='pairCount'>
-                          <br/>
-                          {each.count}
-
-                        </span>
-                      </p>
-                    </Grid>              
-                  </>
-                  )
-                })}
-
               {each[3].map((each, i) => {
                 return(
                   <>

@@ -10,7 +10,39 @@ export default function Page({aData}) {
 
   const [checked, setChecked] = useState([])
   const [pair, setPair] = useState([])
+  const [pick1, setPick1] = useState([])
+  const [pick2, setPick2] = useState([])
+  const [pick3, setPick3] = useState([])
+  const [pick4, setPick4] = useState([])
+  const [pick5, setPick5] = useState([])
+  const [pick6, setPick6] = useState([])
+  const [next1, setNext1] = useState([])
+  const [next2, setNext2] = useState([])
+  const [next3, setNext3] = useState([])
+  const [next4, setNext4] = useState([])
+  const [next5, setNext5] = useState([])
+  const [next6, setNext6] = useState([])
 
+
+
+  const findMost20 = (pick, setState) => {
+    const pivot = document.getElementById(pick).value;
+    if(!pivot) {
+      setState([]);
+    } else
+    if(pivot <= 55) {
+      let arr = aData.getMode
+      arr = arr[pivot - 1].modeList;
+      let sliced = arr.slice(0, pivot - 1);
+      sliced = sliced.concat(arr.slice(pivot, arr.length))
+      
+      let sorted = sliced.sort((a,b) => {
+        return b.count - a.count
+      })
+
+      setState(sorted.slice(0, 24))
+    }
+  }
 
   const findByCombo = (event) => {
     if(event.key === 'Enter') {
@@ -211,6 +243,51 @@ export default function Page({aData}) {
           })}
         </Grid>
       </Grid>
+
+      {[['pick1', pick1, setPick1, next1, setNext1],['pick2', pick2, setPick2, next2, setNext2],
+    ['pick3', pick3, setPick3, next3, setNext3], ['pick4', pick4, setPick4, next4, setNext4], 
+    ['pick5', pick5, setPick5, next5, setNext5], ['pick6', pick6, setPick6, next6, setNext6]].map((each) => {
+      return (
+        <>
+          <Grid container spacing={0}>
+            <Grid item xs={0}>
+              <input className='textInput' type='text' id={each[0]} 
+              onKeyDown={(event) => {
+                if(event.key === 'Enter') {
+                  findMost20(each[0], each[2]);
+                  findAllNext(each[0], each[4])
+                }
+              }}/>
+            </Grid>
+
+            <Grid item container sm={12}>
+
+              {each[1].map((each,i) => {
+                return(
+                  <>
+                    <Grid item xs={1} sm={0.5} textAlign={'center'} >
+                      <p className='pairShow' key={i}>
+                        {each.number} 
+                        <span className='pairCount'>
+                          <br/>
+                          {each.count}
+
+                        </span>
+                      </p>
+                    </Grid>              
+                  </>
+                  )
+                })}                
+
+
+
+            </Grid>
+
+          </Grid>
+        <hr />
+        </>
+          )
+        })}
 
       <style jsx>{`
      .pairShow {
@@ -434,11 +511,14 @@ import axios from 'axios';
 export async function getServerSideProps(context) {
   let aData = {
     basepath: process.env.basepath,
-    data: []
+    data: [],
+    modeData: []
   }
 
   const reverb = await axios.get(process.env.basepath + '/api/getResult55'); // get results term by term
     aData.data = JSON.parse(reverb.data);
+  const modeList = await axios.get(process.env.basepath + '/api/getMode56');
+    aData.modeData = JSON.parse(modeList.data)
 
   return {
     props: { aData }, // will be passed to the page component as props
