@@ -10,7 +10,7 @@ function waitUI() {
 
 async function lott655() {
   let chonkyquay = document.getElementsByTagName('select')[1];
-  for(let i = 3; i > 1; i--) {
+  for(let i = 1; i > 0; i--) {
     // let doso = document.getElementsByClassName('choi_ngay')[11];
     chonkyquay.options[i].selected = true;
     // doso.click();

@@ -12,7 +12,7 @@ function waitUI() {
 async function lott() {
   let gameIndicator = document.getElementsByTagName('select')[0]
   if(gameIndicator.value == '3') {
-    for(let i = 3; i > 0; i--) {
+    for(let i = 2; i > 1; i--) {
       
       let chonkyquay = document.getElementsByTagName('select')[1];
       // let doso = document.getElementsByClassName('choi_ngay')[13];
