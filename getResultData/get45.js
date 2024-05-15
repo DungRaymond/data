@@ -37,7 +37,6 @@ async function lott() {
       };
       console.log(kyquay.innerHTML)
       result.jackpot ? arr.push(result) : console.log("-");
-      arr.push(result)
   
     }
     return arr;
