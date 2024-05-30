@@ -30,10 +30,12 @@ import isInclude from '../../modules/combination.js'
 
 // PAGE COMPONENT
 
-ChartJS.defaults.font.size = 18;
+ChartJS.defaults.font.size = 17;
 ChartJS.defaults.font.weight = '700';
 
 export function Page({aData}) {
+
+  const plainArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]
 
   const [pick1, setPick1] = useState([])
   const [pick2, setPick2] = useState([])
@@ -43,31 +45,22 @@ export function Page({aData}) {
   const [pick6, setPick6] = useState([])
   const [termplus6, setTermplus6] = useState([])
   const [last40, setLast40] = useState([])
+  const [next1, setNext1] = useState([])
+  const [next2, setNext2] = useState([])
+  const [next3, setNext3] = useState([])
+  const [next4, setNext4] = useState([])
+  const [next5, setNext5] = useState([])
+  const [next6, setNext6] = useState([])
 
   const router = useRouter();
   const queryParam = router.query.pairs.split('-');
 
   const findMost20 = (pick, setState) => {
-    // console.log('here1');
     const pivot = document.getElementById(pick).value;
     if(!pivot) {
       setState([]);
     } else
     if(pivot <= 55) {
-      // axios.get(aData.basepath + '/api/getMode55')
-      // .then(res => {
-      //   let arr = JSON.parse(res.data)
-      //   arr = arr[pivot - 1].modeList;
-      //   let sliced = arr.slice(0, pivot - 1);
-      //   sliced = sliced.concat(arr.slice(pivot, arr.length))
-        
-      //   let sorted = sliced.sort((a,b) => {
-      //     return b.count - a.count
-      //   })
-  
-      //   setState(sorted.slice(0, 24))
-      // })
-
       let arr = aData.getMode
       arr = arr[pivot - 1].modeList;
       let sliced = arr.slice(0, pivot - 1);
@@ -80,32 +73,50 @@ export function Page({aData}) {
       setState(sorted.slice(0, 24))
     }
   }
+
+  const findAllNext = (pick, setState) => {
+    const pivot = document.getElementById(pick).value;
+    let arr = aData.getResult;
+    if(!pivot) {
+      setState([]);
+    } else
+    if(pivot <= 55) {
+      let temp = [];
+      for(let i = 0; i < arr.length - 1; i++) {
+        if(arr[i].jackpot.includes(pivot < 10 ? '0' + pivot : pivot)) {
+          temp.push(...arr[i+1].jackpot)
+        }
+      }
+      let items = {};
+      temp.forEach(function(x) { 
+        items[x] = (items[x] || 0)+1;
+      });
+
+      
+      let itemsArr = Object.keys(items).map((key) => [key, items[key]]);
+      let sorted = itemsArr.sort((a,b) => {
+        return b[1] - a[1];
+      })
+      let sliced = sorted.filter(item => {
+        return (item[0] - pivot != 0)
+      })
+
+      setState(sliced.slice(0,24))
+
+    }
+  }
+
+
+  //
   const findByTerm = (event)  => {
     if(event.key === 'Enter') {
+      event.preventDefault();
       const count = document.getElementById('term').value;
-      // axios.get(aData.basepath + '/api/getResult55')
-      // .then(res => {
-      //   let arr = (JSON.parse(res.data))
-      //   let slicedArr = arr.slice(count - 4, count - 0 + 2);
-      //   setTermplus6(slicedArr)
-      // })
       let slicedArr = aData.getResult.slice(count - 4, count - 0 + 2);
       setTermplus6(slicedArr)
     }
   }
   
-  const printMost12 = (pick) => {
-    console.log(pick);
-    pick.map((each,i) => {
-      return(
-        <Grid item>
-          <h3 key={i}>
-            {each.number} [{each.count}]
-          </h3>
-        </Grid>
-        )
-      })
-  }
 
   const setTerm = () => {
     const param1 = document.getElementById('first').value || queryParam[0];
@@ -117,12 +128,6 @@ export function Page({aData}) {
   const findLast40 = (event) => {
     if(event.key === 'Enter') {
       const count = document.getElementById('last40Input').value;
-      // axios.get(aData.basepath + '/api/getResult55')
-      // .then(res => {
-      //   let arr = (JSON.parse(res.data))
-      //   let slicedArr = arr.slice(arr.length - count, arr.length);
-      //   setLast40(slicedArr)
-      // })
       let arr = aData.getResult
       let slicedArr = arr.slice(arr.length - count, arr.length);
       setLast40(slicedArr)
@@ -224,7 +229,7 @@ export function Page({aData}) {
 
 
     <br/>
-    <Grid container sx={{width: '2040px', height: '36vh'}}>
+    <Grid container sx={{width: '2040px', height: '46vh'}}>
       <Bar options={aData.options} data={aData.data} />
     </Grid>
     <br/>
@@ -234,38 +239,66 @@ export function Page({aData}) {
       
     </Grid>
 
+{/* //SECTION single number review */}
 
-    {[['pick1', pick1, setPick1],['pick2', pick2, setPick2],
-    ['pick3', pick3, setPick3], ['pick4', pick4, setPick4], 
-    ['pick5', pick5, setPick5], ['pick6', pick6, setPick6]].map((each) => {
+    {[['pick1', pick1, setPick1, next1, setNext1],['pick2', pick2, setPick2, next2, setNext2],
+    ['pick3', pick3, setPick3, next3, setNext3], ['pick4', pick4, setPick4, next4, setNext4], 
+    ['pick5', pick5, setPick5, next5, setNext5], ['pick6', pick6, setPick6, next6, setNext6]].map((each) => {
       return (
         <>
-          <Grid container spacing={1}>
-            <Grid item xs={1}>
+          <Grid container spacing={0}>
+            <Grid item xs={0}>
               <input className='textInput' type='text' id={each[0]} 
               onKeyDown={(event) => {
                 if(event.key === 'Enter') {
                   findMost20(each[0], each[2]);
+                  findAllNext(each[0], each[4])
                 }
               }}/>
             </Grid>
 
             <Grid item container sm={12}>
 
-              {each[1].map((each,i) => {
-                return(
-                  <Grid item xs={1} textAlign={'center'} >
-                    <p className='pairShow' key={i}>
-                      {each.number} 
-                      <span className='pairCount'>
+            {each[1].map((each,i) => {
+              return(
+                <>
+                <Grid item xs={1} sm={0.5} textAlign={'center'} >
+                <p className='pairShow' key={i}>
+                {each.number}
+                <span className='pairCount'>
+                <br/>
+                {each.count}
+
+                </span>
+                </p>
+                </Grid>
+                </>
+                )
+              })
+            }
+
+ {/* !SECTION 1 term after */}
+
+            {each[3].map((each, i) => {
+              return(
+                <>
+                    <Grid item xs={1} sm={0.5} textAlign={'center'}>
+                      <p className='pairShow2' key={i}>
+                        {each[0]}
+                        <span className='pairCount2'>
                         <br/>
-                        {each.count}
+                        {each[1]}
 
                       </span>
-                    </p>
-                  </Grid>
-                  )
-                })}
+                      </p>
+                    </Grid>  
+                </>
+                )
+              })
+            }                
+
+
+
             </Grid>
 
           </Grid>
@@ -278,15 +311,21 @@ export function Page({aData}) {
     <input className='textInput' type='text' id={"last40Input"} onKeyDown={event => {
               findLast40(event)
       }} />
-    <input className='textInput' type='text' id={"last40Indicator"} onKeyDown={event => {
-              findLast40(event)
-      }} />
-    <input className='textInput' type='text' id={"last40Indicator2"} onKeyDown={event => {
-              findLast40(event)
-      }} />
-    <input className='textInput' type='text' id={"last40Indicator3"} onKeyDown={event => {
-              findLast40(event)
-      }} />
+        <input className='textInput box1' type='text' id={"last40Indicator"} onKeyDown={event => {
+                  findLast40(event,'box1')
+          }} />
+          <input className='textInput box2' type='text' id={"last40Indicator2"} onKeyDown={event => {
+                  findLast40(event, 'box2')
+          }} />
+        <input className='textInput box3' type='text' id={"last40Indicator3"} onKeyDown={event => {
+                  findLast40(event, 'box3')
+          }} />
+          <input className='textInput box4' type='text' id={"last40Indicator4"} onKeyDown={event => {
+                  findLast40(event, 'box4')
+          }} />
+        <input className='textInput box5' type='text' id={"last40Indicator5"} onKeyDown={event => {
+                  findLast40(event, 'box5')
+          }} />
 
       <br/>
 
@@ -304,15 +343,41 @@ export function Page({aData}) {
                     const param1 = document.getElementById('last40Indicator').value;
                     const param2 = document.getElementById('last40Indicator2').value;
                     const param3 = document.getElementById('last40Indicator3').value;
+                    const param4 = document.getElementById('last40Indicator4').value;
+                    const param5 = document.getElementById('last40Indicator5').value;
                     let psyBong = parseInt(bong)
-                    if(psyBong == parseInt(param1) || psyBong == parseInt(param2) || psyBong == parseInt(param3)){
-                      return <span className='bongcloud-white'>
-                        {bong}
-                      </span>
+                    switch(psyBong) {
+                      case parseInt(param1):
+                        return <span className='bongcloud-green'>
+                          {bong}
+                        </span>;
+                        break;
+                      case parseInt(param2):
+                        return <span className='bongcloud-purple'>
+                          {bong}
+                        </span>;
+                        break;
+                      case parseInt(param3):
+                        return <span className='bongcloud-red'>
+                          {bong}
+                        </span>;
+                        break;
+                      case parseInt(param4):
+                        return <span className='bongcloud-orange'>
+                          {bong}
+                        </span>;
+                        break;
+                      case parseInt(param5):
+                        return <span className='bongcloud-pink'>
+                          {bong}
+                        </span>;
+                        break;
+                      default:
+                        return <span className='bongcloud'>
+                          {bong}
+                        </span>
+
                     }
-                    return <span className='bongcloud'>
-                      {bong}
-                    </span>
                   })}
                 </p>
 
@@ -363,7 +428,7 @@ export function Page({aData}) {
 
 
       </Grid>
-            <Grid container sx={{width: '2040px', height: '36vh'}}>
+            <Grid container sx={{width: '2040px', height: '46vh'}}>
               <Bar options={aData.options} data={aData.data} />
             </Grid>
             <br/>
@@ -386,6 +451,20 @@ export function Page({aData}) {
       font-size: 18px;
     }
     .pairCount {
+      font-weight: 700;
+      font-size: 17px;
+      color: brown;
+      font-family: 'Roboto', sans-serif;
+    }
+    .pairShow2 {
+      font-weight: 900;
+      font-family: 'Roboto', sans-serif;
+      background-color: rgb(139, 224, 222, 0.6);
+      color: ;
+      margin-right: 4px;
+      font-size: 18px;
+    }
+    .pairCount2 {
       font-weight: 700;
       font-size: 17px;
       color: brown;
@@ -423,7 +502,8 @@ export function Page({aData}) {
   }
   .bongcloud {
     border-left: 1px black solid;
-    background-color: orange;
+    background-color: black;
+    color: white;
     font-family: 'Roboto', sans-serif;
     border-radius: 5px;
     margin-left: 3px;
@@ -434,21 +514,61 @@ export function Page({aData}) {
   .bongcloud:last-child {
     margin-right: 0;
   }
-  .bongcloud-white {
-    border: 1px black solid;
-    background-color: black;
+  .bongcloud-green {
+    border: 2px black solid;
+    background-color: RGB(37,160,9,0.7);
     border-radius: 5px;
     margin-left: 3px;
     padding: 0 1px;
     padding-right: 2px;
-    color: white;
+    color: black;
     font-family: 'Roboto', sans-serif;
-    font-size: 1.2em;
+    font-size: 1.3em;
   }
-  .bongcloud-white:last-child {
-    margin-right: 0;
+  .bongcloud-purple {
+    border: 2px black solid;
+    background-color: RGB(168,5,252,0.8);
+    border-radius: 5px;
+    margin-left: 3px;
+    padding: 0 1px;
+    padding-right: 2px;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3em;
   }
-
+  .bongcloud-red {
+    border: 2px black solid;
+    background-color: RGB(255,15,15,0.7);
+    border-radius: 5px;
+    margin-left: 3px;
+    padding: 0 1px;
+    padding-right: 2px;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3em;
+  }
+  .bongcloud-orange {
+    border: 2px black solid;
+    background-color: orange;
+    border-radius: 5px;
+    margin-left: 3px;
+    padding: 0 1px;
+    padding-right: 2px;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3em;
+  }
+  .bongcloud-pink {
+    border: 2px black solid;
+    background-color: RGB(206,114,203,0.7);
+    border-radius: 5px;
+    margin-left: 3px;
+    padding: 0 1px;
+    padding-right: 2px;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3em;
+  }
 
 
   .bongterm2 {
@@ -489,7 +609,7 @@ export function Page({aData}) {
   margin-left: 3px;
   padding: 0 1px;
   padding-right: 2px;
-  font-size: 1.2em;
+  font-size: 0.9em;
 }
 .bongcloud2:last-child {
   margin-right: 0;
@@ -503,7 +623,7 @@ export function Page({aData}) {
   padding-right: 2px;
   color: white;
   font-family: 'Roboto', sans-serif;
-  font-size: 1.2em;
+  font-size: 0.9em;
 }
 .bongcloud-white2:last-child {
   margin-right: 0;
@@ -647,6 +767,36 @@ export function Page({aData}) {
         .pure-material-button-contained:disabled::after {
           opacity: 0;
         }
+        .box1 {
+          border: 1px solid black;
+          border-radius: 3px;
+          background-color: RGB(37,160,9,0.7);
+          text-align: center;
+        }
+        .box2 {
+          border: 1px solid black;
+          border-radius: 3px;
+          background-color: RGB(117,6,229,0.7);
+          text-align: center;
+        }
+        .box3 {
+          border: 1px solid black;
+          border-radius: 3px;
+          background-color: rgb(211,6,6,0.7);
+          text-align: center;
+        }
+        .box4 {
+          border: 1px solid black;
+          border-radius: 3px;
+          background-color: orange;
+          text-align: center;
+        }
+        .box5 {
+          border: 1px solid black;
+          border-radius: 3px;
+          background-color: RGB(206,114,203,0.7);
+          text-align: center;
+        }
     `}</style>
   </>
   )
@@ -688,7 +838,6 @@ export async function getServerSideProps(context) {
         value1 : statData[pam[0]].stat[i],
         value2 : statData[pam[1]].stat[i],
         value3 : statData[pam[2]].stat[i],
-        // last100: freqData[freqData.length - 1].stat[i]
       })
     }
 
@@ -704,8 +853,6 @@ export async function getServerSideProps(context) {
         return each.key + ''
       }
     })
-
-    console.log(sortedLabels);
 
     // DEPRECATED
 

@@ -11,13 +11,13 @@ export function HomePage() {
       }}>
         Mega
       </button>
-      {/* <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push("/55/0-947-987")
+      <button type='button' className='pure-material-button-contained' onClick={() => {
+        router.push("/55/0-999-1039")
       }}>
         Power
-      </button> */}
+      </button>
       <button type='button' className='pure-material-button-contained' onClick={() => {
-        router.push("/56/0-947-987")
+        router.push("/56/0-999-1039")
       }}>
         Power 6
       </button>
